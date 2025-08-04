@@ -14,36 +14,33 @@ export default function AuthPage() {
 
     setIsTransitioning(true);
 
+    // Tunggu sampai overlay menutup penuh baru ganti form (800ms)
     setTimeout(() => {
       setIsLogin(!isLogin);
+      // Tunggu sebentar lagi baru buka overlay (400ms)
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 600);
-    }, 600);
+      }, 400);
+    }, 800);
   };
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden">
+    <div className="min-h-screen flex flex-col lg:flex-row relative overflow-hidden">
       {/* BLUE TRANSITION OVERLAY */}
       <div
-        className={`absolute left-0 top-0 bottom-0 z-50 transition-all ease-in-out ${
+        className={`absolute left-0 top-0 bottom-0 z-50 transition-all ease-in-out duration-700 w-full lg:w-1/2 ${
           isTransitioning
-            ? isLogin
-              ? "translate-y-0"
-              : "translate-y-0"
-            : isLogin
-            ? "translate-y-full"
-            : "-translate-y-full"
+            ? "translate-y-0"
+            : "translate-y-full"
         }`}
         style={{
-          width: "50%",
           backgroundColor: "#20273A",
         }}
       >
         <div className="flex items-center justify-center h-full">
-          <div className="text-center px-8">
+          <div className="text-center px-4 sm:px-8">
             <h2
-              className={`text-3xl font-bold transition-all duration-500 ${
+              className={`text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500 ${
                 isTransitioning
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
@@ -57,7 +54,7 @@ export default function AuthPage() {
             </h2>
 
             <p
-              className={`text-lg mt-4 transition-all duration-700 ${
+              className={`text-sm sm:text-base lg:text-lg mt-4 transition-all duration-700 ${
                 isTransitioning
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-6"
@@ -71,66 +68,24 @@ export default function AuthPage() {
           </div>
         </div>
 
-        {/* Decorative Elements*/}
-        <div className="absolute top-20 left-20 w-6 h-6 bg-white rounded-full opacity-20 animate-bounce"></div>
+        {/* Decorative Elements - Responsive positioning */}
+        <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-4 sm:w-6 h-4 sm:h-6 bg-white rounded-full opacity-20 animate-bounce"></div>
         <div
-          className="absolute bottom-32 left-16 w-8 h-8 bg-white rounded-full opacity-15 animate-bounce"
+          className="absolute bottom-16 sm:bottom-32 left-8 sm:left-16 w-6 sm:w-8 h-6 sm:h-8 bg-white rounded-full opacity-15 animate-bounce"
           style={{ animationDelay: "1s" }}
         ></div>
         <div
-          className="absolute top-1/2 left-10 w-4 h-4 bg-white rounded-full opacity-30 animate-bounce"
+          className="absolute top-1/2 left-5 sm:left-10 w-3 sm:w-4 h-3 sm:h-4 bg-white rounded-full opacity-30 animate-bounce"
           style={{ animationDelay: "0.5s" }}
         ></div>
       </div>
 
       {/* Left Side - Form */}
       <div
-        className="flex-1 flex items-center justify-center relative z-10"
+        className="flex-1 min-h-screen lg:min-h-auto flex items-center justify-center relative z-10 order-1 lg:order-none"
         style={{ backgroundColor: "#ffffff" }}
       >
-        <div className="w-full max-w-lg px-8">
-          {/* Transition Button - REGISTER */}
-          {!isLogin && (
-            <div className="mb-6">
-              <div
-                style={{
-                  backgroundColor: "#20273A",
-                  color: "white",
-                  padding: "0.75rem 1.5rem",
-                  borderRadius: "25px",
-                  boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-                  textAlign: "center",
-                  marginBottom: "1.75rem",
-                }}
-              >
-                <p style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  Sudah memiliki akun?
-                </p>
-                <button
-                  onClick={handleTransition}
-                  disabled={isTransitioning}
-                  className={`w-full transition-all duration-300 ${
-                    isTransitioning
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:scale-105"
-                  }`}
-                  style={{
-                    backgroundColor: "#FDD741",
-                    color: "#000",
-                    border: "none",
-                    borderRadius: "15px",
-                    padding: "0.5rem 1.5rem",
-                    fontSize: "0.9rem",
-                    fontWeight: "600",
-                    cursor: isTransitioning ? "not-allowed" : "pointer",
-                  }}
-                >
-                  Masuk di sini
-                </button>
-              </div>
-            </div>
-          )}
-
+        <div className="w-full max-w-lg px-4 sm:px-6 lg:px-8 py-8 lg:py-0">
           {/* Forms */}
           <div className="relative">
             <div
@@ -154,46 +109,44 @@ export default function AuthPage() {
             </div>
           </div>
 
-          {/* Transition Button - LOGIN */}
-          {isLogin && (
-            <div className="mt-8">
-              <div
+          {/* Transition Button - Always at Bottom */}
+          <div className="mt-6 sm:mt-8">
+            <div
+              style={{
+                backgroundColor: "#20273A",
+                color: "white",
+                padding: "1rem 1.5rem",
+                borderRadius: "25px",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+                textAlign: "center",
+              }}
+            >
+              <p className="text-sm sm:text-base mb-2">
+                {isLogin ? "Belum memiliki akun?" : "Sudah memiliki akun?"}
+              </p>
+              <button
+                onClick={handleTransition}
+                disabled={isTransitioning}
+                className={`w-full transition-all duration-300 ${
+                  isTransitioning
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:scale-105"
+                }`}
                 style={{
-                  backgroundColor: "#20273A",
-                  color: "white",
-                  padding: "1rem 2rem",
-                  borderRadius: "25px",
-                  boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-                  textAlign: "center",
+                  backgroundColor: "#FDD741",
+                  color: "#000",
+                  border: "none",
+                  borderRadius: "15px",
+                  padding: "0.5rem 1.5rem",
+                  fontSize: "0.85rem",
+                  fontWeight: "600",
+                  cursor: isTransitioning ? "not-allowed" : "pointer",
                 }}
               >
-                <p style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  Belum memiliki akun?
-                </p>
-                <button
-                  onClick={handleTransition}
-                  disabled={isTransitioning}
-                  className={`w-full transition-all duration-300 ${
-                    isTransitioning
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:scale-105"
-                  }`}
-                  style={{
-                    backgroundColor: "#FDD741",
-                    color: "#000",
-                    border: "none",
-                    borderRadius: "15px",
-                    padding: "0.5rem 1.5rem",
-                    fontSize: "0.9rem",
-                    fontWeight: "600",
-                    cursor: isTransitioning ? "not-allowed" : "pointer",
-                  }}
-                >
-                  Daftar di sini
-                </button>
-              </div>
+                {isLogin ? "Daftar di sini" : "Masuk di sini"}
+              </button>
             </div>
-          )}
+          </div>
         </div>
       </div>
 
@@ -259,22 +212,22 @@ export default function AuthPage() {
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-20 w-4 h-4 bg-white rounded-full opacity-20 animate-bounce"></div>
+      {/* Decorative Elements - Responsive positioning */}
+      <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-3 sm:w-4 h-3 sm:h-4 bg-white rounded-full opacity-20 animate-bounce"></div>
       <div
-        className="absolute bottom-32 right-16 w-6 h-6 bg-white rounded-full opacity-15 animate-bounce"
+        className="absolute bottom-16 sm:bottom-32 right-8 sm:right-16 w-4 sm:w-6 h-4 sm:h-6 bg-white rounded-full opacity-15 animate-bounce"
         style={{ animationDelay: "1s" }}
       ></div>
       <div
-        className="absolute top-1/2 left-10 w-2 h-2 bg-white rounded-full opacity-25 animate-bounce"
+        className="absolute top-1/2 left-5 sm:left-10 w-2 h-2 bg-white rounded-full opacity-25 animate-bounce"
         style={{ animationDelay: "0.5s" }}
       ></div>
       <div
-        className="absolute top-32 right-32 w-3 h-3 bg-white rounded-full opacity-30 animate-pulse"
+        className="absolute top-16 sm:top-32 right-16 sm:right-32 w-2 sm:w-3 h-2 sm:h-3 bg-white rounded-full opacity-30 animate-pulse"
         style={{ animationDelay: "2s" }}
       ></div>
       <div
-        className="absolute bottom-20 left-32 w-5 h-5 bg-white rounded-full opacity-20 animate-pulse"
+        className="absolute bottom-10 sm:bottom-20 left-16 sm:left-32 w-3 sm:w-5 h-3 sm:h-5 bg-white rounded-full opacity-20 animate-pulse"
         style={{ animationDelay: "1.5s" }}
       ></div>
     </div>
