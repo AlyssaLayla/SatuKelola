@@ -3,22 +3,101 @@
 import React from "react";
 import {
   ChevronRight,
-  Check,
-  Clock,
-  DollarSign,
-  CheckCircle,
-  User,
+  FileText,
 } from "lucide-react";
-import { LegalStep } from "@/types/legalitas.type";
+import { OSSProcess } from "@/types/legalitas.type";
 
-// Progress Header Component
-interface ProgressHeaderProps {
-  completionRate: number;
-}
+// Hero Section Component
+export const HeroSection: React.FC = () => {
+  return (
+    <div
+      style={{
+        background: "linear-gradient(135deg, #FCD34D, #F59E0B)",
+        padding: "4rem 2rem",
+        borderRadius: "2rem",
+        marginBottom: "3rem",
+        color: "#1F2937",
+        textAlign: "center",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background pattern */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage:
+            "radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+          pointerEvents: "none",
+        }}
+      />
 
-export const ProgressHeader: React.FC<ProgressHeaderProps> = ({
-  completionRate,
-}) => {
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <div style={{ fontSize: "4rem", marginBottom: "1.5rem" }}>🎯</div>
+        <h1
+          style={{
+            fontSize: "3rem",
+            fontWeight: "bold",
+            margin: "0 0 1rem 0",
+            color: "#1F2937",
+          }}
+        >
+          Ayo Urus Legalitas Usaha Anda!
+        </h1>
+        <p
+          style={{
+            fontSize: "1.25rem",
+            margin: "0 0 2rem 0",
+            color: "#374151",
+            fontWeight: "500",
+          }}
+        >
+          Mudah, cepat, dan terarah
+        </p>
+
+        <button
+          style={{
+            background: "linear-gradient(135deg, #DC2626, #B91C1C)",
+            color: "white",
+            padding: "1rem 2rem",
+            borderRadius: "1rem",
+            border: "none",
+            fontSize: "1.125rem",
+            fontWeight: "700",
+            cursor: "pointer",
+            boxShadow: "0 4px 14px 0 rgba(220, 38, 38, 0.3)",
+            transition: "all 0.3s ease",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            margin: "0 auto",
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow =
+              "0 6px 20px 0 rgba(220, 38, 38, 0.4)";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow =
+              "0 4px 14px 0 rgba(220, 38, 38, 0.3)";
+          }}
+          onClick={() => window.open("https://oss.go.id", "_blank")}
+        >
+          <span>🦅</span>
+          Akses Website OSS Sekarang
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Page Header Component
+export const PageHeader: React.FC = () => {
   return (
     <div
       style={{
@@ -77,7 +156,7 @@ export const ProgressHeader: React.FC<ProgressHeaderProps> = ({
             </p>
           </div>
 
-          {/* OSS Logo placeholder */}
+          {/* OSS Logo */}
           <div
             style={{
               width: "200px",
@@ -103,13 +182,12 @@ export const ProgressHeader: React.FC<ProgressHeaderProps> = ({
           </div>
         </div>
 
-        {/* Yellow info box */}
+        {/* Info box */}
         <div
           style={{
             background: "rgba(254, 240, 138, 0.9)",
             borderRadius: "1rem",
             padding: "1.5rem",
-            marginBottom: "2rem",
             border: "2px solid #FCD34D",
           }}
         >
@@ -126,124 +204,304 @@ export const ProgressHeader: React.FC<ProgressHeaderProps> = ({
             secara mandiri
           </p>
         </div>
-
-        {/* Progress bar */}
-        <div
-          style={{
-            background: "rgba(255, 255, 255, 0.3)",
-            borderRadius: "1rem",
-            padding: "1rem",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "0.75rem",
-            }}
-          >
-            <span
-              style={{ fontSize: "1rem", fontWeight: "600", color: "#1F2937" }}
-            >
-              Progress Anda
-            </span>
-            <span
-              style={{
-                fontSize: "1.25rem",
-                fontWeight: "bold",
-                color: "#1F2937",
-              }}
-            >
-              {completionRate}%
-            </span>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              height: "0.75rem",
-              background: "rgba(255, 255, 255, 0.5)",
-              borderRadius: "0.5rem",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                width: `${completionRate}%`,
-                height: "100%",
-                background: "linear-gradient(90deg, #10B981, #059669)",
-                borderRadius: "0.5rem",
-                transition: "width 0.5s ease",
-              }}
-            />
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
-// Category Badge Component
-interface CategoryBadgeProps {
-  category: string;
-}
-
-export const CategoryBadge: React.FC<CategoryBadgeProps> = ({ category }) => {
-  const getCategoryColor = (cat: string): string => {
-    const colors: Record<string, string> = {
-      registration: "#3B82F6",
-      licensing: "#8B5CF6",
-      tax: "#EF4444",
-      legal: "#F59E0B",
-      insurance: "#10B981",
-      reporting: "#6B7280",
-    };
-    return colors[cat] || "#6B7280";
-  };
-
-  const getCategoryLabel = (cat: string): string => {
-    const labels: Record<string, string> = {
-      registration: "Pendaftaran",
-      licensing: "Perizinan",
-      tax: "Perpajakan",
-      legal: "Legal",
-      insurance: "Asuransi",
-      reporting: "Laporan",
-    };
-    return labels[cat] || cat;
-  };
+// Step Guide Section Component
+export const StepGuideSection: React.FC = () => {
+  const steps = [
+    {
+      id: 1,
+      title: "Masuk ke oss.go.id",
+      illustration: "🌐",
+      bgColor: "linear-gradient(135deg, #3B82F6, #1D4ED8)",
+    },
+    {
+      id: 2,
+      title: "Klik 'Panduan OSS' pada landing page",
+      illustration: "📖",
+      bgColor: "linear-gradient(135deg, #10B981, #047857)",
+    },
+    {
+      id: 3,
+      title: "Pilih kategori Usaha Mikro dan Kecil (UMK)",
+      illustration: "🏪",
+      bgColor: "linear-gradient(135deg, #8B5CF6, #6D28D9)",
+    },
+    {
+      id: 4,
+      title: "Pilih subkategori sesuai bisnis Anda",
+      illustration: "🎯",
+      bgColor: "linear-gradient(135deg, #F59E0B, #D97706)",
+    },
+    {
+      id: 5,
+      title: "Ikuti langkah pendaftaran",
+      illustration: "📝",
+      bgColor: "linear-gradient(135deg, #EF4444, #DC2626)",
+    },
+    {
+      id: 6,
+      title: "Isi data usaha & pemilik",
+      illustration: "👤",
+      bgColor: "linear-gradient(135deg, #06B6D4, #0891B2)",
+    },
+    {
+      id: 7,
+      title: "Unggah dokumen yang sesuai",
+      illustration: "📎",
+      bgColor: "linear-gradient(135deg, #84CC16, #65A30D)",
+    },
+    {
+      id: 8,
+      title: "Klik submit",
+      illustration: "✅",
+      bgColor: "linear-gradient(135deg, #F97316, #EA580C)",
+    },
+    {
+      id: 9,
+      title: "Cek dashboard untuk melihat update status",
+      illustration: "📊",
+      bgColor: "linear-gradient(135deg, #EC4899, #DB2777)",
+    },
+    {
+      id: 10,
+      title: "Dokumen Legal Anda sudah siap!",
+      illustration: "🎉",
+      bgColor: "linear-gradient(135deg, #14B8A6, #0F766E)",
+    },
+  ];
 
   return (
-    <span
-      style={{
-        background: getCategoryColor(category) + "20",
-        color: getCategoryColor(category),
-        padding: "0.25rem 0.75rem",
-        borderRadius: "9999px",
-        fontSize: "0.75rem",
-        fontWeight: "600",
-      }}
-    >
-      {getCategoryLabel(category)}
-    </span>
+    <div style={{ marginBottom: "4rem" }}>
+      <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+        <h2
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            color: "#1F2937",
+            marginBottom: "1rem",
+          }}
+        >
+          Langkah-Langkah Mengurus Legalitas
+        </h2>
+        <p
+          style={{
+            fontSize: "1.125rem",
+            color: "#6B7280",
+            maxWidth: "600px",
+            margin: "0 auto",
+            lineHeight: "1.6",
+          }}
+        >
+          Ikuti panduan step-by-step berikut untuk mengurus legalitas usaha
+          secara mandiri di website OSS
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "1.5rem",
+          marginBottom: "2rem",
+        }}
+      >
+        {steps.map((step, index) => (
+          <div
+            key={step.id}
+            style={{
+              background: "white",
+              borderRadius: "1.5rem",
+              overflow: "hidden",
+              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+              border: "1px solid #E5E7EB",
+              transition: "all 0.3s ease",
+              transform: "translateY(0)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-4px)";
+              e.currentTarget.style.boxShadow = "0 20px 40px -10px rgba(0, 0, 0, 0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1)";
+            }}
+          >
+            {/* Header dengan warna berbeda */}
+            <div
+              style={{
+                background: step.bgColor,
+                padding: "1.5rem",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              {/* Background pattern */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-50%",
+                  right: "-50%",
+                  width: "100%",
+                  height: "100%",
+                  background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                  pointerEvents: "none",
+                }}
+              />
+              
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "3rem",
+                      height: "3rem",
+                      borderRadius: "50%",
+                      background: "rgba(255, 255, 255, 0.2)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "white",
+                      fontSize: "1rem",
+                      fontWeight: "bold",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {step.id}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "3rem",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {step.illustration}
+                  </div>
+                </div>
+                
+                <h3
+                  style={{
+                    fontSize: "1.125rem",
+                    fontWeight: "bold",
+                    color: "white",
+                    margin: 0,
+                    lineHeight: "1.4",
+                  }}
+                >
+                  {step.title}
+                </h3>
+              </div>
+            </div>
+
+            {/* Body dengan info tambahan */}
+            <div style={{ padding: "1.5rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  color: "#6B7280",
+                  fontSize: "0.875rem",
+                  fontWeight: "500",
+                }}
+              >
+                <div
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    background: step.bgColor,
+                  }}
+                />
+                Step {step.id} dari 10
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Call to action after steps */}
+      <div
+        style={{
+          background: "linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.1))",
+          borderRadius: "1.5rem",
+          padding: "2rem",
+          textAlign: "center",
+          border: "2px solid rgba(99, 102, 241, 0.2)",
+        }}
+      >
+        <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>🚀</div>
+        <h3
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "#1F2937",
+            marginBottom: "0.5rem",
+          }}
+        >
+          Siap Memulai?
+        </h3>
+        <p
+          style={{
+            fontSize: "1rem",
+            color: "#6B7280",
+            marginBottom: "1.5rem",
+          }}
+        >
+          Akses website OSS sekarang dan ikuti langkah-langkah di atas
+        </p>
+        <button
+          style={{
+            background: "linear-gradient(135deg, #6366F1, #4F46E5)",
+            color: "white",
+            padding: "0.75rem 2rem",
+            borderRadius: "1rem",
+            border: "none",
+            fontSize: "1rem",
+            fontWeight: "600",
+            cursor: "pointer",
+            boxShadow: "0 4px 14px 0 rgba(99, 102, 241, 0.3)",
+            transition: "all 0.3s ease",
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow =
+              "0 6px 20px 0 rgba(99, 102, 241, 0.4)";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow =
+              "0 4px 14px 0 rgba(99, 102, 241, 0.3)";
+          }}
+          onClick={() => window.open("https://oss.go.id", "_blank")}
+        >
+          🌐 Mulai di OSS Sekarang
+        </button>
+      </div>
+    </div>
   );
 };
 
-// Step Card Component - Updated with blue card style
-interface StepCardProps {
-  step: LegalStep;
+// Process Card Component
+interface ProcessCardProps {
+  process: OSSProcess;
   isActive: boolean;
-  isCompleted: boolean;
   onClick: () => void;
-  onToggleComplete: () => void;
 }
 
-export const StepCard: React.FC<StepCardProps> = ({
-  step,
+export const ProcessCard: React.FC<ProcessCardProps> = ({
+  process,
   isActive,
-  isCompleted,
   onClick,
-  onToggleComplete,
 }) => {
   return (
     <div
@@ -260,14 +518,12 @@ export const StepCard: React.FC<StepCardProps> = ({
         transform: isActive ? "translateY(-2px)" : "translateY(0)",
       }}
     >
-      {/* Header - Blue card style like in the image */}
+      {/* Header */}
       <div
         onClick={onClick}
         style={{
           padding: "1.5rem",
-          background: isCompleted
-            ? "linear-gradient(135deg, #10B981, #059669)"
-            : "linear-gradient(135deg, #6366F1, #4F46E5)",
+          background: "linear-gradient(135deg, #6366F1, #4F46E5)",
           color: "white",
           cursor: "pointer",
           transition: "all 0.3s ease",
@@ -285,11 +541,10 @@ export const StepCard: React.FC<StepCardProps> = ({
               justifyContent: "center",
               color: "white",
               flexShrink: 0,
-              fontSize: "1.25rem",
-              fontWeight: "bold",
+              fontSize: "1.5rem",
             }}
           >
-            {isCompleted ? <Check className="w-6 h-6" /> : step.id}
+            {process.illustration}
           </div>
 
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -301,7 +556,7 @@ export const StepCard: React.FC<StepCardProps> = ({
                 lineHeight: "1.4",
               }}
             >
-              {step.title}
+              {process.title}
             </h3>
             <p
               style={{
@@ -311,7 +566,7 @@ export const StepCard: React.FC<StepCardProps> = ({
                 lineHeight: "1.5",
               }}
             >
-              {step.description}
+              {process.description}
             </p>
           </div>
 
@@ -336,95 +591,6 @@ export const StepCard: React.FC<StepCardProps> = ({
             borderTop: "1px solid #E2E8F0",
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "1.5rem",
-              marginBottom: "2rem",
-            }}
-          >
-            <div
-              style={{
-                background: "white",
-                padding: "1.5rem",
-                borderRadius: "1rem",
-                border: "1px solid #E2E8F0",
-                boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                <Clock className="w-5 h-5" style={{ color: "#3B82F6" }} />
-                <span
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "700",
-                    color: "#1F2937",
-                  }}
-                >
-                  Estimasi Waktu
-                </span>
-              </div>
-              <p
-                style={{
-                  fontSize: "1rem",
-                  color: "#6B7280",
-                  margin: 0,
-                  fontWeight: "500",
-                }}
-              >
-                {step.estimatedTime}
-              </p>
-            </div>
-
-            <div
-              style={{
-                background: "white",
-                padding: "1.5rem",
-                borderRadius: "1rem",
-                border: "1px solid #E2E8F0",
-                boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                <DollarSign className="w-5 h-5" style={{ color: "#10B981" }} />
-                <span
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "700",
-                    color: "#1F2937",
-                  }}
-                >
-                  Biaya
-                </span>
-              </div>
-              <p
-                style={{
-                  fontSize: "1rem",
-                  color: "#6B7280",
-                  margin: 0,
-                  fontWeight: "500",
-                }}
-              >
-                {step.cost}
-              </p>
-            </div>
-          </div>
-
           <div style={{ marginBottom: "2rem" }}>
             <h4
               style={{
@@ -432,12 +598,16 @@ export const StepCard: React.FC<StepCardProps> = ({
                 fontWeight: "700",
                 color: "#1F2937",
                 marginBottom: "1rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
               }}
             >
+              <FileText className="w-5 h-5" style={{ color: "#3B82F6" }} />
               Persyaratan yang Dibutuhkan:
             </h4>
             <ul style={{ margin: 0, paddingLeft: "1.5rem" }}>
-              {step.requirements.map((req, index) => (
+              {process.requirements.map((req, index) => (
                 <li
                   key={index}
                   style={{
@@ -455,195 +625,26 @@ export const StepCard: React.FC<StepCardProps> = ({
 
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              marginBottom: "2rem",
-              flexWrap: "wrap",
-            }}
-          >
-            <span
-              style={{
-                background: step.isOnline ? "#DCFCE7" : "#FEF3C7",
-                color: step.isOnline ? "#166534" : "#92400E",
-                padding: "0.5rem 1rem",
-                borderRadius: "9999px",
-                fontSize: "0.875rem",
-                fontWeight: "600",
-              }}
-            >
-              {step.isOnline ? "🌐 Online" : "🏢 Offline"}
-            </span>
-
-            <span
-              style={{
-                background:
-                  step.priority === "high"
-                    ? "#FEE2E2"
-                    : step.priority === "medium"
-                    ? "#FEF3C7"
-                    : "#F3F4F6",
-                color:
-                  step.priority === "high"
-                    ? "#991B1B"
-                    : step.priority === "medium"
-                    ? "#92400E"
-                    : "#6B7280",
-                padding: "0.5rem 1rem",
-                borderRadius: "9999px",
-                fontSize: "0.875rem",
-                fontWeight: "600",
-                textTransform: "capitalize",
-              }}
-            >
-              Prioritas {step.priority}
-            </span>
-
-            <CategoryBadge category={step.category} />
-          </div>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleComplete();
-            }}
-            style={{
-              width: "100%",
-              padding: "1rem 1.5rem",
-              background: isCompleted
-                ? "linear-gradient(135deg, #F3F4F6, #E5E7EB)"
-                : "linear-gradient(135deg, #10B981, #059669)",
-              color: isCompleted ? "#6B7280" : "white",
-              border: "none",
+              background: "rgba(99, 102, 241, 0.1)",
               borderRadius: "1rem",
-              fontSize: "1rem",
-              fontWeight: "700",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "0.75rem",
-              boxShadow: isCompleted
-                ? "none"
-                : "0 4px 14px 0 rgba(16, 185, 129, 0.3)",
-            }}
-            onMouseOver={(e) => {
-              if (!isCompleted) {
-                e.currentTarget.style.transform = "translateY(-1px)";
-                e.currentTarget.style.boxShadow =
-                  "0 6px 20px 0 rgba(16, 185, 129, 0.4)";
-              }
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = isCompleted
-                ? "none"
-                : "0 4px 14px 0 rgba(16, 185, 129, 0.3)";
+              padding: "1.5rem",
+              border: "1px solid rgba(99, 102, 241, 0.2)",
             }}
           >
-            {isCompleted ? (
-              <>
-                <CheckCircle className="w-5 h-5" />
-                Selesai - Klik untuk batalkan
-              </>
-            ) : (
-              <>
-                <Check className="w-5 h-5" />
-                Tandai Selesai
-              </>
-            )}
-          </button>
+            <p
+              style={{
+                fontSize: "0.9rem",
+                color: "#4F46E5",
+                margin: 0,
+                fontWeight: "500",
+                textAlign: "center",
+              }}
+            >
+              💡 Proses ini dilakukan langsung di website OSS (oss.go.id)
+            </p>
+          </div>
         </div>
       )}
-    </div>
-  );
-};
-
-// Completion Celebration Component - Updated with OSS style
-export const CompletionCelebration: React.FC = () => {
-  return (
-    <div
-      style={{
-        background: "linear-gradient(135deg, #FEF3C7, #F59E0B)",
-        borderRadius: "2rem",
-        padding: "3rem 2rem",
-        textAlign: "center",
-        color: "#1F2937",
-        marginTop: "3rem",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Background illustration area */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "2rem",
-          left: "2rem",
-          width: "200px",
-          height: "150px",
-          background: "rgba(255, 255, 255, 0.3)",
-          borderRadius: "1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "4rem",
-        }}
-      >
-        🎉👥
-      </div>
-
-      <div style={{ position: "relative", zIndex: 1 }}>
-        <div style={{ fontSize: "4rem", marginBottom: "1.5rem" }}>🎉</div>
-        <h3
-          style={{
-            fontSize: "2rem",
-            fontWeight: "bold",
-            marginBottom: "1rem",
-            color: "#1F2937",
-          }}
-        >
-          Ayo urus legalitas usaha Anda!
-        </h3>
-        <p
-          style={{
-            fontSize: "1.25rem",
-            margin: "0 0 2rem 0",
-            color: "#374151",
-            fontWeight: "500",
-          }}
-        >
-          Mudah, cepat, dan terarah
-        </p>
-
-        <button
-          style={{
-            background: "linear-gradient(135deg, #6366F1, #4F46E5)",
-            color: "white",
-            padding: "1rem 2rem",
-            borderRadius: "1rem",
-            border: "none",
-            fontSize: "1.125rem",
-            fontWeight: "700",
-            cursor: "pointer",
-            boxShadow: "0 4px 14px 0 rgba(99, 102, 241, 0.3)",
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = "translateY(-2px)";
-            e.currentTarget.style.boxShadow =
-              "0 6px 20px 0 rgba(99, 102, 241, 0.4)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow =
-              "0 4px 14px 0 rgba(99, 102, 241, 0.3)";
-          }}
-        >
-          Akses Website OSS Sekarang
-        </button>
-      </div>
     </div>
   );
 };
