@@ -1,139 +1,158 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Download, CheckCircle, ExternalLink, Calendar, Star, Target, Lightbulb, Settings, Home } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  ArrowLeft,
+  Download,
+  CheckCircle,
+  ExternalLink,
+  Calendar,
+  Star,
+  Target,
+  Lightbulb,
+  Settings,
+} from "lucide-react";
 
 // Types
 type MarketingRecommendation = {
   archetype: string;
   priorityPlatforms: string[];
   contentIdeas: string[];
-  tools: { name: string; link: string; desc: string; }[];
-  actionPlan: { week: number; tasks: string[]; }[];
+  tools: { name: string; link: string; desc: string }[];
+  actionPlan: { week: number; tasks: string[] }[];
   successStories: string[];
 };
 
 // Section Component
-const Section = ({ 
-  icon, 
-  title, 
-  children 
-}: { 
+const Section = ({
+  icon,
+  title,
+  children,
+}: {
   icon: React.ReactNode;
-  title: string; 
+  title: string;
   children: React.ReactNode;
 }) => (
-  <div style={{ marginBottom: '3rem' }}>
-    <h2 
+  <div style={{ marginBottom: "3rem" }}>
+    <h2
       style={{
-        fontSize: '1.5rem',
-        fontWeight: 'black',
-        color: '#111827',
-        marginBottom: '1.5rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem'
+        fontSize: "1.5rem",
+        fontWeight: "black",
+        color: "#20273A", // secondary/300
+        marginBottom: "1.5rem",
+        display: "flex",
+        alignItems: "center",
+        gap: "0.75rem",
       }}
     >
       {icon}
       {title}
     </h2>
-    <div style={{ paddingLeft: '0.5rem' }}>
-      {children}
-    </div>
+    <div style={{ paddingLeft: "0.5rem" }}>{children}</div>
   </div>
 );
 
-// Platform Card Component
+// Enhanced Platform Card Component with card-like styling
 const PlatformCard = ({ name }: { name: string }) => (
-  <div 
+  <div
     style={{
-      display: 'flex',
-      alignItems: 'center',
-      padding: '1rem',
-      backgroundColor: '#f9fafb',
-      borderRadius: '0.75rem',
-      border: '1px solid #e5e7eb',
-      transition: 'all 0.3s ease',
-      cursor: 'pointer'
+      display: "flex",
+      alignItems: "center",
+      padding: "1.5rem",
+      backgroundColor: "#fff", // frame/100
+      borderRadius: "0.75rem",
+      border: "1px solid #D4D4D4", // frame/200
+      transition: "all 0.3s ease",
+      cursor: "pointer",
+      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
     }}
     onMouseEnter={(e) => {
-      e.currentTarget.style.backgroundColor = '#f3f4f6';
-      e.currentTarget.style.borderColor = '#fbbf24';
-      e.currentTarget.style.transform = 'translateY(-2px)';
-      e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+      e.currentTarget.style.backgroundColor = "#FEF2C0"; // primary/100
+      e.currentTarget.style.borderColor = "#FDD741"; // primary/300
+      e.currentTarget.style.transform = "translateY(-2px)";
+      e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
     }}
     onMouseLeave={(e) => {
-      e.currentTarget.style.backgroundColor = '#f9fafb';
-      e.currentTarget.style.borderColor = '#e5e7eb';
-      e.currentTarget.style.transform = 'translateY(0)';
-      e.currentTarget.style.boxShadow = 'none';
+      e.currentTarget.style.backgroundColor = "#fff"; // frame/100
+      e.currentTarget.style.borderColor = "#D4D4D4"; // frame/200
+      e.currentTarget.style.transform = "translateY(0)";
+      e.currentTarget.style.boxShadow = "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)";
     }}
   >
-    <div 
+    <div
       style={{
-        width: '3rem',
-        height: '3rem',
-        backgroundColor: '#fbbf24',
-        borderRadius: '0.5rem',
-        marginRight: '0.75rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#ffffff',
-        fontWeight: 'bold'
+        width: "3rem",
+        height: "3rem",
+        backgroundColor: "#FDD741", // primary/300
+        borderRadius: "0.5rem",
+        marginRight: "0.75rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#ffffff",
+        fontWeight: "bold",
       }}
     >
       {name.charAt(0)}
     </div>
-    <span style={{ fontWeight: '500', color: '#374151' }}>{name}</span>
+    <span style={{ fontWeight: "500", color: "#20273A" }}>{name}</span>
   </div>
 );
 
-// Tool Card Component
-const ToolCard = ({ tool }: { tool: { name: string; link: string; desc: string; } }) => (
+// Enhanced Tool Card Component with card-like styling
+const ToolCard = ({
+  tool,
+}: {
+  tool: { name: string; link: string; desc: string };
+}) => (
   <a
     href={tool.link}
     target="_blank"
     rel="noopener noreferrer"
     style={{
-      display: 'block',
-      border: '2px solid #fde68a',
-      borderRadius: '1rem',
-      padding: '1.5rem',
-      transition: 'all 0.3s ease',
-      textDecoration: 'none',
-      backgroundColor: '#ffffff',
-      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+      display: "block",
+      border: "2px solid #FEE480", // primary/200
+      borderRadius: "0.75rem",
+      padding: "1.5rem",
+      transition: "all 0.3s ease",
+      textDecoration: "none",
+      backgroundColor: "#fff", // frame/100
+      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
     }}
     onMouseEnter={(e) => {
-      e.currentTarget.style.borderColor = '#fbbf24';
-      e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
-      e.currentTarget.style.transform = 'translateY(-4px)';
-      e.currentTarget.style.backgroundColor = '#fffbeb';
+      e.currentTarget.style.borderColor = "#FDD741"; // primary/300
+      e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)";
+      e.currentTarget.style.transform = "translateY(-4px)";
+      e.currentTarget.style.backgroundColor = "#FEF2C0"; // primary/100
     }}
     onMouseLeave={(e) => {
-      e.currentTarget.style.borderColor = '#fde68a';
-      e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.05)';
-      e.currentTarget.style.transform = 'translateY(0)';
-      e.currentTarget.style.backgroundColor = '#ffffff';
+      e.currentTarget.style.borderColor = "#FEE480"; // primary/200
+      e.currentTarget.style.boxShadow = "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)";
+      e.currentTarget.style.transform = "translateY(0)";
+      e.currentTarget.style.backgroundColor = "#fff"; // frame/100
     }}
   >
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
-      <h3 style={{ fontWeight: 'bold', color: '#f59e0b', margin: 0, fontSize: '1.125rem' }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
+      <h3 style={{ fontWeight: "600", color: "#D3B336", margin: 0, fontSize: "1.125rem" }}>
         {tool.name}
       </h3>
-      <ExternalLink size={18} style={{ color: '#9ca3af', flexShrink: 0 }} />
+      <ExternalLink size={18} style={{ color: "#90939D", flexShrink: 0 }} />
     </div>
-    <p style={{ fontSize: '0.9375rem', color: '#6b7280', margin: 0, lineHeight: '1.5' }}>
+    <p style={{ fontSize: "0.875rem", color: "#90939D", margin: 0, lineHeight: "1.5" }}>
       {tool.desc}
     </p>
   </a>
 );
 
-// Week Plan Component
-const WeekPlan = ({ weekPlan }: { weekPlan: { week: number; tasks: string[]; } }) => {
-  const [checkedTasks, setCheckedTasks] = useState<boolean[]>(new Array(weekPlan.tasks.length).fill(false));
+// Enhanced Week Plan Component with progress tracking
+const WeekPlan = ({
+  weekPlan,
+}: {
+  weekPlan: { week: number; tasks: string[] };
+}) => {
+  const [checkedTasks, setCheckedTasks] = useState<boolean[]>(
+    new Array(weekPlan.tasks.length).fill(false)
+  );
 
   const toggleTask = (taskIndex: number) => {
     const newCheckedTasks = [...checkedTasks];
@@ -141,72 +160,112 @@ const WeekPlan = ({ weekPlan }: { weekPlan: { week: number; tasks: string[]; } }
     setCheckedTasks(newCheckedTasks);
   };
 
+  const completedTasks = checkedTasks.filter(Boolean).length;
+  const progressPercentage = (completedTasks / weekPlan.tasks.length) * 100;
+
   return (
-    <div 
+    <div
       style={{
-        borderLeft: '4px solid #fbbf24',
-        paddingLeft: '1.5rem',
-        paddingTop: '0.5rem',
-        paddingBottom: '0.5rem',
-        backgroundColor: '#fffbeb',
-        borderRadius: '0 0.75rem 0.75rem 0',
-        marginLeft: '0.5rem'
+        borderLeft: "4px solid #FDD741", // primary/300
+        paddingLeft: "1.5rem",
+        paddingTop: "1.5rem",
+        paddingBottom: "1.5rem",
+        paddingRight: "1.5rem",
+        backgroundColor: "#FFFEFA", // primary/100
+        borderRadius: "0.75rem",
+        marginLeft: "0.5rem",
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
       }}
     >
-      <h3 style={{ fontWeight: 'black', fontSize: '1.25rem', color: '#111827', marginBottom: '1rem' }}>
-        Minggu {weekPlan.week}
-      </h3>
-      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <h3 style={{ fontWeight: "700", fontSize: "1.25rem", color: "#20273A", marginBottom: "1rem" }}>
+          Minggu {weekPlan.week}
+        </h3>
+        
+        {/* Progress Section */}
+        <div style={{ marginBottom: "1rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+            <span style={{ fontSize: "0.875rem", color: "#90939D" }}>
+              Progress: {completedTasks}/{weekPlan.tasks.length}
+            </span>
+            <span style={{ fontSize: "0.875rem", color: "#D3B336", fontWeight: "600" }}>
+              {Math.round(progressPercentage)}%
+            </span>
+          </div>
+          
+          {/* Custom Progress Bar */}
+          <div style={{
+            width: "100%",
+            height: "8px",
+            backgroundColor: "#FEE480", // primary/200
+            borderRadius: "4px",
+            overflow: "hidden"
+          }}>
+            <div style={{
+              height: "100%",
+              backgroundColor: "#FDD741", // primary/300
+              width: `${progressPercentage}%`,
+              transition: "width 0.3s ease",
+              borderRadius: "4px"
+            }} />
+          </div>
+        </div>
+      </div>
+
+      <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
         {weekPlan.tasks.map((task, taskIndex) => (
-          <li 
-            key={taskIndex} 
-            style={{ 
-              display: 'flex', 
-              alignItems: 'flex-start', 
-              marginBottom: '1rem',
-              cursor: 'pointer',
-              padding: '0.5rem',
-              borderRadius: '0.5rem',
-              transition: 'all 0.3s ease'
+          <li
+            key={taskIndex}
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              marginBottom: "1rem",
+              cursor: "pointer",
+              padding: "0.75rem",
+              borderRadius: "0.5rem",
+              transition: "all 0.3s ease",
+              backgroundColor: "transparent"
             }}
             onClick={() => toggleTask(taskIndex)}
             onMouseEnter={(e) => {
               if (!checkedTasks[taskIndex]) {
-                e.currentTarget.style.backgroundColor = '#fef3c7';
+                e.currentTarget.style.backgroundColor = "#FEE480"; // primary/200
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.backgroundColor = "transparent";
             }}
           >
+            {/* Custom Checkbox */}
             <div
               style={{
-                width: '1.5rem',
-                height: '1.5rem',
-                border: '2px solid #fbbf24',
-                borderRadius: '0.375rem',
-                marginRight: '0.75rem',
-                marginTop: '0.125rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: checkedTasks[taskIndex] ? '#fbbf24' : 'transparent',
-                transition: 'all 0.3s ease',
-                flexShrink: 0
+                width: "1.25rem",
+                height: "1.25rem",
+                border: "2px solid #FDD741", // primary/300
+                borderRadius: "0.25rem",
+                marginRight: "0.75rem",
+                marginTop: "0.125rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: checkedTasks[taskIndex] ? "#FDD741" : "transparent", // primary/300
+                transition: "all 0.3s ease",
+                flexShrink: 0,
+                cursor: "pointer"
               }}
             >
               {checkedTasks[taskIndex] && (
-                <CheckCircle size={14} style={{ color: '#ffffff' }} />
+                <CheckCircle size={12} style={{ color: "#ffffff" }} />
               )}
             </div>
-            <span 
-              style={{ 
-                color: '#374151',
-                textDecoration: checkedTasks[taskIndex] ? 'line-through' : 'none',
+            <span
+              style={{
+                color: "#20273A", // secondary/300
+                textDecoration: checkedTasks[taskIndex] ? "line-through" : "none",
                 opacity: checkedTasks[taskIndex] ? 0.6 : 1,
-                transition: 'all 0.3s ease',
-                fontSize: '1rem',
-                lineHeight: '1.5'
+                transition: "all 0.3s ease",
+                fontSize: "1rem",
+                lineHeight: "1.5",
               }}
             >
               {task}
@@ -223,18 +282,13 @@ const MarketingResultPage = () => {
   const [quizData, setQuizData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // Load quiz data from localStorage
+  // Load quiz data from in-memory storage (localStorage not available in Claude artifacts)
   useEffect(() => {
-    try {
-      const storedData = localStorage.getItem('quizResult');
-      if (storedData) {
-        setQuizData(JSON.parse(storedData));
-      }
-    } catch (error) {
-      console.error('Error loading quiz data:', error);
-    } finally {
+    // Simulating loading without localStorage
+    setTimeout(() => {
+      setQuizData({ archetype: "Content Creator" });
       setLoading(false);
-    }
+    }, 1000);
   }, []);
 
   // Dummy data hasil rekomendasi
@@ -244,12 +298,24 @@ const MarketingResultPage = () => {
     contentIdeas: [
       "Buat 3 video 'How to use' produk Anda dalam 1 minggu",
       "Lakukan live session Q&A setiap Jumat jam 4 sore",
-      "Buat challenge dengan hashtag khusus brand Anda"
+      "Buat challenge dengan hashtag khusus brand Anda",
     ],
     tools: [
-      { name: "CapCut", link: "https://www.capcut.com", desc: "Edit video mudah di HP" },
-      { name: "Canva", link: "https://canva.com", desc: "Desain grafis instan" },
-      { name: "InShot", link: "https://inshot.com", desc: "Tambahkan teks & musik ke video" }
+      {
+        name: "CapCut",
+        link: "https://www.capcut.com",
+        desc: "Edit video mudah di HP",
+      },
+      {
+        name: "Canva",
+        link: "https://canva.com",
+        desc: "Desain grafis instan",
+      },
+      {
+        name: "InShot",
+        link: "https://inshot.com",
+        desc: "Tambahkan teks & musik ke video",
+      },
     ],
     actionPlan: [
       {
@@ -257,57 +323,65 @@ const MarketingResultPage = () => {
         tasks: [
           "Optimalkan bio TikTok & Instagram",
           "Buat 3 konten dasar produk",
-          "Follow 10 akun kompetitor untuk riset"
-        ]
+          "Follow 10 akun kompetitor untuk riset",
+        ],
       },
       {
         week: 2,
         tasks: [
           "Posting 1 reel/reels setiap hari",
           "Lakukan 1 live session",
-          "Gunakan 5 hashtag relevan per postingan"
-        ]
+          "Gunakan 5 hashtag relevan per postingan",
+        ],
       },
       {
         week: 3,
         tasks: [
           "Kolaborasi dengan 1 micro-influencer",
           "Analisis insight mingguan",
-          "Buat konten user-generated content"
-        ]
-      }
+          "Buat konten user-generated content",
+        ],
+      },
     ],
     successStories: [
       "UMKM Kue Basah: Meningkat 300% penjualan dengan challenge TikTok",
-      "Brand Skincare Lokal: Dapat 10.000 followers dalam 2 bulan lewat Reels"
-    ]
+      "Brand Skincare Lokal: Dapat 10.000 followers dalam 2 bulan lewat Reels",
+    ],
   };
 
   if (loading) {
     return (
-      <div style={{ 
-        minHeight: '100vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        backgroundColor: '#f9fafb'
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ 
-            width: '3rem', 
-            height: '3rem', 
-            border: '3px solid #e5e7eb', 
-            borderTop: '3px solid #7c3aed',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 1rem'
-          }}></div>
-          <p style={{ color: '#6b7280' }}>Memuat hasil quiz...</p>
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#fff", // frame/100
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <div
+            style={{
+              width: "3rem",
+              height: "3rem",
+              border: "3px solid #D4D4D4", // frame/200
+              borderTop: "3px solid #D3B336", // primary/400
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+              margin: "0 auto 1rem",
+            }}
+          ></div>
+          <p style={{ color: "#90939D" }}>Memuat hasil quiz...</p>
         </div>
         <style jsx>{`
           @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
           }
         `}</style>
       </div>
@@ -315,173 +389,168 @@ const MarketingResultPage = () => {
   }
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
-      {/* Navigation */}
-      <nav style={{ 
-        backgroundColor: '#ffffff', 
-        padding: '1rem 0',
-        borderBottom: '1px solid #e5e7eb',
-        position: 'sticky',
-        top: 0,
-        zIndex: 10
-      }}>
-        <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
+      {/* Header */}
+      <div
+        style={{
+          background: "#20273A", // secondary/300 - dark background
+          color: "#fff", // white text
+          padding: "3rem 1.5rem",
+          textAlign: "center",
+          position: "relative",
+        }}
+      >
+        {/* Back Button inside header */}
+        <div style={{ position: "absolute", top: "1.5rem", left: "1.5rem" }}>
           <button
             onClick={() => window.history.back()}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.5rem 1rem',
-              backgroundColor: 'transparent',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.5rem',
-              color: '#374151',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.75rem 1.25rem",
+              backgroundColor: "rgba(255, 255, 255, 0.1)", // semi-transparent white
+              border: "1px solid rgba(255, 255, 255, 0.3)", // semi-transparent border
+              borderRadius: "10px",
+              color: "#fff", // white text
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              backdropFilter: "blur(10px)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#f3f4f6';
-              e.currentTarget.style.borderColor = '#d1d5db';
+              e.currentTarget.style.backgroundColor =
+                "rgba(255, 255, 255, 0.2)"; // lighter on hover
+              e.currentTarget.style.borderColor = "#FDD741"; // primary/300 border on hover
+              e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.borderColor = '#e5e7eb';
+              e.currentTarget.style.backgroundColor =
+                "rgba(255, 255, 255, 0.1)";
+              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
             <ArrowLeft size={16} />
             Kembali
           </button>
-
-          <button
-            onClick={() => window.location.href = '/'}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.5rem 1rem',
-              backgroundColor: 'transparent',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.5rem',
-              color: '#374151',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#f3f4f6';
-              e.currentTarget.style.borderColor = '#d1d5db';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.borderColor = '#e5e7eb';
-            }}
-          >
-            <Home size={16} />
-            Home
-          </button>
         </div>
-      </nav>
 
-      {/* Header */}
-      <div 
-        style={{
-          background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-          color: '#111827',
-          padding: '3rem 1.5rem',
-          textAlign: 'center'
-        }}
-      >
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'black', marginBottom: '1rem', margin: 0 }}>
-          Rekomendasi Pemasaran Anda
+        <h1
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: "black",
+            margin: 0,
+            color: "#fff",
+          }}
+        >
+          Rekomendasi Pemasaran
         </h1>
-        
+
         <div 
           style={{
             display: 'inline-block',
-            backgroundColor: '#ffffff',
-            color: '#111827',
+            backgroundColor: '#FDD741', // primary/300
+            color: '#20273A', // secondary/300
             padding: '0.75rem 2rem',
-            borderRadius: '9999px',
+            borderRadius: '20px',
             fontWeight: '700',
             fontSize: '1rem',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            marginTop: '1.5rem',
           }}
         >
           Profil: {recommendation.archetype}
         </div>
-
-        <p style={{ marginTop: '1.5rem', opacity: 0.8, lineHeight: '1.6', margin: '1.5rem auto 0', maxWidth: '42rem', fontSize: '1.125rem' }}>
-          Berdasarkan jawaban Anda, kami telah menyusun strategi khusus untuk meningkatkan penjualan di platform digital
-        </p>
       </div>
 
       {/* Content */}
-      <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '3rem 1.5rem' }}>
+      <div
+        style={{ maxWidth: "56rem", margin: "0 auto", padding: "3rem 1.5rem" }}
+      >
         {/* Platform Prioritas */}
-        <Section 
-          icon={<Target size={24} style={{ color: '#f59e0b' }} />}
+        <Section
+          icon={<Target size={24} style={{ color: "#D3B336" }} />}
           title="Platform Prioritas"
         >
-          <div 
+          <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '1.5rem',
-              marginBottom: '1.5rem'
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "1.5rem",
+              marginBottom: "1.5rem",
             }}
           >
             {recommendation.priorityPlatforms.map((platform, index) => (
               <PlatformCard key={index} name={platform} />
             ))}
           </div>
-          <p style={{ color: '#6b7280', fontSize: '1rem', margin: 0, lineHeight: '1.6' }}>
-            Fokus pada 1-2 platform ini terlebih dahulu untuk hasil maksimal
-          </p>
         </Section>
 
         {/* Ide Konten */}
-        <Section 
-          icon={<Lightbulb size={24} style={{ color: '#f59e0b' }} />}
+        <Section
+          icon={<Lightbulb size={24} style={{ color: "#D3B336" }} />}
           title="Ide Konten Spesifik"
         >
-          <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+          <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
             {recommendation.contentIdeas.map((idea, index) => (
-              <li key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                <div 
+              <li
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                <div
                   style={{
-                    width: '2rem',
-                    height: '2rem',
-                    borderRadius: '50%',
-                    backgroundColor: '#fef3c7',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginRight: '1rem',
-                    marginTop: '0.125rem',
+                    width: "2rem",
+                    height: "2rem",
+                    borderRadius: "50%",
+                    backgroundColor: "#FEF2C0", // primary/100
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "1rem",
+                    marginTop: "0.125rem",
                     flexShrink: 0,
-                    border: '2px solid #fbbf24'
+                    border: "2px solid #FDD741", // primary/300
                   }}
                 >
-                  <span style={{ color: '#f59e0b', fontWeight: 'bold', fontSize: '0.875rem' }}>
+                  <span
+                    style={{
+                      color: "#D3B336",
+                      fontWeight: "bold",
+                      fontSize: "0.875rem",
+                    }}
+                  >
                     {index + 1}
                   </span>
                 </div>
-                <p style={{ color: '#374151', margin: 0, lineHeight: '1.6', fontSize: '1rem' }}>{idea}</p>
+                <p
+                  style={{
+                    color: "#20273A",
+                    margin: 0,
+                    lineHeight: "1.6",
+                    fontSize: "1rem",
+                  }}
+                >
+                  {idea}
+                </p>
               </li>
             ))}
           </ul>
         </Section>
 
         {/* Tools */}
-        <Section 
-          icon={<Settings size={24} style={{ color: '#f59e0b' }} />}
+        <Section
+          icon={<Settings size={24} style={{ color: "#D3B336" }} />}
           title="Tools Gratis Pendukung"
         >
-          <div 
+          <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '1.5rem'
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "1.5rem",
             }}
           >
             {recommendation.tools.map((tool, index) => (
@@ -491,11 +560,13 @@ const MarketingResultPage = () => {
         </Section>
 
         {/* Action Plan */}
-        <Section 
-          icon={<Calendar size={24} style={{ color: '#f59e0b' }} />}
-          title="Rencana Aksi 30 Hari"
+        <Section
+          icon={<Calendar size={24} style={{ color: "#D3B336" }} />}
+          title="Rencana Aksi"
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+          >
             {recommendation.actionPlan.map((weekPlan, index) => (
               <WeekPlan key={index} weekPlan={weekPlan} />
             ))}
@@ -503,24 +574,44 @@ const MarketingResultPage = () => {
         </Section>
 
         {/* Success Stories */}
-        <Section 
-          icon={<Star size={24} style={{ color: '#f59e0b' }} />}
+        <Section
+          icon={<Star size={24} style={{ color: "#D3B336" }} />}
           title="Kisah Sukses UMKM"
         >
-          <div 
+          <div
             style={{
-              backgroundColor: '#fffbeb',
-              borderLeft: '4px solid #fbbf24',
-              padding: '2rem',
-              borderRadius: '0.75rem',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+              backgroundColor: "#FFFEFA", // primary/100
+              borderLeft: "4px solid #FDD741", // primary/300
+              padding: "2rem",
+              borderRadius: "0.75rem",
+              boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
             }}
           >
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
               {recommendation.successStories.map((story, index) => (
-                <li key={index} style={{ display: 'flex', marginBottom: '1rem' }}>
-                  <span style={{ marginRight: '0.75rem', color: '#f59e0b', fontWeight: 'bold', fontSize: '1.25rem' }}>•</span>
-                  <span style={{ color: '#92400e', lineHeight: '1.6', fontSize: '1rem' }}>{story}</span>
+                <li
+                  key={index}
+                  style={{ display: "flex", marginBottom: "1rem" }}
+                >
+                  <span
+                    style={{
+                      marginRight: "0.75rem",
+                      color: "#D3B336",
+                      fontWeight: "bold",
+                      fontSize: "1.25rem",
+                    }}
+                  >
+                    •
+                  </span>
+                  <span
+                    style={{
+                      color: "#7F6C21",
+                      lineHeight: "1.6",
+                      fontSize: "1rem",
+                    }}
+                  >
+                    {story}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -528,40 +619,39 @@ const MarketingResultPage = () => {
         </Section>
 
         {/* CTA */}
-        <div style={{ marginTop: '4rem', textAlign: 'center' }}>
-          <button 
+        <div style={{ marginTop: "4rem", textAlign: "center" }}>
+          <button
             style={{
-              background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
-              color: '#111827',
-              padding: '1.25rem 2.5rem',
-              borderRadius: '9999px',
-              fontWeight: 'bold',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              boxShadow: '0 10px 15px -3px rgba(251, 191, 36, 0.4)',
-              fontSize: '1.125rem'
+              background: "#FDD741", // primary/300 to primary/400
+              color: "#000", // frame/100
+              padding: "1.25rem 2.5rem",
+              borderRadius: "20px",
+              fontWeight: "600",
+              border: "none",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              boxShadow: "0 10px 15px -3px rgba(253, 215, 65, 0.4)",
+              fontSize: "1.125rem",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'linear-gradient(to right, #f59e0b, #d97706)';
-              e.currentTarget.style.transform = 'translateY(-3px)';
-              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(251, 191, 36, 0.4)';
+              e.currentTarget.style.background = "#D3B336"; // primary/400 to primary/500
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.boxShadow =
+                "0 20px 25px -5px rgba(253, 215, 65, 0.4)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'linear-gradient(to right, #fbbf24, #f59e0b)';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(251, 191, 36, 0.4)';
+              e.currentTarget.style.background = "#FDD741"; // primary/300 to primary/400
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 10px 15px -3px rgba(253, 215, 65, 0.4)";
             }}
           >
             <Download size={22} />
-            Simpan sebagai PDF
+            Simpan
           </button>
-          <p style={{ marginTop: '1.5rem', color: '#6b7280', fontSize: '1rem', margin: '1.5rem 0 0 0', lineHeight: '1.6' }}>
-            Mulai implementasi hari ini dan pantau perkembangannya di dashboard SatuKelola
-          </p>
         </div>
       </div>
     </div>

@@ -9,8 +9,7 @@ export default function MarketingAdvisorHero() {
       style={{
         position: "relative",
         overflow: "hidden",
-        background:
-          "linear-gradient(135deg, #fef3c7 0%, #fffbeb 50%, #fed7aa 100%)",
+        background: "rgba(254, 242, 192, 0.5)",
         display: "flex",
         alignItems: "center",
         minHeight: "500px",
@@ -48,11 +47,7 @@ export default function MarketingAdvisorHero() {
               letterSpacing: "-0.025em",
             }}
           >
-            Yuk Temukan Cara
-            <br />
-            Promosi Paling
-            <br />
-            Cocok Versi Kamu!
+            Yuk Temukan Cara Promosi Paling Cocok Versi Kamu!
           </h1>
 
           <div style={{ position: "relative" }}>
@@ -62,10 +57,10 @@ export default function MarketingAdvisorHero() {
                 display: "inline-flex",
                 alignItems: "center",
                 padding: "1.25rem 2.5rem",
-                backgroundColor: "#fbbf24",
+                backgroundColor: "#FDD741",
                 color: "#111827",
-                fontWeight: "800",
-                borderRadius: "9999px",
+                fontWeight: "700",
+                borderRadius: "20px",
                 border: "none",
                 cursor: "pointer",
                 transition: "all 0.3s ease",
@@ -74,13 +69,13 @@ export default function MarketingAdvisorHero() {
                 fontSize: "1.125rem",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#f59e0b";
+                e.currentTarget.style.backgroundColor = "#D3B336";
                 e.currentTarget.style.transform = "scale(1.05)";
                 e.currentTarget.style.boxShadow =
                   "0 20px 40px rgba(251, 191, 36, 0.5)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#fbbf24";
+                e.currentTarget.style.backgroundColor = "#FDD741";
                 e.currentTarget.style.transform = "scale(1)";
                 e.currentTarget.style.boxShadow =
                   "0 10px 30px rgba(251, 191, 36, 0.4)";
@@ -212,7 +207,7 @@ export default function MarketingAdvisorHero() {
         />
       </div>
 
-      {/* Custom Styles */}
+{/* Custom Styles */}
       <style jsx>{`
         .hero-float {
           animation: float 6s ease-in-out infinite;
@@ -283,7 +278,7 @@ export default function MarketingAdvisorHero() {
             text-align: center;
             max-width: 100% !important;
           }
-          
+
           .hero-image {
             position: relative !important;
             right: auto !important;
@@ -293,17 +288,20 @@ export default function MarketingAdvisorHero() {
             text-align: center;
             display: flex;
             justify-content: center;
-            height: 400px;
+            width: 100%;
+            height: auto;
           }
-          
+
           .hero-image img {
-            height: 400px !important;
-            max-height: 400px !important;
-            min-height: 350px !important;
+            width: 100% !important;
+            height: auto !important;
+            max-width: 500px !important;
+            max-height: none !important;
+            min-height: auto !important;
           }
-          
+
           .hero-title {
-            font-size: 36px !important;
+            font-size: 42px !important;
             margin-bottom: 2rem !important;
           }
         }
@@ -313,29 +311,26 @@ export default function MarketingAdvisorHero() {
           .content-container {
             padding: 2.5rem 1.5rem 1rem 1.5rem !important;
           }
-          
+
           .hero-image {
-            height: 350px !important;
             margin-top: 1.5rem !important;
           }
-          
+
           .hero-image img {
-            height: 350px !important;
-            max-height: 350px !important;
-            min-height: 300px !important;
+            max-width: 400px !important;
           }
-          
+
           .hero-title {
-            font-size: 32px !important;
-            line-height: 1.2 !important;
+            font-size: 40px !important;
+            line-height: 1.1 !important;
             margin-bottom: 1.5rem !important;
           }
-          
+
           .hero-button {
             padding: 1rem 2rem !important;
             font-size: 1rem !important;
           }
-          
+
           .decorative-star {
             font-size: 2rem !important;
           }
@@ -346,22 +341,15 @@ export default function MarketingAdvisorHero() {
           .content-container {
             padding: 2rem 1rem 1rem 1rem !important;
           }
-          
+
           .hero-image {
-            height: 300px !important;
-            margin-top: 1rem !important;
+            display: none !important;
           }
-          
-          .hero-image img {
-            height: 300px !important;
-            max-height: 300px !important;
-            min-height: 250px !important;
-          }
-          
+
           .hero-title {
-            font-size: 28px !important;
+            font-size: 38px !important;
           }
-          
+
           .hero-button {
             padding: 0.875rem 1.75rem !important;
             font-size: 0.95rem !important;
@@ -373,42 +361,20 @@ export default function MarketingAdvisorHero() {
           .content-container {
             padding: 1.5rem 1rem 0.5rem 1rem !important;
           }
-          
+
           .hero-image {
-            height: 280px !important;
-            margin-top: 1rem !important;
+            display: none !important;
           }
-          
-          .hero-image img {
-            height: 280px !important;
-            max-height: 280px !important;
-            min-height: 230px !important;
-          }
-          
+
           .hero-title {
-            font-size: 26px !important;
+            font-size: 36px !important;
             margin-bottom: 1.25rem !important;
             line-height: 1.1 !important;
           }
-          
+
           .hero-button {
             padding: 0.75rem 1.5rem !important;
             font-size: 0.9rem !important;
-          }
-          
-          .decorative-star {
-            font-size: 1.5rem !important;
-            top: 15% !important;
-          }
-          
-          .decorative-circle-1 {
-            width: 8px !important;
-            height: 8px !important;
-          }
-          
-          .decorative-circle-2 {
-            width: 6px !important;
-            height: 6px !important;
           }
         }
 
@@ -417,30 +383,19 @@ export default function MarketingAdvisorHero() {
           .content-container {
             padding: 1rem 0.75rem 0.5rem 0.75rem !important;
           }
-          
+
           .hero-image {
-            height: 250px !important;
-            margin-top: 0.75rem !important;
+            display: none !important;
           }
-          
-          .hero-image img {
-            height: 250px !important;
-            max-height: 250px !important;
-            min-height: 200px !important;
-          }
-          
+
           .hero-title {
-            font-size: 24px !important;
+            font-size: 32px !important;
             margin-bottom: 1rem !important;
           }
-          
+
           .hero-button {
             padding: 0.625rem 1.25rem !important;
             font-size: 0.85rem !important;
-          }
-          
-          .decorative-star {
-            font-size: 1.25rem !important;
           }
         }
       `}</style>

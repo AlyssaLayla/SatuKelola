@@ -57,7 +57,7 @@ const BenefitsSection = () => {
           <h2
             style={{
               fontSize: "2.5rem",
-              fontWeight: "900",
+              fontWeight: "700",
               color: "#000",
               marginBottom: "16px",
               lineHeight: "1.1",
@@ -90,8 +90,9 @@ const BenefitsSection = () => {
                 }}
               >
                 <div style={{
-                  background: 'linear-gradient(135deg, #fde047, #facc15, #eab308)',
+                  background: '#FDD741;',
                   borderRadius: '24px',
+                  borderColor: '#FEE480',
                   padding: '32px',
                   height: '100%',
                   boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
