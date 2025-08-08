@@ -9,48 +9,60 @@ export default function MarketingAdvisorHero() {
       style={{
         position: "relative",
         overflow: "hidden",
-        background: "rgba(254, 242, 192, 0.5)",
+        background: "linear-gradient(to bottom, #FEF2C0 0%, transparent 100%)",
         display: "flex",
         alignItems: "center",
-        minHeight: "500px",
+        paddingTop: "20px",
+        paddingBottom: "20px",
       }}
     >
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: "0",
+          display: "flex",
           alignItems: "center",
           width: "100%",
+          maxWidth: "1280px",
+          margin: "0 auto",
           position: "relative",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
         }}
       >
         {/* Content - Left Side */}
         <div
           className="content-container"
           style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            padding: "5rem 40rem 5rem 4rem",
+            flex: "1",
+            paddingTop: "5rem",
+            paddingBottom: "5rem",
+            paddingRight: "3rem",
             position: "relative",
             zIndex: 2,
+            maxWidth: "600px",
           }}
         >
           <h1
-            className="hero-title"
             style={{
-              fontSize: "48px",
+              fontSize: "4rem !important",
               fontWeight: "900",
               color: "#111827",
-              lineHeight: "1.1",
-              marginBottom: "3rem",
-              letterSpacing: "-0.025em",
+              lineHeight: "1.05",
+              marginBottom: "1.5rem",
+              letterSpacing: "-0.03em",
             }}
           >
             Yuk Temukan Cara Promosi Paling Cocok Versi Kamu!
           </h1>
 
-          <div style={{ position: "relative" }}>
+          {/* Button Container */}
+          <div
+            className="button-container"
+            style={{
+              position: "relative",
+              marginTop: "3rem",
+              maxWidth: "400px",
+            }}
+          >
             <button
               className="hero-button"
               style={{
@@ -83,7 +95,7 @@ export default function MarketingAdvisorHero() {
             >
               <span>Mulai Disini</span>
               <ChevronDown
-                size={24}
+                size={20}
                 style={{
                   marginLeft: "0.75rem",
                   transition: "transform 0.3s ease",
@@ -93,16 +105,15 @@ export default function MarketingAdvisorHero() {
           </div>
         </div>
 
-        {/* Hero Image - Absolute positioned to right edge */}
+        {/* Hero Image - Enhanced */}
         <div
-          className="hero-image"
+          className="hero-image-container"
           style={{
-            position: "absolute",
-            top: "50%",
-            right: "0",
-            transform: "translateY(-50%)",
+            flex: "0 0 auto",
+            position: "relative",
             zIndex: 1,
             animation: "float 6s ease-in-out infinite",
+            marginLeft: "auto",
           }}
         >
           <img
@@ -112,22 +123,21 @@ export default function MarketingAdvisorHero() {
               width: "auto",
               height: "100%",
               maxHeight: "600px",
-              minHeight: "550px",
               objectFit: "contain",
-              filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15))",
+              filter: "drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1))",
               display: "block",
             }}
           />
 
-          {/* Decorative Star */}
+          {/* Decorative Elements */}
           <div
             className="decorative-star"
             style={{
               position: "absolute",
-              top: "20%",
+              top: "10%",
               left: "15%",
               fontSize: "2.5rem",
-              color: "#f59e0b",
+              color: "#C4A73B",
               animation: "bounceSubtle 3s ease-in-out infinite",
               animationDelay: "0.5s",
               transform: "rotate(15deg)",
@@ -137,39 +147,41 @@ export default function MarketingAdvisorHero() {
             ✦
           </div>
 
-          {/* Small decorative elements */}
+          {/* Small decorative elements - Reduced visibility */}
           <div
             className="decorative-circle-1"
             style={{
               position: "absolute",
               top: "35%",
               left: "-5%",
-              width: "12px",
-              height: "12px",
-              backgroundColor: "#fb923c",
+              width: "8px",
+              height: "8px",
+              backgroundColor: "#20273A",
               borderRadius: "50%",
               animation: "bounceSubtle 4s ease-in-out infinite",
               animationDelay: "1.5s",
+              opacity: 0.3,
             }}
           />
           <div
             className="decorative-circle-2"
             style={{
               position: "absolute",
-              bottom: "30%",
-              left: "10%",
-              width: "8px",
-              height: "8px",
-              backgroundColor: "#ec4899",
+              bottom: "35%",
+              left: "8%",
+              width: "6px",
+              height: "6px",
+              backgroundColor: "#C4A73B",
               borderRadius: "50%",
               animation: "bounceSubtle 3.5s ease-in-out infinite",
               animationDelay: "2.5s",
+              opacity: 0.4,
             }}
           />
         </div>
       </div>
 
-      {/* Background Decoration */}
+      {/* Enhanced Background Decoration - Reduced visibility */}
       <div
         style={{
           position: "absolute",
@@ -182,55 +194,56 @@ export default function MarketingAdvisorHero() {
         <div
           style={{
             position: "absolute",
-            top: "-10rem",
-            right: "-8rem",
-            width: "24rem",
-            height: "24rem",
-            background: "linear-gradient(135deg, #fde68a, #fb923c)",
+            top: "-15rem",
+            right: "-12rem",
+            width: "25rem",
+            height: "25rem",
+            background:
+              "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(196, 167, 59, 0.05))",
             borderRadius: "50%",
-            opacity: 0.2,
-            filter: "blur(3rem)",
+            opacity: 0.3,
+            filter: "blur(4rem)",
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: "-8rem",
-            left: "-8rem",
+            bottom: "-12rem",
+            left: "-12rem",
             width: "20rem",
             height: "20rem",
-            background: "linear-gradient(135deg, #fce7f3, #a855f7)",
+            background:
+              "linear-gradient(135deg, rgba(32, 39, 58, 0.05), rgba(144, 147, 157, 0.05))",
             borderRadius: "50%",
             opacity: 0.2,
-            filter: "blur(3rem)",
+            filter: "blur(4rem)",
           }}
         />
       </div>
 
-{/* Custom Styles */}
-      <style jsx>{`
-        .hero-float {
-          animation: float 6s ease-in-out infinite;
-        }
+      {/* Gradient Transition to Next Section */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "100px",
+          background:
+            "linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.8) 100%)",
+          pointerEvents: "none",
+          zIndex: 3,
+        }}
+      />
 
+      <style jsx>{`
         @keyframes float {
           0%,
           100% {
-            transform: translateY(-50%);
+            transform: translateY(0);
           }
           50% {
-            transform: translateY(calc(-50% - 20px));
-          }
-        }
-
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+            transform: translateY(-25px);
           }
         }
 
@@ -246,156 +259,147 @@ export default function MarketingAdvisorHero() {
 
         /* Large desktop */
         @media (max-width: 1440px) {
-          .content-container {
-            padding: 4rem 35rem 4rem 3rem !important;
+          .content-container h1 {
+            font-size: 3rem !important;
+          }
+          .hero-image-container img {
+            max-height: 550px !important;
+            min-height: 400px !important;
           }
         }
 
         /* Desktop */
         @media (max-width: 1280px) {
           .content-container {
-            padding: 4rem 25rem 4rem 3rem !important;
+            padding-right: 2rem !important;
           }
-          .hero-title {
-            font-size: 44px !important;
+          .content-container h1 {
+            font-size: 2.8rem !important;
+          }
+          .hero-image-container img {
+            max-height: 500px !important;
+            min-height: 350px !important;
           }
         }
 
         /* Small desktop */
         @media (max-width: 1150px) {
           .content-container {
-            padding: 4rem 20rem 4rem 3rem !important;
+            padding-right: 1.5rem !important;
           }
-          .hero-title {
-            font-size: 40px !important;
+          .content-container h1 {
+            font-size: 2.5rem !important;
+          }
+          .hero-image-container img {
+            max-height: 450px !important;
+            min-height: 300px !important;
           }
         }
 
-        /* Tablet landscape */
+        /* Tablet landscape - Stack vertically */
         @media (max-width: 1024px) {
+          section > div {
+            flex-direction: column !important;
+            text-align: center !important;
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+          }
+
           .content-container {
-            padding: 3rem 2rem 1rem 2rem !important;
-            text-align: center;
             max-width: 100% !important;
+            padding-top: 3rem !important;
+            padding-bottom: 2rem !important;
+            padding-right: 0 !important;
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
           }
 
-          .hero-image {
-            position: relative !important;
-            right: auto !important;
-            top: auto !important;
-            transform: none !important;
-            margin-top: 2rem;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            height: auto;
+          .content-container h1 {
+            font-size: 2.8rem !important;
           }
 
-          .hero-image img {
+          .button-container {
             width: 100% !important;
-            height: auto !important;
+            max-width: 400px !important;
+            display: flex !important;
+            justify-content: center !important;
+          }
+
+          .hero-image-container {
+            margin-left: 0 !important;
+            margin-top: 1.5rem !important;
+            display: flex !important;
+            justify-content: center !important;
+          }
+
+          .hero-image-container img {
+            width: 100% !important;
             max-width: 500px !important;
             max-height: none !important;
             min-height: auto !important;
-          }
-
-          .hero-title {
-            font-size: 42px !important;
-            margin-bottom: 2rem !important;
+            height: auto !important;
           }
         }
 
         /* Tablet portrait */
         @media (max-width: 768px) {
-          .content-container {
-            padding: 2.5rem 1.5rem 1rem 1.5rem !important;
+          section > div {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
           }
 
-          .hero-image {
+          .content-container {
+            padding-top: 2.5rem !important;
+            padding-bottom: 1.5rem !important;
+          }
+
+          .content-container h1 {
+            font-size: 2.2rem !important;
+          }
+
+          .hero-image-container img {
+            max-width: 400px !important;
+          }
+        }
+
+        /* Mobile landscape & portrait */
+        @media (max-width: 640px) {
+          .content-container {
+            padding-top: 2rem !important;
+            padding-bottom: 1rem !important;
+          }
+
+          .content-container h1 {
+            font-size: 1.8rem !important;
+            margin-bottom: 1rem !important;
+          }
+
+          .button-container {
+            max-width: 100% !important;
             margin-top: 1.5rem !important;
           }
 
-          .hero-image img {
-            max-width: 400px !important;
+          .hero-image-container {
+            display: none !important;
+          }
+        }
+
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+          section > div {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
           }
 
-          .hero-title {
-            font-size: 40px !important;
-            line-height: 1.1 !important;
-            margin-bottom: 1.5rem !important;
+          .content-container h1 {
+            font-size: 1.6rem !important;
           }
 
           .hero-button {
             padding: 1rem 2rem !important;
             font-size: 1rem !important;
-          }
-
-          .decorative-star {
-            font-size: 2rem !important;
-          }
-        }
-
-        /* Mobile landscape */
-        @media (max-width: 640px) {
-          .content-container {
-            padding: 2rem 1rem 1rem 1rem !important;
-          }
-
-          .hero-image {
-            display: none !important;
-          }
-
-          .hero-title {
-            font-size: 38px !important;
-          }
-
-          .hero-button {
-            padding: 0.875rem 1.75rem !important;
-            font-size: 0.95rem !important;
-          }
-        }
-
-        /* Mobile portrait */
-        @media (max-width: 480px) {
-          .content-container {
-            padding: 1.5rem 1rem 0.5rem 1rem !important;
-          }
-
-          .hero-image {
-            display: none !important;
-          }
-
-          .hero-title {
-            font-size: 36px !important;
-            margin-bottom: 1.25rem !important;
-            line-height: 1.1 !important;
-          }
-
-          .hero-button {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 0.9rem !important;
-          }
-        }
-
-        /* Very small mobile */
-        @media (max-width: 360px) {
-          .content-container {
-            padding: 1rem 0.75rem 0.5rem 0.75rem !important;
-          }
-
-          .hero-image {
-            display: none !important;
-          }
-
-          .hero-title {
-            font-size: 32px !important;
-            margin-bottom: 1rem !important;
-          }
-
-          .hero-button {
-            padding: 0.625rem 1.25rem !important;
-            font-size: 0.85rem !important;
           }
         }
       `}</style>

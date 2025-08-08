@@ -306,7 +306,7 @@ const QuizSection = () => {
 
   if (isCompleted) {
     return (
-      <section style={{ padding: "5rem 0", backgroundColor: "#f9fafb" }}>
+      <section style={{ padding: "5rem 0" }}>
         <div
           style={{ maxWidth: "48rem", margin: "0 auto", padding: "0 1.5rem" }}
         >
@@ -373,15 +373,13 @@ const QuizSection = () => {
                 transition: "all 0.3s ease",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "#1E8449";
+                e.currentTarget.style.background = "#1E8449";
                 e.currentTarget.style.transform = "translateY(-2px)";
                 e.currentTarget.style.boxShadow =
                   "0 10px 15px -3px rgba(0, 0, 0, 0.1)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background =
-                  "#27AE60";
+                e.currentTarget.style.background = "#27AE60";
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}
@@ -395,7 +393,7 @@ const QuizSection = () => {
   }
 
   return (
-    <section style={{ padding: "5rem 0", backgroundColor: "#f9fafb" }}>
+    <section style={{ padding: "5rem 0" }}>
       <div style={{ maxWidth: "56rem", margin: "0 auto", padding: "0 1.5rem" }}>
         {/* Progress Bar */}
         {isStarted && <ProgressBar progress={progress} />}
