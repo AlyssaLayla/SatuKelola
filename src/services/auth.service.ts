@@ -21,8 +21,8 @@ class AuthService {
             data: {
               id: "1",
               username: data.username,
-              email: "user@example.com",
-              name: "Mantap",
+              email: "sari.dewi@example.com",
+              name: "Sari",
               accessToken: "dummy-auth-token-12345",
               refreshToken: "dummy-refresh-token-67890",
               role: "admin",
