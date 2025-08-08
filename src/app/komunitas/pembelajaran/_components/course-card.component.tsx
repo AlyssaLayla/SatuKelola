@@ -102,7 +102,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
             <div
               style={{
                 fontSize: "0.65rem",
-                fontWeight: "600",
+                fontWeight: "500",
                 color: "#ffffff",
                 lineHeight: "1",
                 margin: "0",
@@ -146,7 +146,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           <h3
             style={{
               fontSize: "0.9rem",
-              fontWeight: "700",
+              fontWeight: "600",
               color: "#111827",
               marginBottom: "0.3rem",
               lineHeight: "1.3",
@@ -197,7 +197,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
                 style={{
                   fontSize: "0.65rem",
                   color: "#C4A73B",
-                  fontWeight: "600",
+                  fontWeight: "500",
                 }}
               >
                 {course.duration}
