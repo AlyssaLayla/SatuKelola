@@ -277,7 +277,7 @@ export default function AuthPage() {
             >
               <div style={{ position: "relative" }}>
                 <Image
-                  src="/img/logo-shopping.png"
+                  src="/logo-shopping.png"
                   alt="Shopping Illustration"
                   width={400}
                   height={400}
@@ -373,7 +373,7 @@ export default function AuthPage() {
               }}
             >
               <Image
-                src="/img/logo-light.png"
+                src="/logo-light.png"
                 alt="Satu Kelola Logo"
                 width={350}
                 height={150}

@@ -282,10 +282,10 @@ export const TestimonialsSection = () => {
         >
           <p
             style={{
-              fontSize: "1.125rem",
+              fontSize: "20px",
               color: "#111827",
               marginBottom: "0.5rem",
-              fontWeight: "500",
+              fontWeight: "400",
             }}
           >
             Apa Kata Mereka?
@@ -300,8 +300,8 @@ export const TestimonialsSection = () => {
               letterSpacing: "-0.03em",
             }}
           >
-            <span style={{ color: "#111827" }}>TESTIMONI DARI</span>{" "}
-            <span style={{ color: "#20273A" }}>PELANGGAN</span>
+            <span style={{ color: "#111827" }}>Testimoni dari</span>{" "}
+            <span style={{ color: "#20273A" }}>Pelanggan</span>
           </h2>
         </div>
 
