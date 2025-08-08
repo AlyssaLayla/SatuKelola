@@ -12,15 +12,13 @@ import {
 import { orderStatsData, stokSectionData } from "@/data/stok";
 
 const DashboardPage: React.FC = () => {
-  // Calculate summary dari semua transactions
   const summary = useMemo(() => {
     return calculateSummary(transaksiData);
   }, []);
 
-  // State untuk carousel toko digital
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 4;
-  const totalItems = digitalStoresData.length + 1; // +1 untuk "Tambah Toko" card
+  const totalItems = digitalStoresData.length + 1;
   const maxIndex = Math.max(0, totalItems - itemsPerPage);
 
   const handlePrevious = () => {
@@ -39,7 +37,6 @@ const DashboardPage: React.FC = () => {
         padding: "0"
       }}
     >
-      {/* Header Section */}
       <div
         style={{
           backgroundColor: "white",
@@ -82,7 +79,6 @@ const DashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Content */}
       <div
         style={{
           maxWidth: "1200px",
@@ -90,7 +86,6 @@ const DashboardPage: React.FC = () => {
           padding: "32px"
         }}
       >
-        {/* Top Section - Keuangan Toko & Performa Toko */}
         <div
           style={{
             display: "grid",
@@ -99,7 +94,6 @@ const DashboardPage: React.FC = () => {
             marginBottom: "32px"
           }}
         >
-          {/* Keuangan Toko */}
           <div
             style={{
               backgroundColor: "white",
@@ -207,7 +201,6 @@ const DashboardPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Performa Toko */}
           <div
             style={{
               backgroundColor: "white",
@@ -245,7 +238,6 @@ const DashboardPage: React.FC = () => {
               </span>
             </div>
 
-            {/* Chart Area */}
             <div
               style={{
                 height: "160px",
@@ -303,7 +295,6 @@ const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Middle Section - Ringkasan Pesanan & Inventaris */}
         <div
           style={{
             display: "grid",
@@ -312,7 +303,6 @@ const DashboardPage: React.FC = () => {
             marginBottom: "32px"
           }}
         >
-          {/* Ringkasan Pesanan */}
           <div
             style={{
               backgroundColor: "white",
@@ -333,7 +323,6 @@ const DashboardPage: React.FC = () => {
               Ringkasan Pesanan
             </h3>
 
-            {/* Progress Bar */}
             <div
               style={{
                 height: "8px",
@@ -356,7 +345,6 @@ const DashboardPage: React.FC = () => {
               ))}
             </div>
 
-            {/* Legend */}
             <div
               style={{
                 display: "grid",
@@ -411,7 +399,7 @@ const DashboardPage: React.FC = () => {
               </div>
             </div>
           </div>
-          {/* Stok Section */}
+
           <div
             style={{
               backgroundColor: "white",
@@ -487,7 +475,6 @@ const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Section - Toko Digital */}
         <div
           style={{
             backgroundColor: "white",
@@ -516,7 +503,6 @@ const DashboardPage: React.FC = () => {
               Toko Digital
             </h3>
             
-            {/* Navigation Arrows */}
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <button
                 onClick={handlePrevious}
@@ -580,7 +566,6 @@ const DashboardPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Carousel Container */}
           <div
             style={{
               overflow: "hidden",
@@ -596,7 +581,6 @@ const DashboardPage: React.FC = () => {
                 width: `${(totalItems / itemsPerPage) * 100}%`
               }}
             >
-              {/* Add Store Card */}
               <div
                 style={{
                   flex: `0 0 ${100 / itemsPerPage}%`,
@@ -629,7 +613,6 @@ const DashboardPage: React.FC = () => {
                 </span>
               </div>
 
-              {/* Store Cards */}
               {digitalStoresData.map((store, index) => (
                 <div
                   key={index}

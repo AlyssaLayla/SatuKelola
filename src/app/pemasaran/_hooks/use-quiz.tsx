@@ -1,7 +1,6 @@
-// hooks/useQuiz.ts
-import { useState, useEffect } from 'react';
-import { Question, Option } from '@/types/pemasaran.type';
-import { marketingQuestions } from '@/data/pemasaran';
+import { useState, useEffect } from "react";
+import { Question, Option } from "@/types/pemasaran.type";
+import { marketingQuestions } from "@/data/pemasaran";
 
 export type QuizAnswer = {
   questionId: string;
@@ -19,42 +18,37 @@ export const useQuiz = () => {
   const totalQuestions = marketingQuestions.length;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
 
-  // Get current question's answer
   const getCurrentAnswer = (): string[] => {
     const existingAnswer = answers.find(
-      answer => answer.questionId === currentQuestion.id
+      (answer) => answer.questionId === currentQuestion.id
     );
     return existingAnswer ? existingAnswer.selectedOptions : [];
   };
 
-  // Handle answer selection
   const handleAnswerSelect = (optionId: string) => {
     const currentAnswer = getCurrentAnswer();
     let newSelectedOptions: string[];
 
-    if (currentQuestion.type === 'single') {
+    if (currentQuestion.type === "single") {
       newSelectedOptions = [optionId];
     } else {
-      // Multiple selection
       if (currentAnswer.includes(optionId)) {
-        newSelectedOptions = currentAnswer.filter(id => id !== optionId);
+        newSelectedOptions = currentAnswer.filter((id) => id !== optionId);
       } else {
         newSelectedOptions = [...currentAnswer, optionId];
       }
     }
 
-    // Update answers
     const newAnswers = answers.filter(
-      answer => answer.questionId !== currentQuestion.id
+      (answer) => answer.questionId !== currentQuestion.id
     );
     newAnswers.push({
       questionId: currentQuestion.id,
-      selectedOptions: newSelectedOptions
+      selectedOptions: newSelectedOptions,
     });
     setAnswers(newAnswers);
   };
 
-  // Navigation functions
   const startQuiz = () => {
     setShowPopup(false);
     setIsStarted(true);
@@ -62,13 +56,13 @@ export const useQuiz = () => {
 
   const goToNextQuestion = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
+      setCurrentQuestionIndex((prev) => prev + 1);
     }
   };
 
   const goToPreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
+      setCurrentQuestionIndex((prev) => prev - 1);
     }
   };
 
@@ -76,18 +70,15 @@ export const useQuiz = () => {
     setIsCompleted(true);
   };
 
-  // Check if current question is answered
   const isCurrentQuestionAnswered = () => {
     const currentAnswer = getCurrentAnswer();
     return currentAnswer.length > 0;
   };
 
-  // Check if it's the last question
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
   const isFirstQuestion = currentQuestionIndex === 0;
 
   return {
-    // State
     currentQuestion,
     currentQuestionIndex,
     totalQuestions,
@@ -96,14 +87,12 @@ export const useQuiz = () => {
     isStarted,
     isCompleted,
     showPopup,
-    
-    // Computed
+
     isLastQuestion,
     isFirstQuestion,
     isCurrentQuestionAnswered: isCurrentQuestionAnswered(),
     currentAnswer: getCurrentAnswer(),
-    
-    // Actions
+
     handleAnswerSelect,
     startQuiz,
     goToNextQuestion,

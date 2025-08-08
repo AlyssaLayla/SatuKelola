@@ -23,7 +23,6 @@ interface Step {
   color: string;
 }
 
-// Step Card Component Props
 interface StepCardProps {
   step: Step;
   isCompleted: boolean;
@@ -42,7 +41,7 @@ export const StepGuideSection = () => {
       description: "Buka website resmi OSS di browser Anda",
       icon: Globe,
       detail: "Pastikan koneksi internet stabil untuk proses yang lancar",
-      color: "#7F6C21", // primary/500
+      color: "#7F6C21",
     },
     {
       id: 2,
@@ -50,7 +49,7 @@ export const StepGuideSection = () => {
       description: "Temukan menu panduan di halaman utama",
       icon: BookOpen,
       detail: "Menu panduan biasanya terletak di bagian atas halaman",
-      color: "#D3B336", // primary/400
+      color: "#D3B336",
     },
     {
       id: 3,
@@ -59,7 +58,7 @@ export const StepGuideSection = () => {
       icon: Store,
       detail:
         "UMK cocok untuk bisnis dengan omzet di bawah 2.5 miliar per tahun",
-      color: "#20273A", // secondary/300
+      color: "#20273A",
     },
     {
       id: 4,
@@ -67,7 +66,7 @@ export const StepGuideSection = () => {
       description: "Sesuaikan dengan bidang usaha spesifik",
       icon: Target,
       detail: "Pilihan yang tepat akan memudahkan proses selanjutnya",
-      color: "#FDD741", // primary/300
+      color: "#FDD741",
     },
     {
       id: 5,
@@ -75,7 +74,7 @@ export const StepGuideSection = () => {
       description: "Mulai proses registrasi akun OSS",
       icon: FileText,
       detail: "Siapkan email aktif untuk verifikasi akun",
-      color: "#B91C1C", // Adjusted red to complement palette
+      color: "#B91C1C",
     },
     {
       id: 6,
@@ -83,7 +82,7 @@ export const StepGuideSection = () => {
       description: "Lengkapi informasi bisnis dan personal",
       icon: User,
       detail: "Pastikan data yang diisi sesuai dengan dokumen resmi",
-      color: "#151A27", // secondary/400
+      color: "#151A27",
     },
     {
       id: 7,
@@ -91,7 +90,7 @@ export const StepGuideSection = () => {
       description: "Upload file persyaratan yang diperlukan",
       icon: Paperclip,
       detail: "Format file yang diterima: PDF, JPG, PNG (maksimal 2MB)",
-      color: "#16A34A", // Adjusted green to complement palette
+      color: "#16A34A",
     },
     {
       id: 8,
@@ -99,7 +98,7 @@ export const StepGuideSection = () => {
       description: "Kirim aplikasi untuk diproses",
       icon: Send,
       detail: "Periksa kembali semua data sebelum submit",
-      color: "#EA580C", // Adjusted orange to complement palette
+      color: "#EA580C",
     },
     {
       id: 9,
@@ -107,7 +106,7 @@ export const StepGuideSection = () => {
       description: "Pantau progress aplikasi Anda",
       icon: BarChart3,
       detail: "Notifikasi akan dikirim melalui email dan SMS",
-      color: "#90939D", // secondary/200
+      color: "#90939D",
     },
     {
       id: 10,
@@ -115,7 +114,7 @@ export const StepGuideSection = () => {
       description: "Download dan simpan sertifikat legalitas",
       icon: Trophy,
       detail: "Backup dokumen di beberapa tempat untuk keamanan",
-      color: "#059669", // Adjusted teal to complement palette
+      color: "#059669",
     },
   ];
 
@@ -150,13 +149,12 @@ export const StepGuideSection = () => {
           paddingRight: "24px",
         }}
       >
-        {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "80px" }}>
           <h2
             style={{
               fontSize: "2.75rem",
               fontWeight: "700",
-              color: "#20273A", // secondary/300
+              color: "#20273A",
               marginBottom: "20px",
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
@@ -167,7 +165,7 @@ export const StepGuideSection = () => {
           <p
             style={{
               fontSize: "1.25rem",
-              color: "#90939D", // secondary/200
+              color: "#90939D",
               maxWidth: "600px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -179,11 +177,9 @@ export const StepGuideSection = () => {
           </p>
         </div>
 
-        {/* Steps Container */}
         <div
           style={{ position: "relative", maxWidth: "1000px", margin: "0 auto" }}
         >
-          {/* Vertical Line */}
           <div
             style={{
               position: "absolute",
@@ -192,14 +188,13 @@ export const StepGuideSection = () => {
               bottom: "40px",
               width: "4px",
               background:
-                "linear-gradient(to bottom, #D4D4D4, #AAAAAA, #D4D4D4)", // frame colors
+                "linear-gradient(to bottom, #D4D4D4, #AAAAAA, #D4D4D4)",
               borderRadius: "2px",
               transform: "translateX(-50%)",
               zIndex: 1,
             }}
           />
 
-          {/* Steps */}
           <div style={{ position: "relative", zIndex: 2 }}>
             {steps.map((step, index) => {
               const isEven = index % 2 === 0;
@@ -224,7 +219,6 @@ export const StepGuideSection = () => {
                     transitionDelay: `${index * 0.1}s`,
                   }}
                 >
-                  {/* Left Content (for even steps) */}
                   <div
                     style={{
                       display: "flex",
@@ -241,7 +235,6 @@ export const StepGuideSection = () => {
                           onToggleComplete={() => toggleStepComplete(step.id)}
                           side="left"
                         />
-                        {/* Chevron for left cards */}
                         <div
                           style={{
                             position: "absolute",
@@ -272,7 +265,6 @@ export const StepGuideSection = () => {
                     )}
                   </div>
 
-                  {/* Center Circle - Always in the middle */}
                   <div
                     style={{
                       display: "flex",
@@ -286,7 +278,7 @@ export const StepGuideSection = () => {
                         height: "80px",
                         borderRadius: "50%",
                         background: isCompleted
-                          ? "linear-gradient(135deg, #16A34A, #15803D)" // Green for completed
+                          ? "linear-gradient(135deg, #16A34A, #15803D)"
                           : `linear-gradient(135deg, ${step.color}, ${step.color}dd)`,
                         display: "flex",
                         alignItems: "center",
@@ -302,13 +294,15 @@ export const StepGuideSection = () => {
                       onClick={() => toggleStepComplete(step.id)}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = "scale(1.15)";
-                        e.currentTarget.style.boxShadow = "0 8px 25px -8px rgba(0, 0, 0, 0.25)";
+                        e.currentTarget.style.boxShadow =
+                          "0 8px 25px -8px rgba(0, 0, 0, 0.25)";
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = isCompleted
                           ? "scale(1.1)"
                           : "scale(1)";
-                        e.currentTarget.style.boxShadow = "0 6px 20px -6px rgba(0, 0, 0, 0.2)";
+                        e.currentTarget.style.boxShadow =
+                          "0 6px 20px -6px rgba(0, 0, 0, 0.2)";
                       }}
                     >
                       {isCompleted ? (
@@ -323,7 +317,6 @@ export const StepGuideSection = () => {
                         />
                       )}
 
-                      {/* Step Number Badge */}
                       <div
                         style={{
                           position: "absolute",
@@ -348,7 +341,6 @@ export const StepGuideSection = () => {
                     </div>
                   </div>
 
-                  {/* Right Content (for odd steps) */}
                   <div
                     style={{
                       display: "flex",
@@ -365,7 +357,6 @@ export const StepGuideSection = () => {
                           onToggleComplete={() => toggleStepComplete(step.id)}
                           side="right"
                         />
-                        {/* Chevron for right cards */}
                         <div
                           style={{
                             position: "absolute",
@@ -403,7 +394,6 @@ export const StepGuideSection = () => {
         </div>
       </div>
 
-      {/* Responsive Styles */}
       <style jsx>{`
         @media (max-width: 1024px) {
           /* Stack vertically on tablet and mobile */
@@ -436,7 +426,6 @@ export const StepGuideSection = () => {
   );
 };
 
-// Step Card Component
 const StepCard: React.FC<StepCardProps> = ({
   step,
   isCompleted,
@@ -452,7 +441,7 @@ const StepCard: React.FC<StepCardProps> = ({
         boxShadow: isCompleted
           ? "0 8px 25px -8px rgba(22, 163, 74, 0.15)"
           : "0 8px 25px -8px rgba(0, 0, 0, 0.08)",
-        border: isCompleted ? "3px solid #16A34A" : "1px solid #D4D4D4", // frame/200
+        border: isCompleted ? "3px solid #16A34A" : "1px solid #D4D4D4",
         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         cursor: "pointer",
         position: "relative",
@@ -472,7 +461,6 @@ const StepCard: React.FC<StepCardProps> = ({
           : "0 8px 25px -8px rgba(0, 0, 0, 0.08)";
       }}
     >
-      {/* Completion overlay */}
       {isCompleted && (
         <div
           style={{
@@ -524,7 +512,7 @@ const StepCard: React.FC<StepCardProps> = ({
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "600",
-                color: isCompleted ? "#16A34A" : "#20273A", // secondary/300
+                color: isCompleted ? "#16A34A" : "#20273A",
                 marginBottom: "0.75rem",
                 lineHeight: "1.3",
                 letterSpacing: "-0.01em",
@@ -538,7 +526,7 @@ const StepCard: React.FC<StepCardProps> = ({
             <p
               style={{
                 fontSize: "18px",
-                color: isCompleted ? "#90939D" : "#90939D", // secondary/200
+                color: isCompleted ? "#90939D" : "#90939D",
                 marginBottom: "1rem",
                 lineHeight: "1.6",
                 fontWeight: "400",
@@ -573,7 +561,6 @@ const StepCard: React.FC<StepCardProps> = ({
             </div>
           </div>
 
-          {/* Completion indicator */}
           <div
             style={{
               width: "24px",

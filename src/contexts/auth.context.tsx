@@ -131,7 +131,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           );
 
           if (isOnProtectedRoute) {
-            router.replace("/login");
+            router.replace("/auth");
           }
         }
       } catch (error) {
@@ -144,7 +144,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         );
 
         if (isOnProtectedRoute) {
-          router.replace("/login");
+          router.replace("/auth");
         }
       } finally {
         setLoadingContext(false);

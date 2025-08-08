@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import { Course } from "../_types/pembelajaran.type";
@@ -22,7 +22,6 @@ export const RecommendedCourses: React.FC<RecommendedCoursesProps> = ({
         }}
         className="recommended-courses-sticky"
       >
-        {/* Recommended Courses */}
         <div
           style={{
             display: "flex",
@@ -46,7 +45,6 @@ export const RecommendedCourses: React.FC<RecommendedCoursesProps> = ({
         </div>
       </div>
 
-      {/* Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 1200px) {
           .recommended-courses-sticky {
@@ -61,7 +59,10 @@ export const RecommendedCourses: React.FC<RecommendedCoursesProps> = ({
         @media (max-width: 768px) {
           .recommended-courses-grid {
             display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+            grid-template-columns: repeat(
+              auto-fit,
+              minmax(280px, 1fr)
+            ) !important;
             gap: 12px !important;
           }
         }

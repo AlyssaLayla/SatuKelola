@@ -45,7 +45,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         e.currentTarget.style.borderColor = "#FEE480";
       }}
     >
-      {/* Course Content Layout */}
       <div
         style={{
           display: "flex",
@@ -54,7 +53,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         }}
         className="course-content"
       >
-        {/* Course Thumbnail with Level Badge Below */}
         <div
           style={{
             display: "flex",
@@ -64,7 +62,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           }}
           className="course-thumbnail-container"
         >
-          {/* Thumbnail Image */}
           <div
             style={{
               width: "100px",
@@ -87,7 +84,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
             />
           </div>
 
-          {/* Level Badge Below Image */}
           <div
             style={{
               background: getLevelColor(course.level),
@@ -115,9 +111,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           </div>
         </div>
 
-        {/* Course Info - Right Side */}
         <div style={{ flex: 1, minWidth: 0 }} className="course-info">
-          {/* Popular Badge */}
           {course.isPopular && (
             <div
               style={{
@@ -176,7 +170,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
             {course.description}
           </p>
 
-          {/* Duration and Students - Mini Stats */}
           <div
             style={{
               display: "flex",
@@ -226,7 +219,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         </div>
       </div>
 
-      {/* Instructor and Rating */}
       <div
         style={{
           display: "flex",
@@ -267,7 +259,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         </div>
       </div>
 
-      {/* Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 768px) {
           .course-card {

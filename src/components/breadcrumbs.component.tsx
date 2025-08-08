@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import { ChevronRight, Home } from "lucide-react";
@@ -14,9 +14,9 @@ interface BreadcrumbsProps {
   className?: string;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ 
-  items, 
-  className = "" 
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
+  items,
+  className = "",
 }) => {
   const handleClick = (href?: string) => {
     if (href) {
@@ -25,7 +25,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   };
 
   return (
-    <nav 
+    <nav
       aria-label="Breadcrumb"
       className={`breadcrumbs-nav ${className}`}
       style={{
@@ -54,7 +54,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             }}
             className="breadcrumb-item"
           >
-            {/* Breadcrumb Link/Text */}
             {item.href && !item.isActive ? (
               <button
                 onClick={() => handleClick(item.href)}
@@ -104,11 +103,10 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
               </span>
             )}
 
-            {/* Separator */}
             {index < items.length - 1 && (
               <ChevronRight
                 size={14}
-                style={{ 
+                style={{
                   color: "#94a3b8",
                   flexShrink: 0,
                 }}
@@ -119,7 +117,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         ))}
       </ol>
 
-      {/* Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 768px) {
           .breadcrumbs-nav {
@@ -147,7 +144,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         }
 
         @media (max-width: 480px) {
-
           .breadcrumb-link,
           .breadcrumb-text {
             font-size: 0.75rem !important;
@@ -165,12 +161,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
         /* Hover effects for better UX */
         .breadcrumb-link:focus {
-          outline: 2px solid #FDD741 !important;
+          outline: 2px solid #fdd741 !important;
           outline-offset: 2px !important;
         }
 
         .breadcrumb-text.active {
-          background-color: #FEE480 !important;
+          background-color: #fee480 !important;
           border-radius: 6px !important;
         }
       `}</style>

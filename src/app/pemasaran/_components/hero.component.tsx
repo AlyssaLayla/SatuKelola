@@ -28,7 +28,6 @@ export default function MarketingAdvisorHero() {
           paddingRight: "2rem",
         }}
       >
-        {/* Content - Left Side */}
         <div
           className="content-container"
           style={{
@@ -54,7 +53,6 @@ export default function MarketingAdvisorHero() {
             Yuk Temukan Cara Promosi Paling Cocok Versi Kamu!
           </h1>
 
-          {/* Button Container */}
           <div
             className="button-container"
             style={{
@@ -105,7 +103,6 @@ export default function MarketingAdvisorHero() {
           </div>
         </div>
 
-        {/* Hero Image - Enhanced */}
         <div
           className="hero-image-container"
           style={{
@@ -129,7 +126,6 @@ export default function MarketingAdvisorHero() {
             }}
           />
 
-          {/* Decorative Elements */}
           <div
             className="decorative-star"
             style={{
@@ -147,7 +143,6 @@ export default function MarketingAdvisorHero() {
             ✦
           </div>
 
-          {/* Small decorative elements - Reduced visibility */}
           <div
             className="decorative-circle-1"
             style={{
@@ -181,7 +176,6 @@ export default function MarketingAdvisorHero() {
         </div>
       </div>
 
-      {/* Enhanced Background Decoration - Reduced visibility */}
       <div
         style={{
           position: "absolute",
@@ -221,7 +215,6 @@ export default function MarketingAdvisorHero() {
         />
       </div>
 
-      {/* Gradient Transition to Next Section */}
       <div
         style={{
           position: "absolute",

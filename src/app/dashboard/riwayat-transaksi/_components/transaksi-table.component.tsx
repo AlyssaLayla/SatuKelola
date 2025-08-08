@@ -51,7 +51,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
       }}
     >
-      {/* Filter tabs - sesuai gambar tanpa DateRangePicker */}
       <div style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div
           style={{
@@ -102,7 +101,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         </div>
       </div>
 
-      {/* Table */}
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
@@ -301,8 +299,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                           alignItems: "center",
                           gap: "4px",
                         }}
-                      >
-                      </div>
+                      ></div>
                     )}
                   </td>
                   <td
@@ -374,7 +371,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         </table>
       </div>
 
-      {/* Table footer */}
       <div
         style={{
           padding: isMobile ? "12px 16px" : "16px 24px",
@@ -398,7 +394,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             transaksi
           </span>
 
-          {/* Pagination */}
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <button
               style={{

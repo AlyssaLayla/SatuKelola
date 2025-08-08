@@ -9,7 +9,6 @@ import {
   Soup
 } from 'lucide-react';
 
-// Data untuk stok dan inventori
 export interface StokItem {
   id: string;
   namaBarang: string;
@@ -91,7 +90,6 @@ export const stokItemsData: StokItem[] = [
   }
 ];
 
-// Data untuk section Stok (kiri)
 export interface StokSectionItem {
   name: string;
   quantity: string;
@@ -105,7 +103,6 @@ export const stokSectionData: StokSectionItem[] = [
   { name: 'Lengkuas', quantity: '75 gr', status: 'red', iconComponent: Wheat }
 ];
 
-// Data untuk section Inventaris (kanan)
 export interface InventarisSectionItem {
   name: string;
   quantity: string;

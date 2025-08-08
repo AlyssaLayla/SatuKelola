@@ -50,7 +50,6 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
         })}
       </div>
 
-      {/* Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 768px) {
           .comments-section {

@@ -4,7 +4,6 @@ import React from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useQuiz } from "../_hooks/use-quiz";
 
-// Progress Bar Component
 const ProgressBar = ({ progress }: { progress: number }) => (
   <div
     style={{
@@ -27,7 +26,6 @@ const ProgressBar = ({ progress }: { progress: number }) => (
   </div>
 );
 
-// Option Component
 const QuizOption = ({
   option,
   isSelected,
@@ -45,12 +43,12 @@ const QuizOption = ({
       width: "100%",
       padding: "1.25rem 1.5rem",
       borderRadius: "10px",
-      border: `3px solid ${isSelected ? "#FDD741" : "#e5e7eb"}`, // primary/300 untuk selected border
-      backgroundColor: isSelected ? "#fff" : "#fff", // frame/100
+      border: `3px solid ${isSelected ? "#FDD741" : "#e5e7eb"}`,
+      backgroundColor: isSelected ? "#fff" : "#fff",
       textAlign: "left",
       transition: "all 0.3s ease",
       boxShadow: isSelected
-        ? "0 4px 10px -5px rgba(253, 215, 65, 0.25)" // shadow dari primary/300
+        ? "0 4px 10px -5px rgba(253, 215, 65, 0.25)"
         : "0 4px 6px -1px rgba(0, 0, 0, 0.05)",
       cursor: "pointer",
       marginBottom: "1.25rem",
@@ -58,31 +56,30 @@ const QuizOption = ({
     }}
     onMouseEnter={(e) => {
       if (!isSelected) {
-        e.currentTarget.style.borderColor = "#FEE480"; // primary/200 untuk hover border
-        e.currentTarget.style.backgroundColor = "#FEF2C0"; // primary/100 untuk hover background
+        e.currentTarget.style.borderColor = "#FEE480";
+        e.currentTarget.style.backgroundColor = "#FEF2C0";
         e.currentTarget.style.transform = "translateY(-2px)";
         e.currentTarget.style.boxShadow = "0 8px 15px -3px rgba(0, 0, 0, 0.1)";
       }
     }}
     onMouseLeave={(e) => {
       if (!isSelected) {
-        e.currentTarget.style.borderColor = "#e5e7eb"; // tetap pakai abu-abu karena tidak ada pengganti di palet
-        e.currentTarget.style.backgroundColor = "#fff"; // frame/100
+        e.currentTarget.style.borderColor = "#e5e7eb";
+        e.currentTarget.style.backgroundColor = "#fff";
         e.currentTarget.style.transform = "translateY(0)";
         e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.05)";
       }
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-      {/* Radio button for single choice, Checkbox for multiple choice */}
       {type === "single" ? (
         <div
           style={{
             width: "28px",
             height: "28px",
             borderRadius: "50%",
-            border: `3px solid ${isSelected ? "#FDD741" : "#d1d5db"}`, // primary/300 untuk selected, abu-abu default
-            backgroundColor: isSelected ? "#FDD741" : "transparent", // primary/300 untuk selected background
+            border: `3px solid ${isSelected ? "#FDD741" : "#d1d5db"}`,
+            backgroundColor: isSelected ? "#FDD741" : "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -95,7 +92,7 @@ const QuizOption = ({
               style={{
                 width: "14px",
                 height: "14px",
-                backgroundColor: "#ffffff", // frame/100 untuk inner dot
+                backgroundColor: "#ffffff",
                 borderRadius: "50%",
               }}
             />
@@ -107,8 +104,8 @@ const QuizOption = ({
             width: "28px",
             height: "28px",
             borderRadius: "0.5rem",
-            border: `3px solid ${isSelected ? "#FDD741" : "#d1d5db"}`, // primary/300 untuk selected, abu-abu default
-            backgroundColor: isSelected ? "#FDD741" : "transparent", // primary/300 untuk selected background
+            border: `3px solid ${isSelected ? "#FDD741" : "#d1d5db"}`,
+            backgroundColor: isSelected ? "#FDD741" : "transparent",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -122,7 +119,7 @@ const QuizOption = ({
               height="16"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#ffffff" // frame/100 untuk checkmark
+              stroke="#ffffff"
               strokeWidth="3"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -137,7 +134,7 @@ const QuizOption = ({
         style={{
           fontSize: "1.125rem",
           lineHeight: "1.6",
-          color: isSelected ? "#111827" : "#374151", // tetap pakai warna abu gelap karena tidak ada pengganti di palet
+          color: isSelected ? "#111827" : "#374151",
           fontWeight: isSelected ? "600" : "500",
           transition: "color 0.3s ease",
         }}
@@ -148,7 +145,6 @@ const QuizOption = ({
   </button>
 );
 
-// Start Overlay Component (not full screen)
 const StartOverlay = ({
   onStart,
   onClose,
@@ -282,7 +278,6 @@ const StartOverlay = ({
   </div>
 );
 
-// Main Quiz Component
 const QuizSection = () => {
   const {
     currentQuestion,
@@ -395,10 +390,8 @@ const QuizSection = () => {
   return (
     <section style={{ padding: "5rem 0" }}>
       <div style={{ maxWidth: "56rem", margin: "0 auto", padding: "0 1.5rem" }}>
-        {/* Progress Bar */}
         {isStarted && <ProgressBar progress={progress} />}
 
-        {/* Question Card */}
         <div
           style={{
             backgroundColor: "#ffffff",
@@ -419,7 +412,6 @@ const QuizSection = () => {
 
           {isStarted && (
             <>
-              {/* Question Header */}
               <div style={{ marginBottom: "2rem" }}>
                 <div
                   style={{
@@ -450,7 +442,6 @@ const QuizSection = () => {
                 )}
               </div>
 
-              {/* Options */}
               <div style={{ marginBottom: "2em" }}>
                 {currentQuestion.options.map((option) => (
                   <QuizOption
@@ -463,7 +454,6 @@ const QuizSection = () => {
                 ))}
               </div>
 
-              {/* Navigation */}
               <div
                 style={{
                   display: "flex",

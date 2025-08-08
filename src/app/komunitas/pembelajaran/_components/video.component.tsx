@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import { BookOpen, Pause, Play, Star, Users } from "lucide-react";
 import React from "react";
-import { FeaturedCourse } from '../_types/pembelajaran.type';
+import { FeaturedCourse } from "../_types/pembelajaran.type";
 
 interface FeaturedVideoSectionProps {
   course: FeaturedCourse;
@@ -23,7 +23,6 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
         overflow: "hidden",
       }}
     >
-      {/* Video Container */}
       <div
         style={{
           position: "relative",
@@ -38,7 +37,6 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
         }}
         className="featured-video-container"
       >
-        {/* Video Placeholder */}
         <img
           src={course.thumbnail}
           alt="Featured Course Thumbnail"
@@ -50,7 +48,6 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
           }}
         />
 
-        {/* Play/Pause Button Overlay */}
         <div
           style={{
             position: "absolute",
@@ -76,23 +73,17 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
             e.currentTarget.style.background = "rgba(255, 255, 255, 1)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform =
-              "translate(-50%, -50%) scale(1)";
-            e.currentTarget.style.background =
-              "rgba(255, 255, 255, 0.9)";
+            e.currentTarget.style.transform = "translate(-50%, -50%) scale(1)";
+            e.currentTarget.style.background = "rgba(255, 255, 255, 0.9)";
           }}
         >
           {isPlaying ? (
             <Pause size={32} style={{ color: "#111827" }} />
           ) : (
-            <Play
-              size={32}
-              style={{ color: "#111827", marginLeft: "4px" }}
-            />
+            <Play size={32} style={{ color: "#111827", marginLeft: "4px" }} />
           )}
         </div>
 
-        {/* Course Stats Overlay */}
         <div
           style={{
             position: "absolute",
@@ -148,7 +139,6 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
         </div>
       </div>
 
-      {/* Course Info */}
       <div style={{ padding: "2rem 2rem 0 2rem" }} className="course-info">
         <h1
           style={{
@@ -176,7 +166,6 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
           {course.description}
         </p>
 
-        {/* Instructor Info */}
         <div
           style={{
             display: "flex",
@@ -223,14 +212,13 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
         </div>
       </div>
 
-      {/* Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 768px) {
           .featured-video-container {
             height: 300px !important;
             border-radius: 16px !important;
           }
-          
+
           .featured-video-container img {
             border-radius: 16px !important;
           }

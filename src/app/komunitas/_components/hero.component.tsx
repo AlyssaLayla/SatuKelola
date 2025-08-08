@@ -29,7 +29,6 @@ export const HeroSection = () => {
           paddingRight: "2rem",
         }}
       >
-        {/* Content - Left Side */}
         <div
           className="content-container"
           style={{
@@ -69,7 +68,6 @@ export const HeroSection = () => {
             seluruh Indonesia
           </p>
 
-          {/* Search Bar */}
           <div
             className="search-container"
             style={{ position: "relative", maxWidth: "400px" }}
@@ -162,7 +160,6 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* Hero Image - Enhanced */}
         <div
           className="hero-image-container"
           style={{
@@ -186,7 +183,6 @@ export const HeroSection = () => {
             }}
           />
 
-          {/* Decorative Elements */}
           <div
             className="decorative-star"
             style={{
@@ -204,7 +200,6 @@ export const HeroSection = () => {
             💬
           </div>
 
-          {/* Small decorative elements - Reduced visibility */}
           <div
             className="decorative-circle-1"
             style={{
@@ -238,7 +233,6 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Enhanced Background Decoration - Reduced visibility */}
       <div
         style={{
           position: "absolute",
@@ -278,7 +272,6 @@ export const HeroSection = () => {
         />
       </div>
 
-      {/* Gradient Transition to Next Section */}
       <div
         style={{
           position: "absolute",

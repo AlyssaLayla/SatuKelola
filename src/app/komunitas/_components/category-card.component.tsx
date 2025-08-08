@@ -131,7 +131,6 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
         />
       </div>
 
-      {/* Background decoration */}
       <div
         style={{
           position: "absolute",

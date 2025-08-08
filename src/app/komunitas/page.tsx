@@ -5,10 +5,9 @@ import CommunityDiscussionSection from "./_components/discussion-section.compone
 const KomunitasMainPage = () => {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+
       <HeroSection />
       
-      {/* Community Discussion Section */}
       <CommunityDiscussionSection />
     </div>
   );

@@ -6,7 +6,6 @@ import { Quote } from "lucide-react";
 export const TestimonialsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Expanded testimonials array with more dummy data
   const topRowTestimonials = [
     {
       id: 1,
@@ -121,7 +120,6 @@ export const TestimonialsSection = () => {
     },
   ];
 
-  // Intersection Observer for section visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -171,7 +169,6 @@ export const TestimonialsSection = () => {
         transition: `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`,
       }}
     >
-      {/* Quote Text */}
       <div style={{ marginBottom: "2rem" }}>
         <h3
           style={{
@@ -199,7 +196,6 @@ export const TestimonialsSection = () => {
         </p>
       </div>
 
-      {/* Author Info */}
       <div
         style={{
           display: "flex",
@@ -207,7 +203,6 @@ export const TestimonialsSection = () => {
           gap: "1rem",
         }}
       >
-        {/* Avatar Placeholder */}
         <div
           style={{
             width: "60px",
@@ -276,7 +271,6 @@ export const TestimonialsSection = () => {
           zIndex: 2,
         }}
       >
-        {/* Section Header */}
         <div
           style={{
             textAlign: "center",
@@ -311,7 +305,6 @@ export const TestimonialsSection = () => {
           </h2>
         </div>
 
-        {/* Testimonials Rows */}
         <div
           style={{
             display: "flex",
@@ -320,16 +313,14 @@ export const TestimonialsSection = () => {
             overflow: "hidden",
           }}
         >
-          {/* Top Row - Moving Left to Right */}
           <div
             className="testimonials-row-top"
             style={{
               display: "flex",
-              animation: "scrollLeftToRight 60s linear infinite", // KECEPATAN: 60s = lebih lambat, 30s = lebih cepat
+              animation: "scrollLeftToRight 60s linear infinite",
               width: "fit-content",
             }}
           >
-            {/* Duplicate for seamless loop */}
             {[...topRowTestimonials, ...topRowTestimonials].map(
               (testimonial, index) => (
                 <TestimonialCard
@@ -341,16 +332,14 @@ export const TestimonialsSection = () => {
             )}
           </div>
 
-          {/* Bottom Row - Moving Right to Left */}
           <div
             className="testimonials-row-bottom"
             style={{
               display: "flex",
-              animation: "scrollRightToLeft 70s linear infinite", // KECEPATAN: 70s = lebih lambat, 35s = lebih cepat
+              animation: "scrollRightToLeft 70s linear infinite",
               width: "fit-content",
             }}
           >
-            {/* Duplicate for seamless loop */}
             {[...bottomRowTestimonials, ...bottomRowTestimonials].map(
               (testimonial, index) => (
                 <TestimonialCard
@@ -364,7 +353,6 @@ export const TestimonialsSection = () => {
         </div>
       </div>
 
-      {/* Background Decorations */}
       <div
         style={{
           position: "absolute",

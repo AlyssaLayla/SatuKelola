@@ -40,7 +40,6 @@ export const CommentCard: React.FC<CommentCardProps> = ({
         }}
         className="comment-content"
       >
-        {/* Avatar */}
         <div
           style={{
             width: "40px",
@@ -58,7 +57,6 @@ export const CommentCard: React.FC<CommentCardProps> = ({
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Author and Timestamp */}
           <div
             style={{
               display: "flex",
@@ -97,7 +95,6 @@ export const CommentCard: React.FC<CommentCardProps> = ({
             </span>
           </div>
 
-          {/* Comment Content */}
           <p
             style={{
               fontSize: "0.9rem",
@@ -111,7 +108,6 @@ export const CommentCard: React.FC<CommentCardProps> = ({
             {comment.content}
           </p>
 
-          {/* Engagement Stats */}
           <div
             style={{
               display: "flex",
@@ -204,7 +200,6 @@ export const CommentCard: React.FC<CommentCardProps> = ({
         </div>
       </div>
 
-      {/* Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 768px) {
           .comment-card {

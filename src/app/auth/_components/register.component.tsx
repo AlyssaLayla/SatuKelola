@@ -27,10 +27,8 @@ export default function RegisterForm() {
     setError("");
 
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      // Add your registration logic here
       console.log("Registration data:", formData);
     } catch (err) {
       setError("Registrasi gagal. Silakan coba lagi.");
@@ -246,7 +244,6 @@ export default function RegisterForm() {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -314,7 +311,6 @@ export default function RegisterForm() {
           </button>
         </form>
 
-        {/* Social Login Divider */}
         <div
           style={{
             margin: "1.5rem 0",
@@ -347,7 +343,6 @@ export default function RegisterForm() {
           </span>
         </div>
 
-        {/* Social Login Buttons */}
         <div
           style={{
             display: "flex",

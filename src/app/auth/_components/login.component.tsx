@@ -15,7 +15,6 @@ export default function LoginForm() {
 
   return (
     <div style={{ width: "100%" }}>
-      {/* Dummy Credentials Info - Clean Design */}
       <div
         style={{
           backgroundColor: "#fff",
@@ -202,7 +201,6 @@ export default function LoginForm() {
             />
           </div>
 
-          {/* Remember Me Checkbox */}
           <div
             style={{
               display: "flex",
@@ -229,7 +227,6 @@ export default function LoginForm() {
             </label>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -297,7 +294,6 @@ export default function LoginForm() {
           </button>
         </form>
 
-        {/* Social Login Divider */}
         <div
           style={{
             margin: "1.5rem 0",
@@ -330,7 +326,6 @@ export default function LoginForm() {
           </span>
         </div>
 
-        {/* Social Login Buttons */}
         <div
           style={{
             display: "flex",

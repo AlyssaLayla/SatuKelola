@@ -80,7 +80,7 @@ export const ProcessCardSection = () => {
       estimatedTime: "2-5 hari kerja",
       difficulty: "medium",
       category: "Administrasi",
-      color: "#7F6C21", // Secondary
+      color: "#7F6C21",
     },
     {
       id: "iumk",
@@ -96,7 +96,7 @@ export const ProcessCardSection = () => {
       estimatedTime: "1-2 hari kerja",
       difficulty: "easy",
       category: "UMKM",
-      color: "#20273A", // Primary light
+      color: "#20273A",
     },
     {
       id: "bpom",
@@ -113,7 +113,7 @@ export const ProcessCardSection = () => {
       estimatedTime: "14-30 hari kerja",
       difficulty: "hard",
       category: "Khusus",
-      color: "#151A27", // Secondary light
+      color: "#151A27",
     },
     {
       id: "hki",
@@ -130,7 +130,7 @@ export const ProcessCardSection = () => {
       estimatedTime: "6-18 bulan",
       difficulty: "hard",
       category: "Perlindungan",
-      color: "#10141D", // Secondary dark
+      color: "#10141D",
     },
   ];
 
@@ -145,13 +145,13 @@ export const ProcessCardSection = () => {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "easy":
-        return "#4CAF50"; // Primary yellow
+        return "#4CAF50";
       case "medium":
-        return "#FFC107"; // Primary darker
+        return "#FFC107";
       case "hard":
-        return "#D32F2F"; // Secondary
+        return "#D32F2F";
       default:
-        return "#90939D"; // Secondary light
+        return "#90939D";
     }
   };
 
@@ -183,13 +183,12 @@ export const ProcessCardSection = () => {
           paddingRight: "24px",
         }}
       >
-        {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "80px" }}>
           <h2
             style={{
               fontSize: "2.75rem",
               fontWeight: "700",
-              color: "#20273A", // secondary/300
+              color: "#20273A",
               marginBottom: "20px",
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
@@ -200,7 +199,7 @@ export const ProcessCardSection = () => {
           <p
             style={{
               fontSize: "1.25rem",
-              color: "#90939D", // secondary/200
+              color: "#90939D",
               maxWidth: "600px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -211,7 +210,6 @@ export const ProcessCardSection = () => {
           </p>
         </div>
 
-        {/* Static Cards Container - No Scrolling */}
         <div
           style={{
             display: "grid",
@@ -270,14 +268,12 @@ export const ProcessCardSection = () => {
                   }
                 }}
               >
-                {/* Card Header */}
                 <div
                   style={{
                     marginBottom: isActive ? "1.5rem" : "2rem",
                     transition: "margin-bottom 0.3s ease",
                   }}
                 >
-                  {/* Category and Difficulty */}
                   <div
                     style={{
                       display: "flex",
@@ -332,7 +328,6 @@ export const ProcessCardSection = () => {
                     </div>
                   </div>
 
-                  {/* Icon and Title */}
                   <div
                     style={{
                       display: "flex",
@@ -397,7 +392,6 @@ export const ProcessCardSection = () => {
                     </div>
                   </div>
 
-                  {/* Time Estimate */}
                   <div
                     style={{
                       background: isActive
@@ -425,7 +419,6 @@ export const ProcessCardSection = () => {
                   </div>
                 </div>
 
-                {/* Expand/Collapse Indicator */}
                 <div
                   style={{
                     display: "flex",
@@ -467,7 +460,6 @@ export const ProcessCardSection = () => {
                   </div>
                 </div>
 
-                {/* Expanded Content with Smooth Animation */}
                 <div
                   style={{
                     maxHeight: isActive ? "1000px" : "0",
@@ -556,7 +548,6 @@ export const ProcessCardSection = () => {
                   </div>
                 </div>
 
-                {/* Background decoration */}
                 <div
                   style={{
                     position: "absolute",
@@ -577,7 +568,6 @@ export const ProcessCardSection = () => {
         </div>
       </div>
 
-      {/* Custom Animations */}
       <style jsx>{`
         @keyframes scroll {
           0% {

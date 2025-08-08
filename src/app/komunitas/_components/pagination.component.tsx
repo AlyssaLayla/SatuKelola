@@ -67,7 +67,6 @@ export const Pagination: React.FC<PaginationProps> = ({
           gap: "0.5rem",
         }}
       >
-        {/* Page Numbers */}
         {[1, 2, 3, 4].map((page) => (
           <button
             key={page}

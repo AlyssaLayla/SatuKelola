@@ -25,7 +25,6 @@ export const HeroSection = () => {
           position: "relative",
         }}
       >
-        {/* Hero Image - Left */}
         <div
           className="hero-image"
           style={{
@@ -51,7 +50,6 @@ export const HeroSection = () => {
             }}
           />
 
-          {/* Decorative Star */}
           <div
             className="decorative-star"
             style={{
@@ -69,7 +67,6 @@ export const HeroSection = () => {
             ⚖️
           </div>
 
-          {/* Small decorative elements */}
           <div
             className="decorative-circle-1"
             style={{
@@ -102,7 +99,6 @@ export const HeroSection = () => {
           />
         </div>
 
-        {/* Content - Now on Right Side */}
         <div
           className="content-container"
           style={{
@@ -179,7 +175,6 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Enhanced Background Decoration */}
       <div
         style={{
           position: "absolute",

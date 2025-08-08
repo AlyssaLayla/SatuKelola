@@ -50,7 +50,6 @@ const BenefitsSection = () => {
           paddingRight: "24px",
         }}
       >
-        {/* Section Header */}
         <div style={{ textAlign: "center", marginBottom: "80px" }}>
           <h2
             style={{
@@ -66,7 +65,6 @@ const BenefitsSection = () => {
           </h2>
         </div>
 
-        {/* Benefits Cards */}
         <div
           style={{
             display: "grid",
@@ -97,7 +95,8 @@ const BenefitsSection = () => {
                     borderRadius: "32px",
                     padding: "2.5rem",
                     height: "100%",
-                    boxShadow: "0 4px 15px -3px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)",
+                    boxShadow:
+                      "0 4px 15px -3px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)",
                     transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                     position: "relative",
                     overflow: "hidden",
@@ -105,15 +104,17 @@ const BenefitsSection = () => {
                     cursor: "pointer",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-8px) scale(1.02)";
-                    e.currentTarget.style.boxShadow = "0 10px 30px -5px rgba(0, 0, 0, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.05)";
+                    e.currentTarget.style.transform =
+                      "translateY(-8px) scale(1.02)";
+                    e.currentTarget.style.boxShadow =
+                      "0 10px 30px -5px rgba(0, 0, 0, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.05)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0) scale(1)";
-                    e.currentTarget.style.boxShadow = "0 4px 15px -3px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 15px -3px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)";
                   }}
                 >
-                  {/* Image Container */}
                   <div
                     style={{
                       display: "flex",
@@ -152,7 +153,6 @@ const BenefitsSection = () => {
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div style={{ textAlign: "center" }}>
                     <h3
                       style={{
@@ -182,7 +182,6 @@ const BenefitsSection = () => {
                     </p>
                   </div>
 
-                  {/* Background decoration */}
                   <div
                     style={{
                       position: "absolute",
@@ -190,7 +189,8 @@ const BenefitsSection = () => {
                       right: "-20px",
                       width: "100px",
                       height: "100px",
-                      background: "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))",
+                      background:
+                        "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))",
                       borderRadius: "50%",
                       transition: "all 0.3s ease",
                       opacity: 0.1,
@@ -204,7 +204,6 @@ const BenefitsSection = () => {
         </div>
       </div>
 
-      {/* Custom Animations */}
       <style jsx>{`
         @keyframes slideDown {
           from {

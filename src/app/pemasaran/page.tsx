@@ -6,7 +6,6 @@ import QuizSection from "./_components/quiz.component";
 const MarketingAdvisorPage = () => {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
       <MarketingAdvisorHero />
       <BenefitsSection />
       <QuizSection />

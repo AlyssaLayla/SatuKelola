@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import { FeaturedVideoSection } from "./video.component";
 import { CommentsSection } from "./comment-section.componnet";
 import { RecommendedCourses } from "./course-recommendation.component";
-import { FEATURED_COURSE, RECOMMENDED_COURSES, COMMENTS } from '../_constants/pembelajaran.constant';
+import {
+  FEATURED_COURSE,
+  RECOMMENDED_COURSES,
+  COMMENTS,
+} from "../_constants/pembelajaran.constant";
 import { Breadcrumbs } from "../../../../components/breadcrumbs.component";
 
 export const PembelajaranMain = () => {
@@ -25,10 +29,9 @@ export const PembelajaranMain = () => {
     setIsPlaying(!isPlaying);
   };
 
-  // Breadcrumb items configuration
   const breadcrumbItems = [
     {
-      label: "Komunitas", 
+      label: "Komunitas",
       href: "/komunitas",
     },
     {
@@ -50,10 +53,8 @@ export const PembelajaranMain = () => {
         }}
         className="main-container"
       >
-        {/* Breadcrumbs */}
         <Breadcrumbs items={breadcrumbItems} />
 
-        {/* Main Content Layout */}
         <div
           style={{
             display: "grid",
@@ -62,7 +63,6 @@ export const PembelajaranMain = () => {
           }}
           className="main-grid"
         >
-          {/* Left Column - Main Content */}
           <div className="main-content">
             <FeaturedVideoSection
               course={FEATURED_COURSE}
@@ -76,7 +76,6 @@ export const PembelajaranMain = () => {
             />
           </div>
 
-          {/* Right Column - Recommended Courses */}
           <div className="sidebar-content">
             <RecommendedCourses
               courses={RECOMMENDED_COURSES}
@@ -86,7 +85,6 @@ export const PembelajaranMain = () => {
         </div>
       </div>
 
-      {/* Global Mobile Responsive Styles */}
       <style jsx>{`
         @media (max-width: 1200px) {
           .main-grid {

@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-// Import User type from your existing auth types
 interface User {
   id: string;
   username: string;
@@ -24,7 +23,6 @@ interface User {
   refreshToken?: string;
 }
 
-// User Menu Dropdown Component
 const UserMenuDropdown = ({
   user,
   isOpen,
@@ -55,7 +53,6 @@ const UserMenuDropdown = ({
         animation: "slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
-      {/* User Info */}
       <div
         style={{
           display: "flex",
@@ -80,37 +77,18 @@ const UserMenuDropdown = ({
             flexShrink: 0,
           }}
         >
-          {/* Avatar placeholder - replace with actual image */}
-          <img
-            src="/api/placeholder/48/48"
-            alt={user?.name || "User"}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-            onError={(e) => {
-              const target = e.currentTarget;
-              target.style.display = "none";
-              const fallback = target.parentElement?.querySelector(
-                ".avatar-fallback"
-              ) as HTMLElement;
-              if (fallback) {
-                fallback.style.display = "flex";
-              }
-            }}
-          />
           <div
-            className="avatar-fallback"
             style={{
-              display: "none",
+              display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: "1.25rem",
               color: "#111827",
+              width: "100%",
+              height: "100%",
             }}
           >
-           <User/>
+            <User size={20} />
           </div>
         </div>
         <div>
@@ -138,7 +116,6 @@ const UserMenuDropdown = ({
         </div>
       </div>
 
-      {/* Menu Items */}
       <div
         style={{
           display: "flex",
@@ -238,7 +215,6 @@ const UserMenuDropdown = ({
   );
 };
 
-// Auth Buttons Component for non-authenticated users
 const AuthButtons = () => (
   <div
     style={{
@@ -279,7 +255,6 @@ const AuthButtons = () => (
   </div>
 );
 
-// User Avatar Button Component
 const UserAvatarButton = ({
   user,
   onClick,
@@ -299,9 +274,10 @@ const UserAvatarButton = ({
       cursor: "pointer",
       transition: "all 0.3s ease",
       minWidth: "180px",
+      background: "transparent",
+      border: "none",
     }}
   >
-    {/* User Icon */}
     <div
       style={{
         width: "32px",
@@ -317,7 +293,6 @@ const UserAvatarButton = ({
       <UserIcon size={18} style={{ color: "#ffffff" }} />
     </div>
 
-    {/* User Info */}
     <div
       style={{
         textAlign: "left",
@@ -340,7 +315,6 @@ const UserAvatarButton = ({
       </p>
     </div>
 
-    {/* Chevron */}
     <ChevronDown
       size={16}
       style={{
@@ -358,89 +332,102 @@ export const LandingNavbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Check authentication status from localStorage
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const checkAuthStatus = async () => {
       setIsLoading(true);
 
-      // Simulate loading delay
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
-      const authToken = localStorage.getItem("auth_token");
+        const authToken =
+          typeof window !== "undefined"
+            ? localStorage.getItem("auth_token")
+            : null;
 
-      if (authToken && authToken !== "") {
-        setIsAuthenticated(true);
+        if (authToken && authToken !== "") {
+          setIsAuthenticated(true);
 
-        // Mock user data - replace with actual user data from API/localStorage
-        const mockUser: User = {
-          id: "1",
-          username: "sari_dewi",
-          name: "Sari Dewi",
-          email: "sari.dewi@example.com",
-          role: "user",
-          permissions: ["read", "write"],
-        };
+          const mockUser: User = {
+            id: "1",
+            username: "sari_dewi",
+            name: "Sari Dewi",
+            email: "sari.dewi@example.com",
+            role: "user",
+            permissions: ["read", "write"],
+          };
 
-        setUser(mockUser);
-      } else {
+          setUser(mockUser);
+        } else {
+          setIsAuthenticated(false);
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error checking auth status:", error);
         setIsAuthenticated(false);
         setUser(null);
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     };
 
-    // Check on mount
     checkAuthStatus();
 
-    // Listen for storage changes (when user logs in/out in another tab)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === "auth_token") {
         checkAuthStatus();
       }
     };
 
-    // Listen for custom auth state changes
     const handleAuthStateChange = () => {
       checkAuthStatus();
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("authStateChanged", handleAuthStateChange);
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", handleStorageChange);
+      window.addEventListener("authStateChanged", handleAuthStateChange);
+    }
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("authStateChanged", handleAuthStateChange);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("storage", handleStorageChange);
+        window.removeEventListener("authStateChanged", handleAuthStateChange);
+      }
     };
-  }, []);
+  }, [isMounted]);
 
   const navItems = [
+    { name: "Komunitas", href: "/komunitas" },
     { name: "Legalitas", href: "/legalitas" },
     { name: "Pemasaran", href: "/pemasaran" },
-    { name: "Komunitas", href: "/komunitas" },
     { name: "Dashboard", href: "/dashboard" },
   ];
 
   const handleLogout = () => {
-    // Clear localStorage
+    if (typeof window === "undefined") return;
+
     localStorage.removeItem("auth_token");
     localStorage.removeItem("refresh_token");
 
-    // Update state
     setIsAuthenticated(false);
     setUser(null);
     setIsUserMenuOpen(false);
 
-    // Dispatch custom event for other components
     window.dispatchEvent(new Event("authStateChanged"));
 
-    // Redirect to home or login page
     window.location.href = "/";
   };
 
-  // Close dropdown when clicking outside
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!isMounted) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isUserMenuOpen &&
@@ -452,7 +439,148 @@ export const LandingNavbar = () => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isUserMenuOpen]);
+  }, [isUserMenuOpen, isMounted]);
+
+  if (!isMounted) {
+    return (
+      <nav
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1000,
+          background: "rgba(255, 255, 255, 0.95)",
+          backdropFilter: "blur(20px)",
+          border: "none",
+          borderBottom: "1px solid rgba(253, 215, 65, 0.15)",
+          boxShadow: "0 2px 20px rgba(0, 0, 0, 0.06)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
+            paddingLeft: "24px",
+            paddingRight: "24px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              height: "80px",
+            }}
+          >
+            <Link
+              href="/"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textDecoration: "none",
+              }}
+            >
+              <img
+                src="/logo.png"
+                alt="SatuKelola Logo"
+                style={{
+                  height: "44px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = "none";
+                  const fallback = target.parentElement?.querySelector(
+                    ".logo-fallback"
+                  ) as HTMLElement;
+                  if (fallback) {
+                    fallback.style.display = "flex";
+                  }
+                }}
+              />
+              <div
+                className="logo-fallback"
+                style={{
+                  display: "none",
+                  alignItems: "center",
+                  gap: "12px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    background: "linear-gradient(135deg, #FDD741, #C4A73B)",
+                    borderRadius: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "900",
+                    fontSize: "1.25rem",
+                    color: "#111827",
+                    boxShadow: "0 4px 12px rgba(253, 215, 65, 0.3)",
+                  }}
+                >
+                  SK
+                </div>
+                <span
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "800",
+                    color: "#111827",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  Satu<span style={{ color: "#C4A73B" }}>Kelola</span>
+                </span>
+              </div>
+            </Link>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "12px 20px",
+                minWidth: "180px",
+              }}
+            >
+              <div
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  border: "2px solid #f3f3f3",
+                  borderTop: "2px solid #FDD741",
+                  borderRadius: "50%",
+                  animation: "spin 1s linear infinite",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: "0.95rem",
+                  color: "#64748b",
+                  fontWeight: "500",
+                }}
+              >
+                Loading...
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <style jsx>{`
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        `}</style>
+      </nav>
+    );
+  }
 
   return (
     <nav
@@ -483,7 +611,6 @@ export const LandingNavbar = () => {
             height: "80px",
           }}
         >
-          {/* Logo */}
           <Link
             href="/"
             style={{
@@ -501,7 +628,6 @@ export const LandingNavbar = () => {
                 objectFit: "contain",
               }}
               onError={(e) => {
-                // Fallback to original design if image fails to load
                 const target = e.currentTarget;
                 target.style.display = "none";
                 const fallback = target.parentElement?.querySelector(
@@ -550,7 +676,6 @@ export const LandingNavbar = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
           <div
             className="desktop-nav"
             style={{
@@ -559,7 +684,6 @@ export const LandingNavbar = () => {
               gap: "2rem",
             }}
           >
-            {/* Nav Items */}
             <div
               style={{
                 display: "flex",
@@ -595,9 +719,7 @@ export const LandingNavbar = () => {
               ))}
             </div>
 
-            {/* Authentication Section */}
             {isLoading ? (
-              // Loading State
               <div
                 style={{
                   display: "flex",
@@ -649,7 +771,6 @@ export const LandingNavbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="mobile-menu-btn"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -680,7 +801,6 @@ export const LandingNavbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div
             className="mobile-menu"
@@ -692,7 +812,6 @@ export const LandingNavbar = () => {
               animation: "slideDown 0.3s ease-out",
             }}
           >
-            {/* Navigation Items */}
             {navItems.map((item, index) => (
               <Link
                 key={index}
@@ -720,7 +839,6 @@ export const LandingNavbar = () => {
               </Link>
             ))}
 
-            {/* Mobile Auth Section */}
             {isAuthenticated ? (
               <div
                 style={{
@@ -750,37 +868,7 @@ export const LandingNavbar = () => {
                       overflow: "hidden",
                     }}
                   >
-                    <img
-                      src="/api/placeholder/48/48"
-                      alt={user?.name || "User"}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.style.display = "none";
-                        const fallback = target.parentElement?.querySelector(
-                          ".avatar-fallback"
-                        ) as HTMLElement;
-                        if (fallback) {
-                          fallback.style.display = "flex";
-                        }
-                      }}
-                    />
-                    <div
-                      className="avatar-fallback"
-                      style={{
-                        display: "none",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "1.25rem",
-                        color: "#111827",
-                      }}
-                    >
-                    <User />
-                    </div>
+                    <User size={20} color="#111827" />
                   </div>
                   <div>
                     <p
@@ -872,7 +960,7 @@ export const LandingNavbar = () => {
                 }}
               >
                 <Link
-                  href="/login"
+                  href="/auth"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -894,7 +982,7 @@ export const LandingNavbar = () => {
                 </Link>
 
                 <Link
-                  href="/register"
+                  href="/auth"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -920,7 +1008,6 @@ export const LandingNavbar = () => {
         )}
       </div>
 
-      {/* Custom Styles */}
       <style jsx>{`
         @keyframes slideDown {
           from {
@@ -930,6 +1017,15 @@ export const LandingNavbar = () => {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
           }
         }
 
@@ -952,6 +1048,31 @@ export const LandingNavbar = () => {
         @media (max-width: 1200px) {
           .desktop-nav > div:first-child {
             gap: 1.5rem !important;
+          }
+        }
+
+        /* Additional responsive adjustments */
+        @media (max-width: 768px) {
+          nav > div {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          nav > div {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+          }
+
+          .logo-fallback span {
+            font-size: 1.25rem !important;
+          }
+
+          .logo-fallback div {
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 1rem !important;
           }
         }
       `}</style>

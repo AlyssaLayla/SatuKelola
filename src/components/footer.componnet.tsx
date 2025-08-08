@@ -1,7 +1,6 @@
 import React from "react";
 import { Facebook, Instagram, Twitter, MessageCircle } from "lucide-react";
 
-// Enhanced Footer Component matching the design
 export const LandingFooter = () => {
   return (
     <footer
@@ -11,7 +10,6 @@ export const LandingFooter = () => {
         position: "relative",
       }}
     >
-      {/* Main Footer Content */}
       <div
         style={{
           maxWidth: "1400px",
@@ -22,7 +20,6 @@ export const LandingFooter = () => {
           paddingBottom: "40px",
         }}
       >
-        {/* Footer Layout */}
         <div
           className="footer-content"
           style={{
@@ -33,7 +30,6 @@ export const LandingFooter = () => {
             gap: "24px",
           }}
         >
-          {/* Left Section - Logo and Copyright */}
           <div
             style={{
               display: "flex",
@@ -41,7 +37,6 @@ export const LandingFooter = () => {
               gap: "12px",
             }}
           >
-            {/* Logo */}
             <div
               style={{
                 display: "flex",
@@ -60,7 +55,6 @@ export const LandingFooter = () => {
               />
             </div>
 
-            {/* Copyright */}
             <div
               style={{
                 display: "flex",
@@ -78,7 +72,7 @@ export const LandingFooter = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: "0.75rem",
-                  color: "#A0AEC0"
+                  color: "#A0AEC0",
                 }}
               >
                 ©
@@ -91,12 +85,11 @@ export const LandingFooter = () => {
                   opacity: 0.9,
                 }}
               >
-                Copyright By PT Satu Kelola. All Rights Reserved.
+                Copyright By Satu Kelola. All Rights Reserved.
               </p>
             </div>
           </div>
 
-          {/* Right Section - Social Media Icons */}
           <div
             style={{
               display: "flex",
@@ -115,15 +108,15 @@ export const LandingFooter = () => {
                 href: "https://instagram.com",
                 name: "Instagram",
               },
-              { 
-                icon: Twitter, 
-                href: "https://twitter.com", 
-                name: "Twitter" 
+              {
+                icon: Twitter,
+                href: "https://twitter.com",
+                name: "Twitter",
               },
-              { 
-                icon: MessageCircle, 
-                href: "https://wa.me", 
-                name: "LINE" 
+              {
+                icon: MessageCircle,
+                href: "https://wa.me",
+                name: "LINE",
               },
             ].map((social, index) => (
               <a
@@ -144,21 +137,25 @@ export const LandingFooter = () => {
                   border: "1px solid rgba(255, 255, 255, 0.1)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.15)";
+                  e.currentTarget.style.background =
+                    "rgba(255, 255, 255, 0.15)";
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                  e.currentTarget.style.borderColor =
+                    "rgba(255, 255, 255, 0.2)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
+                  e.currentTarget.style.background =
+                    "rgba(255, 255, 255, 0.08)";
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
+                  e.currentTarget.style.borderColor =
+                    "rgba(255, 255, 255, 0.1)";
                 }}
               >
                 <social.icon
                   size={20}
-                  style={{ 
-                    color: "#ffffff", 
-                    opacity: 0.9 
+                  style={{
+                    color: "#ffffff",
+                    opacity: 0.9,
                   }}
                 />
               </a>

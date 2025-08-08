@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import CategoryCard from "./category-card.component";
@@ -19,11 +19,13 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
 }) => {
   return (
     <div style={{ marginBottom: "80px" }}>
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: "24px"
-      }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "24px",
+        }}
+      >
         {categories.map((category, index) => (
           <CategoryCard
             key={category.id}
@@ -39,7 +41,10 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
       <style jsx>{`
         @media (max-width: 1024px) {
           div:first-child > div {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+            grid-template-columns: repeat(
+              auto-fit,
+              minmax(280px, 1fr)
+            ) !important;
             gap: 20px !important;
           }
         }
@@ -48,7 +53,7 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
           div:first-child {
             margin-bottom: 60px !important;
           }
-          
+
           div:first-child > div {
             grid-template-columns: 1fr !important;
             gap: 16px !important;
@@ -59,7 +64,7 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
           div:first-child {
             margin-bottom: 40px !important;
           }
-          
+
           div:first-child > div {
             gap: 12px !important;
           }

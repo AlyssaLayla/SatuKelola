@@ -37,14 +37,12 @@ export const DiscussionForum: React.FC<DiscussionForumProps> = ({
         border: "1px solid #f1f5f9",
       }}
     >
-      {/* Forum Header */}
       <FilterHeader
         activeFilter={activeFilter}
         filterOptions={filterOptions}
         onFilterChange={onFilterChange}
       />
 
-      {/* Discussion List */}
       <div style={{ marginBottom: "3rem" }}>
         {discussions.map((discussion, index) => (
           <DiscussionCard
@@ -57,7 +55,6 @@ export const DiscussionForum: React.FC<DiscussionForumProps> = ({
         ))}
       </div>
 
-      {/* Pagination */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

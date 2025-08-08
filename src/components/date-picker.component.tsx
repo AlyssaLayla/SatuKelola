@@ -1,13 +1,15 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Calendar } from 'lucide-react';
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronDown, Calendar } from "lucide-react";
 
 interface DateRangePickerProps {
   onDateRangeChange?: (startDate: Date | null, endDate: Date | null) => void;
 }
 
-const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) => {
+const DateRangePicker: React.FC<DateRangePickerProps> = ({
+  onDateRangeChange,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -16,21 +18,24 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const formatDate = (date: Date | null) => {
-    if (!date) return '';
-    return date.toLocaleDateString('id-ID', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
+    if (!date) return "";
+    return date.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
     });
   };
 
@@ -40,7 +45,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
     } else if (startDate) {
       return `${formatDate(startDate)} - Pilih akhir`;
     }
-    return 'Rentang';
+    return "Rentang";
   };
 
   const getDaysInMonth = (date: Date) => {
@@ -52,13 +57,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
     const startingDayOfWeek = firstDay.getDay();
 
     const days = [];
-    
-    // Add empty cells for days before the first day of the month
+
     for (let i = 0; i < startingDayOfWeek; i++) {
       days.push(null);
     }
-    
-    // Add all days of the month
+
     for (let i = 1; i <= daysInMonth; i++) {
       days.push(new Date(year, month, i));
     }
@@ -68,16 +71,13 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
 
   const handleDateClick = (date: Date) => {
     if (!startDate || (startDate && endDate)) {
-      // First selection or reset
       setStartDate(date);
       setEndDate(null);
     } else if (date >= startDate) {
-      // Second selection
       setEndDate(date);
       onDateRangeChange?.(startDate, date);
       setIsOpen(false);
     } else {
-      // If second date is before first, make it the new start
       setStartDate(date);
       setEndDate(null);
     }
@@ -89,22 +89,28 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
   };
 
   const isDateSelected = (date: Date) => {
-    return (startDate && date.getTime() === startDate.getTime()) ||
-           (endDate && date.getTime() === endDate.getTime());
+    return (
+      (startDate && date.getTime() === startDate.getTime()) ||
+      (endDate && date.getTime() === endDate.getTime())
+    );
   };
 
   const previousMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1)
+    );
   };
 
   const nextMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1)
+    );
   };
 
   const days = getDaysInMonth(currentMonth);
-  const monthYear = currentMonth.toLocaleDateString('id-ID', { 
-    month: 'long', 
-    year: 'numeric' 
+  const monthYear = currentMonth.toLocaleDateString("id-ID", {
+    month: "long",
+    year: "numeric",
   });
 
   return (
@@ -125,7 +131,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
           color: "#374151",
           cursor: "pointer",
           transition: "background-color 0.2s ease",
-          minWidth: "160px"
+          minWidth: "160px",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#f9fafb";
@@ -136,11 +142,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
       >
         <Calendar size={16} />
         <span>{getDisplayText()}</span>
-        <ChevronDown 
-          size={16} 
+        <ChevronDown
+          size={16}
           style={{
             transition: "transform 0.2s ease",
-            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)"
+            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
           }}
         />
       </button>
@@ -158,16 +164,15 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
             boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
             zIndex: 50,
             padding: "16px",
-            width: "320px"
+            width: "320px",
           }}
         >
-          {/* Calendar Header */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: "16px"
+              marginBottom: "16px",
             }}
           >
             <button
@@ -178,7 +183,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
                 border: "none",
                 backgroundColor: "transparent",
                 cursor: "pointer",
-                transition: "background-color 0.2s ease"
+                transition: "background-color 0.2s ease",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "#f3f4f6";
@@ -194,7 +199,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
                 fontWeight: "600",
                 color: "#111827",
                 fontSize: "16px",
-                margin: "0"
+                margin: "0",
               }}
             >
               {monthYear}
@@ -207,7 +212,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
                 border: "none",
                 backgroundColor: "transparent",
                 cursor: "pointer",
-                transition: "background-color 0.2s ease"
+                transition: "background-color 0.2s ease",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "#f3f4f6";
@@ -220,16 +225,15 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
             </button>
           </div>
 
-          {/* Days of week */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
               gap: "4px",
-              marginBottom: "8px"
+              marginBottom: "8px",
             }}
           >
-            {['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'].map(day => (
+            {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
               <div
                 key={day}
                 style={{
@@ -237,7 +241,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
                   fontSize: "12px",
                   fontWeight: "500",
                   color: "#6b7280",
-                  padding: "8px"
+                  padding: "8px",
                 }}
               >
                 {day}
@@ -245,12 +249,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
             ))}
           </div>
 
-          {/* Calendar Days */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
-              gap: "4px"
+              gap: "4px",
             }}
           >
             {days.map((date, index) => {
@@ -273,21 +276,21 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
                     border: "none",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
-                    backgroundColor: isSelected 
-                      ? "#fbbf24" 
-                      : isInRange 
-                        ? "#fef3c7"
-                        : isToday
-                          ? "#f3f4f6"
-                          : "transparent",
-                    color: isSelected 
-                      ? "white" 
-                      : isInRange 
-                        ? "#92400e"
-                        : isToday
-                          ? "#111827"
-                          : "#374151",
-                    fontWeight: isToday ? "600" : "normal"
+                    backgroundColor: isSelected
+                      ? "#fbbf24"
+                      : isInRange
+                      ? "#fef3c7"
+                      : isToday
+                      ? "#f3f4f6"
+                      : "transparent",
+                    color: isSelected
+                      ? "white"
+                      : isInRange
+                      ? "#92400e"
+                      : isToday
+                      ? "#111827"
+                      : "#374151",
+                    fontWeight: isToday ? "600" : "normal",
                   }}
                   onMouseEnter={(e) => {
                     if (!isSelected && !isInRange) {
@@ -308,7 +311,6 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
             })}
           </div>
 
-          {/* Quick actions */}
           <div style={{ marginTop: "16px", display: "flex", gap: "8px" }}>
             <button
               onClick={() => {
@@ -322,7 +324,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateRangeChange }) 
                 border: "none",
                 backgroundColor: "transparent",
                 cursor: "pointer",
-                transition: "color 0.2s ease"
+                transition: "color 0.2s ease",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = "#111827";

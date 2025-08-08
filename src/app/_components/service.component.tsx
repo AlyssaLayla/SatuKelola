@@ -55,7 +55,6 @@ export const ServicesSection = () => {
     },
   ];
 
-  // Intersection Observer for section visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -80,7 +79,6 @@ export const ServicesSection = () => {
     };
   }, []);
 
-  // Scroll functionality
   const checkScrollPosition = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } =
@@ -92,7 +90,7 @@ export const ServicesSection = () => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 320; // Card width + gap
+      const scrollAmount = 320;
       const newScrollLeft =
         direction === "left"
           ? scrollContainerRef.current.scrollLeft - scrollAmount
@@ -109,7 +107,7 @@ export const ServicesSection = () => {
     const container = scrollContainerRef.current;
     if (container) {
       container.addEventListener("scroll", checkScrollPosition);
-      checkScrollPosition(); // Initial check
+      checkScrollPosition();
 
       return () => container.removeEventListener("scroll", checkScrollPosition);
     }
@@ -135,7 +133,6 @@ export const ServicesSection = () => {
           zIndex: 2,
         }}
       >
-        {/* Section Header */}
         <div
           style={{
             display: "flex",
@@ -159,7 +156,8 @@ export const ServicesSection = () => {
             >
               <span style={{ color: "#20273A" }}>
                 Cari Tahu <br />
-                Layanan Kami!</span>
+                Layanan Kami!
+              </span>
             </h2>
             <p
               style={{
@@ -176,7 +174,6 @@ export const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Services Carousel */}
         <div
           ref={scrollContainerRef}
           style={{
@@ -250,7 +247,6 @@ export const ServicesSection = () => {
                   }
                 }}
               >
-                {/* Background Decoration */}
                 <div
                   style={{
                     position: "absolute",
@@ -265,7 +261,6 @@ export const ServicesSection = () => {
                   }}
                 />
 
-                {/* Inner Glow Effect */}
                 <div
                   className={`inner-glow-${service.id}`}
                   style={{
@@ -279,7 +274,6 @@ export const ServicesSection = () => {
                   }}
                 />
 
-                {/* Icon Container */}
                 <div
                   style={{
                     width: "80px",
@@ -308,7 +302,6 @@ export const ServicesSection = () => {
                   />
                 </div>
 
-                {/* Content */}
                 <div style={{ position: "relative", zIndex: 2 }}>
                   <h3
                     style={{
@@ -339,7 +332,6 @@ export const ServicesSection = () => {
                     {service.description}
                   </p>
 
-                  {/* Action Indicator */}
                   <div
                     style={{
                       display: "flex",
@@ -366,7 +358,6 @@ export const ServicesSection = () => {
         </div>
       </div>
 
-      {/* Background Elements */}
       <div
         style={{
           position: "absolute",

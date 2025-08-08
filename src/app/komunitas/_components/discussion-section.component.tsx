@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from "react";
 import CategoriesSection from "./category-section.component";
 import DiscussionForum from "./discussion-forum.component";
-import { 
-  CATEGORIES, 
-  DISCUSSIONS, 
-  FILTER_OPTIONS, 
-  PAGINATION_CONFIG 
+import {
+  CATEGORIES,
+  DISCUSSIONS,
+  FILTER_OPTIONS,
+  PAGINATION_CONFIG,
 } from "../_constants/komunitas.constant";
 
 export const CommunityDiscussionSection = () => {
@@ -26,26 +26,29 @@ export const CommunityDiscussionSection = () => {
   }, []);
 
   const toggleCategory = (categoryId: string) => {
-    setSelectedCategories(prev => 
+    setSelectedCategories((prev) =>
       prev.includes(categoryId)
-        ? prev.filter(id => id !== categoryId)
+        ? prev.filter((id) => id !== categoryId)
         : [...prev, categoryId]
     );
   };
 
   return (
-    <section style={{ 
-      paddingTop: "100px", 
-      paddingBottom: "100px", 
-      backgroundColor: "#ffffff" 
-    }}>
-      <div style={{ 
-        maxWidth: "1200px", 
-        margin: "0 auto", 
-        paddingLeft: "24px", 
-        paddingRight: "24px" 
-      }}>
-        {/* Categories Section */}
+    <section
+      style={{
+        paddingTop: "100px",
+        paddingBottom: "100px",
+        backgroundColor: "#ffffff",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          paddingLeft: "24px",
+          paddingRight: "24px",
+        }}
+      >
         <CategoriesSection
           categories={CATEGORIES}
           selectedCategories={selectedCategories}
@@ -53,7 +56,6 @@ export const CommunityDiscussionSection = () => {
           onToggleCategory={toggleCategory}
         />
 
-        {/* Discussion Forum Section */}
         <DiscussionForum
           discussions={DISCUSSIONS}
           visibleCards={visibleCards}
@@ -72,7 +74,7 @@ export const CommunityDiscussionSection = () => {
             padding-top: 60px !important;
             padding-bottom: 60px !important;
           }
-          
+
           section > div {
             padding-left: 16px !important;
             padding-right: 16px !important;
@@ -84,7 +86,7 @@ export const CommunityDiscussionSection = () => {
             padding-top: 40px !important;
             padding-bottom: 40px !important;
           }
-          
+
           section > div {
             padding-left: 12px !important;
             padding-right: 12px !important;

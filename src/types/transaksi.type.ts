@@ -14,4 +14,4 @@ export interface TransactionSummary {
   saldoBersih: number;
 }
 
-export type FilterType = 'Semua' | 'Pemasukan' | 'Pengeluaran';
+export type FilterType = "Semua" | "Pemasukan" | "Pengeluaran";

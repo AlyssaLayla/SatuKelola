@@ -1,4 +1,3 @@
-// page.tsx - Marketing Result Page LENGKAP SETELAH PERBAIKAN
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -15,7 +14,6 @@ import {
 } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs.component";
 
-// TYPES
 type MarketingRecommendation = {
   archetype: string;
   priorityPlatforms: string[];
@@ -25,10 +23,9 @@ type MarketingRecommendation = {
   successStories: string[];
 };
 
-// SECTION HEADER COMPONENT
-const SectionHeader: React.FC<{ icon: React.ReactNode; title: string }> = ({ 
-  icon, 
-  title 
+const SectionHeader: React.FC<{ icon: React.ReactNode; title: string }> = ({
+  icon,
+  title,
 }) => (
   <div style={{ marginBottom: "2rem" }}>
     <h2
@@ -66,7 +63,6 @@ const SectionHeader: React.FC<{ icon: React.ReactNode; title: string }> = ({
   </div>
 );
 
-// PLATFORM CARD COMPONENT
 const PlatformCard: React.FC<{ name: string }> = ({ name }) => (
   <div
     style={{
@@ -112,9 +108,9 @@ const PlatformCard: React.FC<{ name: string }> = ({ name }) => (
     >
       {name.charAt(0)}
     </div>
-    <span 
-      style={{ 
-        fontWeight: "500", 
+    <span
+      style={{
+        fontWeight: "500",
         color: "#111827",
         fontSize: "1rem",
       }}
@@ -159,8 +155,9 @@ const PlatformCard: React.FC<{ name: string }> = ({ name }) => (
   </div>
 );
 
-// TOOL CARD COMPONENT
-const ToolCard: React.FC<{ tool: { name: string; link: string; desc: string } }> = ({ tool }) => (
+const ToolCard: React.FC<{
+  tool: { name: string; link: string; desc: string };
+}> = ({ tool }) => (
   <a
     href={tool.link}
     target="_blank"
@@ -189,21 +186,21 @@ const ToolCard: React.FC<{ tool: { name: string; link: string; desc: string } }>
       e.currentTarget.style.backgroundColor = "#ffffff";
     }}
   >
-    <div 
-      style={{ 
-        display: "flex", 
-        justifyContent: "space-between", 
-        alignItems: "flex-start", 
-        marginBottom: "1rem" 
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        marginBottom: "1rem",
       }}
       className="tool-header"
     >
-      <h3 
-        style={{ 
-          fontWeight: "600", 
-          color: "#C4A73B", 
-          margin: 0, 
-          fontSize: "1.125rem" 
+      <h3
+        style={{
+          fontWeight: "600",
+          color: "#C4A73B",
+          margin: 0,
+          fontSize: "1.125rem",
         }}
         className="tool-name"
       >
@@ -211,12 +208,12 @@ const ToolCard: React.FC<{ tool: { name: string; link: string; desc: string } }>
       </h3>
       <ExternalLink size={18} style={{ color: "#64748b", flexShrink: 0 }} />
     </div>
-    <p 
-      style={{ 
-        fontSize: "0.875rem", 
-        color: "#64748b", 
-        margin: 0, 
-        lineHeight: "1.5" 
+    <p
+      style={{
+        fontSize: "0.875rem",
+        color: "#64748b",
+        margin: 0,
+        lineHeight: "1.5",
       }}
       className="tool-description"
     >
@@ -251,8 +248,9 @@ const ToolCard: React.FC<{ tool: { name: string; link: string; desc: string } }>
   </a>
 );
 
-// WEEK PLAN COMPONENT
-const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({ weekPlan }) => {
+const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({
+  weekPlan,
+}) => {
   const [checkedTasks, setCheckedTasks] = useState<boolean[]>(
     new Array(weekPlan.tasks.length).fill(false)
   );
@@ -282,68 +280,75 @@ const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({ w
       className="week-plan"
     >
       <div style={{ marginBottom: "1.5rem" }}>
-        <h3 
-          style={{ 
-            fontWeight: "600", 
-            fontSize: "1.25rem", 
-            color: "#111827", 
-            marginBottom: "1rem" 
+        <h3
+          style={{
+            fontWeight: "600",
+            fontSize: "1.25rem",
+            color: "#111827",
+            marginBottom: "1rem",
           }}
           className="week-title"
         >
           Minggu {weekPlan.week}
         </h3>
-        
+
         <div style={{ marginBottom: "1rem" }} className="progress-section">
-          <div 
-            style={{ 
-              display: "flex", 
-              justifyContent: "space-between", 
-              alignItems: "center", 
-              marginBottom: "0.5rem" 
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "0.5rem",
             }}
             className="progress-info"
           >
-            <span 
-              style={{ 
-                fontSize: "0.875rem", 
-                color: "#64748b" 
+            <span
+              style={{
+                fontSize: "0.875rem",
+                color: "#64748b",
               }}
               className="progress-text"
             >
               Progress: {completedTasks}/{weekPlan.tasks.length}
             </span>
-            <span 
-              style={{ 
-                fontSize: "0.875rem", 
-                color: "#C4A73B", 
-                fontWeight: "600" 
+            <span
+              style={{
+                fontSize: "0.875rem",
+                color: "#C4A73B",
+                fontWeight: "600",
               }}
               className="progress-percentage"
             >
               {Math.round(progressPercentage)}%
             </span>
           </div>
-          
-          <div style={{
-            width: "100%",
-            height: "8px",
-            backgroundColor: "#FEE480",
-            borderRadius: "4px",
-            overflow: "hidden"
-          }}>
-            <div style={{
-              height: "100%",
-              backgroundColor: "#FDD741",
-              width: `${progressPercentage}%`,
-              transition: "width 0.3s ease",
-              borderRadius: "4px"
-            }} />
+
+          <div
+            style={{
+              width: "100%",
+              height: "8px",
+              backgroundColor: "#FEE480",
+              borderRadius: "4px",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                height: "100%",
+                backgroundColor: "#FDD741",
+                width: `${progressPercentage}%`,
+                transition: "width 0.3s ease",
+                borderRadius: "4px",
+              }}
+            />
           </div>
         </div>
       </div>
 
-      <ul style={{ margin: 0, padding: 0, listStyle: "none" }} className="task-list">
+      <ul
+        style={{ margin: 0, padding: 0, listStyle: "none" }}
+        className="task-list"
+      >
         {weekPlan.tasks.map((task, taskIndex) => (
           <li
             key={taskIndex}
@@ -355,7 +360,7 @@ const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({ w
               padding: "0.75rem",
               borderRadius: "8px",
               transition: "all 0.3s ease",
-              backgroundColor: "transparent"
+              backgroundColor: "transparent",
             }}
             className="task-item"
             onClick={() => toggleTask(taskIndex)}
@@ -379,10 +384,12 @@ const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({ w
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: checkedTasks[taskIndex] ? "#FDD741" : "transparent",
+                backgroundColor: checkedTasks[taskIndex]
+                  ? "#FDD741"
+                  : "transparent",
                 transition: "all 0.3s ease",
                 flexShrink: 0,
-                cursor: "pointer"
+                cursor: "pointer",
               }}
               className="task-checkbox"
             >
@@ -393,7 +400,9 @@ const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({ w
             <span
               style={{
                 color: "#111827",
-                textDecoration: checkedTasks[taskIndex] ? "line-through" : "none",
+                textDecoration: checkedTasks[taskIndex]
+                  ? "line-through"
+                  : "none",
                 opacity: checkedTasks[taskIndex] ? 0.6 : 1,
                 transition: "all 0.3s ease",
                 fontSize: "1rem",
@@ -458,15 +467,19 @@ const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({ w
   );
 };
 
-// CONTENT IDEAS SECTION
-const ContentIdeasSection: React.FC<{ contentIdeas: string[] }> = ({ contentIdeas }) => (
+const ContentIdeasSection: React.FC<{ contentIdeas: string[] }> = ({
+  contentIdeas,
+}) => (
   <div style={{ marginBottom: "3rem" }}>
     <SectionHeader
       icon={<Lightbulb size={24} style={{ color: "#C4A73B" }} />}
       title="Ide Konten Spesifik"
     />
     <div style={{ paddingLeft: "0.5rem" }}>
-      <ul style={{ margin: 0, padding: 0, listStyle: "none" }} className="content-ideas-list">
+      <ul
+        style={{ margin: 0, padding: 0, listStyle: "none" }}
+        className="content-ideas-list"
+      >
         {contentIdeas.map((idea, index) => (
           <li
             key={index}
@@ -555,8 +568,9 @@ const ContentIdeasSection: React.FC<{ contentIdeas: string[] }> = ({ contentIdea
   </div>
 );
 
-// SUCCESS STORIES SECTION
-const SuccessStoriesSection: React.FC<{ successStories: string[] }> = ({ successStories }) => (
+const SuccessStoriesSection: React.FC<{ successStories: string[] }> = ({
+  successStories,
+}) => (
   <div style={{ marginBottom: "3rem" }}>
     <SectionHeader
       icon={<Star size={24} style={{ color: "#C4A73B" }} />}
@@ -573,7 +587,10 @@ const SuccessStoriesSection: React.FC<{ successStories: string[] }> = ({ success
         }}
         className="success-stories-container"
       >
-        <ul style={{ margin: 0, padding: 0, listStyle: "none" }} className="success-stories-list">
+        <ul
+          style={{ margin: 0, padding: 0, listStyle: "none" }}
+          className="success-stories-list"
+        >
           {successStories.map((story, index) => (
             <li
               key={index}
@@ -634,7 +651,6 @@ const SuccessStoriesSection: React.FC<{ successStories: string[] }> = ({ success
   </div>
 );
 
-// MAIN COMPONENT
 const MarketingResultPage = () => {
   const [quizData, setQuizData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -703,7 +719,6 @@ const MarketingResultPage = () => {
     ],
   };
 
-  // BREADCRUMB ITEMS - SESUAI PATH localhost/pemasaran/hasil
   const breadcrumbItems = [
     {
       label: "Pemasaran",
@@ -742,8 +757,12 @@ const MarketingResultPage = () => {
         </div>
         <style jsx>{`
           @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
           }
         `}</style>
       </div>
@@ -752,7 +771,6 @@ const MarketingResultPage = () => {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#ffffff" }}>
-      {/* HEADER */}
       <div
         style={{
           background: "#111827",
@@ -764,7 +782,6 @@ const MarketingResultPage = () => {
         className="result-header"
       >
         <div style={{ position: "absolute", top: "1.5rem", left: "1.5rem" }}>
-          {/* BREADCRUMBS */}
           <Breadcrumbs items={breadcrumbItems} />
         </div>
 
@@ -781,17 +798,17 @@ const MarketingResultPage = () => {
           Rekomendasi Pemasaran
         </h1>
 
-        <div 
+        <div
           style={{
-            display: 'inline-block',
-            backgroundColor: '#FDD741',
-            color: '#111827',
-            padding: '0.75rem 2rem',
-            borderRadius: '20px',
-            fontWeight: '600',
-            fontSize: '1rem',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-            marginTop: '1.5rem',
+            display: "inline-block",
+            backgroundColor: "#FDD741",
+            color: "#111827",
+            padding: "0.75rem 2rem",
+            borderRadius: "20px",
+            fontWeight: "600",
+            fontSize: "1rem",
+            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+            marginTop: "1.5rem",
           }}
           className="archetype-badge"
         >
@@ -843,7 +860,6 @@ const MarketingResultPage = () => {
         `}</style>
       </div>
 
-      {/* CONTENT */}
       <div style={{ minHeight: "100vh" }}>
         <div
           style={{
@@ -856,8 +872,6 @@ const MarketingResultPage = () => {
           }}
           className="main-container"
         >
-
-          {/* PLATFORM PRIORITAS */}
           <div style={{ marginBottom: "3rem" }}>
             <SectionHeader
               icon={<Target size={24} style={{ color: "#C4A73B" }} />}
@@ -880,10 +894,8 @@ const MarketingResultPage = () => {
             </div>
           </div>
 
-          {/* IDE KONTEN */}
           <ContentIdeasSection contentIdeas={recommendation.contentIdeas} />
 
-          {/* TOOLS */}
           <div style={{ marginBottom: "3rem" }}>
             <SectionHeader
               icon={<Settings size={24} style={{ color: "#C4A73B" }} />}
@@ -905,7 +917,6 @@ const MarketingResultPage = () => {
             </div>
           </div>
 
-          {/* ACTION PLAN */}
           <div style={{ marginBottom: "3rem" }}>
             <SectionHeader
               icon={<Calendar size={24} style={{ color: "#C4A73B" }} />}
@@ -913,7 +924,11 @@ const MarketingResultPage = () => {
             />
             <div style={{ paddingLeft: "0.5rem" }}>
               <div
-                style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "2rem",
+                }}
                 className="action-plan-container"
               >
                 {recommendation.actionPlan.map((weekPlan, index) => (
@@ -923,10 +938,10 @@ const MarketingResultPage = () => {
             </div>
           </div>
 
-          {/* SUCCESS STORIES */}
-          <SuccessStoriesSection successStories={recommendation.successStories} />
+          <SuccessStoriesSection
+            successStories={recommendation.successStories}
+          />
 
-          {/* CTA BUTTON */}
           <div style={{ marginTop: "4rem", textAlign: "center" }}>
             <button
               style={{
@@ -948,12 +963,14 @@ const MarketingResultPage = () => {
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "#C4A73B";
                 e.currentTarget.style.transform = "translateY(-3px)";
-                e.currentTarget.style.boxShadow = "0 20px 25px -5px rgba(253, 215, 65, 0.4)";
+                e.currentTarget.style.boxShadow =
+                  "0 20px 25px -5px rgba(253, 215, 65, 0.4)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "#FDD741";
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(253, 215, 65, 0.4)";
+                e.currentTarget.style.boxShadow =
+                  "0 10px 15px -3px rgba(253, 215, 65, 0.4)";
               }}
             >
               <Download size={22} />
@@ -962,7 +979,6 @@ const MarketingResultPage = () => {
           </div>
         </div>
 
-        {/* GLOBAL MOBILE RESPONSIVE STYLES */}
         <style jsx>{`
           @media (max-width: 1200px) {
             .main-container {
@@ -981,12 +997,18 @@ const MarketingResultPage = () => {
             }
 
             .platforms-grid {
-              grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+              grid-template-columns: repeat(
+                auto-fit,
+                minmax(180px, 1fr)
+              ) !important;
               gap: 1rem !important;
             }
 
             .tools-grid {
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+              grid-template-columns: repeat(
+                auto-fit,
+                minmax(250px, 1fr)
+              ) !important;
               gap: 1rem !important;
             }
 

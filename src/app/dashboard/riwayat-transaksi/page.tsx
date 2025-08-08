@@ -8,7 +8,6 @@ import { calculateSummary } from "@/utils/transaksi.util";
 import DateRangePicker from "@/components/date-picker.component";
 
 const RiwayatTransaksiPage: React.FC = () => {
-  // State untuk date range filtering
   const [dateRange, setDateRange] = useState<{
     start: Date | null;
     end: Date | null;
@@ -17,7 +16,6 @@ const RiwayatTransaksiPage: React.FC = () => {
     end: null,
   });
 
-  // Filter transactions berdasarkan date range
   const filteredTransactions = useMemo(() => {
     if (!dateRange.start || !dateRange.end) {
       return transaksiData;
@@ -26,13 +24,11 @@ const RiwayatTransaksiPage: React.FC = () => {
     return transaksiData.filter((transaction) => {
       const transactionDate = new Date(transaction.tanggal);
       return (
-        transactionDate >= dateRange.start! &&
-        transactionDate <= dateRange.end!
+        transactionDate >= dateRange.start! && transactionDate <= dateRange.end!
       );
     });
   }, [dateRange]);
 
-  // Calculate summary dari filtered transactions
   const summary = useMemo(() => {
     return calculateSummary(filteredTransactions);
   }, [filteredTransactions]);
@@ -46,19 +42,18 @@ const RiwayatTransaksiPage: React.FC = () => {
 
   return (
     <div
-      style={{ 
+      style={{
         minHeight: "100vh",
         backgroundColor: "#f8fafc",
         padding: "0",
-        position: "relative"
+        position: "relative",
       }}
     >
-      {/* Header Section */}
       <div
         style={{
           backgroundColor: "white",
           borderBottom: "1px solid #e5e7eb",
-          padding: "24px 32px"
+          padding: "24px 32px",
         }}
       >
         <div
@@ -67,38 +62,34 @@ const RiwayatTransaksiPage: React.FC = () => {
             alignItems: "center",
             justifyContent: "space-between",
             maxWidth: "1200px",
-            margin: "0 auto"
+            margin: "0 auto",
           }}
         >
-          {/* Title */}
           <h1
             style={{
               fontSize: "32px",
               fontWeight: "700",
               color: "#111827",
-              margin: "0"
+              margin: "0",
             }}
           >
             Riwayat Transaksi
           </h1>
-          
-          {/* Date Range Picker */}
+
           <div>
             <DateRangePicker onDateRangeChange={handleDateRangeChange} />
           </div>
         </div>
       </div>
 
-      {/* Content */}
       <div
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
           padding: "32px",
-          position: "relative"
+          position: "relative",
         }}
       >
-        {/* Summary Cards */}
         <div style={{ marginBottom: "32px" }}>
           <TransactionSummaryCard
             totalPemasukan={summary.totalPemasukan}
@@ -108,11 +99,9 @@ const RiwayatTransaksiPage: React.FC = () => {
           />
         </div>
 
-        {/* Transaction Table */}
         <div style={{ position: "relative" }}>
           <TransactionTable transactions={filteredTransactions} />
-          
-          {/* Floating Add Button */}
+
           <a
             href="#"
             style={{
@@ -129,15 +118,17 @@ const RiwayatTransaksiPage: React.FC = () => {
               textDecoration: "none",
               boxShadow: "0 8px 24px -4px rgba(0, 0, 0, 0.2)",
               transition: "all 0.2s ease",
-              zIndex: 10
+              zIndex: 10,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "scale(1.1)";
-              e.currentTarget.style.boxShadow = "0 12px 32px -4px rgba(0, 0, 0, 0.3)";
+              e.currentTarget.style.boxShadow =
+                "0 12px 32px -4px rgba(0, 0, 0, 0.3)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow = "0 8px 24px -4px rgba(0, 0, 0, 0.2)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 24px -4px rgba(0, 0, 0, 0.2)";
             }}
           >
             <span
@@ -145,7 +136,7 @@ const RiwayatTransaksiPage: React.FC = () => {
                 fontSize: "28px",
                 fontWeight: "bold",
                 color: "white",
-                lineHeight: "1"
+                lineHeight: "1",
               }}
             >
               +
