@@ -14,7 +14,6 @@ import {
   Trophy,
 } from "lucide-react";
 
-// Step type definition
 interface Step {
   id: number;
   title: string;
@@ -32,7 +31,6 @@ interface StepCardProps {
   side: "left" | "right";
 }
 
-// Enhanced Step Guide Section Component
 export const StepGuideSection = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -44,7 +42,7 @@ export const StepGuideSection = () => {
       description: "Buka website resmi OSS di browser Anda",
       icon: Globe,
       detail: "Pastikan koneksi internet stabil untuk proses yang lancar",
-      color: "#3B82F6",
+      color: "#7F6C21", // primary/500
     },
     {
       id: 2,
@@ -52,7 +50,7 @@ export const StepGuideSection = () => {
       description: "Temukan menu panduan di halaman utama",
       icon: BookOpen,
       detail: "Menu panduan biasanya terletak di bagian atas halaman",
-      color: "#10B981",
+      color: "#D3B336", // primary/400
     },
     {
       id: 3,
@@ -61,7 +59,7 @@ export const StepGuideSection = () => {
       icon: Store,
       detail:
         "UMK cocok untuk bisnis dengan omzet di bawah 2.5 miliar per tahun",
-      color: "#8B5CF6",
+      color: "#20273A", // secondary/300
     },
     {
       id: 4,
@@ -69,7 +67,7 @@ export const StepGuideSection = () => {
       description: "Sesuaikan dengan bidang usaha spesifik",
       icon: Target,
       detail: "Pilihan yang tepat akan memudahkan proses selanjutnya",
-      color: "#F59E0B",
+      color: "#FDD741", // primary/300
     },
     {
       id: 5,
@@ -77,7 +75,7 @@ export const StepGuideSection = () => {
       description: "Mulai proses registrasi akun OSS",
       icon: FileText,
       detail: "Siapkan email aktif untuk verifikasi akun",
-      color: "#EF4444",
+      color: "#B91C1C", // Adjusted red to complement palette
     },
     {
       id: 6,
@@ -85,7 +83,7 @@ export const StepGuideSection = () => {
       description: "Lengkapi informasi bisnis dan personal",
       icon: User,
       detail: "Pastikan data yang diisi sesuai dengan dokumen resmi",
-      color: "#06B6D4",
+      color: "#151A27", // secondary/400
     },
     {
       id: 7,
@@ -93,7 +91,7 @@ export const StepGuideSection = () => {
       description: "Upload file persyaratan yang diperlukan",
       icon: Paperclip,
       detail: "Format file yang diterima: PDF, JPG, PNG (maksimal 2MB)",
-      color: "#84CC16",
+      color: "#16A34A", // Adjusted green to complement palette
     },
     {
       id: 8,
@@ -101,7 +99,7 @@ export const StepGuideSection = () => {
       description: "Kirim aplikasi untuk diproses",
       icon: Send,
       detail: "Periksa kembali semua data sebelum submit",
-      color: "#F97316",
+      color: "#EA580C", // Adjusted orange to complement palette
     },
     {
       id: 9,
@@ -109,7 +107,7 @@ export const StepGuideSection = () => {
       description: "Pantau progress aplikasi Anda",
       icon: BarChart3,
       detail: "Notifikasi akan dikirim melalui email dan SMS",
-      color: "#EC4899",
+      color: "#90939D", // secondary/200
     },
     {
       id: 10,
@@ -117,7 +115,7 @@ export const StepGuideSection = () => {
       description: "Download dan simpan sertifikat legalitas",
       icon: Trophy,
       detail: "Backup dokumen di beberapa tempat untuk keamanan",
-      color: "#14B8A6",
+      color: "#059669", // Adjusted teal to complement palette
     },
   ];
 
@@ -157,8 +155,8 @@ export const StepGuideSection = () => {
           <h2
             style={{
               fontSize: "2.75rem",
-              fontWeight: "800",
-              color: "#111827",
+              fontWeight: "700",
+              color: "#20273A", // secondary/300
               marginBottom: "20px",
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
@@ -169,7 +167,7 @@ export const StepGuideSection = () => {
           <p
             style={{
               fontSize: "1.25rem",
-              color: "#64748b",
+              color: "#90939D", // secondary/200
               maxWidth: "600px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -194,7 +192,7 @@ export const StepGuideSection = () => {
               bottom: "40px",
               width: "4px",
               background:
-                "linear-gradient(to bottom, #e2e8f0, #cbd5e1, #e2e8f0)",
+                "linear-gradient(to bottom, #D4D4D4, #AAAAAA, #D4D4D4)", // frame colors
               borderRadius: "2px",
               transform: "translateX(-50%)",
               zIndex: 1,
@@ -258,7 +256,7 @@ export const StepGuideSection = () => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            boxShadow: `0 8px 25px -8px ${step.color}40`,
+                            boxShadow: "0 4px 12px -4px rgba(0, 0, 0, 0.15)",
                             zIndex: 4,
                           }}
                         >
@@ -288,14 +286,14 @@ export const StepGuideSection = () => {
                         height: "80px",
                         borderRadius: "50%",
                         background: isCompleted
-                          ? "linear-gradient(135deg, #10B981, #047857)"
+                          ? "linear-gradient(135deg, #16A34A, #15803D)" // Green for completed
                           : `linear-gradient(135deg, ${step.color}, ${step.color}dd)`,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         position: "relative",
                         zIndex: 3,
-                        boxShadow: `0 20px 40px -12px ${step.color}40`,
+                        boxShadow: "0 6px 20px -6px rgba(0, 0, 0, 0.2)",
                         border: "4px solid #ffffff",
                         cursor: "pointer",
                         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -304,13 +302,13 @@ export const StepGuideSection = () => {
                       onClick={() => toggleStepComplete(step.id)}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = "scale(1.15)";
-                        e.currentTarget.style.boxShadow = `0 25px 50px -12px ${step.color}60`;
+                        e.currentTarget.style.boxShadow = "0 8px 25px -8px rgba(0, 0, 0, 0.25)";
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = isCompleted
                           ? "scale(1.1)"
                           : "scale(1)";
-                        e.currentTarget.style.boxShadow = `0 20px 40px -12px ${step.color}40`;
+                        e.currentTarget.style.boxShadow = "0 6px 20px -6px rgba(0, 0, 0, 0.2)";
                       }}
                     >
                       {isCompleted ? (
@@ -342,7 +340,7 @@ export const StepGuideSection = () => {
                           fontSize: "0.875rem",
                           fontWeight: "800",
                           color: step.color,
-                          boxShadow: `0 4px 12px -4px ${step.color}40`,
+                          boxShadow: "0 2px 8px -2px rgba(0, 0, 0, 0.15)",
                         }}
                       >
                         {step.id}
@@ -382,7 +380,7 @@ export const StepGuideSection = () => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            boxShadow: `0 8px 25px -8px ${step.color}40`,
+                            boxShadow: "0 4px 12px -4px rgba(0, 0, 0, 0.15)",
                             zIndex: 4,
                           }}
                         >
@@ -438,24 +436,6 @@ export const StepGuideSection = () => {
   );
 };
 
-// Step type definition
-interface Step {
-  id: number;
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
-  detail: string;
-  color: string;
-}
-
-// Step Card Component Props
-interface StepCardProps {
-  step: Step;
-  isCompleted: boolean;
-  onToggleComplete: () => void;
-  side: "left" | "right";
-}
-
 // Step Card Component
 const StepCard: React.FC<StepCardProps> = ({
   step,
@@ -470,9 +450,9 @@ const StepCard: React.FC<StepCardProps> = ({
         borderRadius: "20px",
         padding: "1.5rem",
         boxShadow: isCompleted
-          ? "0 25px 50px -12px rgba(16, 185, 129, 0.2)"
-          : "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
-        border: isCompleted ? "3px solid #10B981" : "1px solid #f1f5f9",
+          ? "0 8px 25px -8px rgba(22, 163, 74, 0.15)"
+          : "0 8px 25px -8px rgba(0, 0, 0, 0.08)",
+        border: isCompleted ? "3px solid #16A34A" : "1px solid #D4D4D4", // frame/200
         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         cursor: "pointer",
         position: "relative",
@@ -482,14 +462,14 @@ const StepCard: React.FC<StepCardProps> = ({
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-4px) scale(1.02)";
         e.currentTarget.style.boxShadow = isCompleted
-          ? "0 30px 60px -12px rgba(16, 185, 129, 0.3)"
-          : "0 30px 60px -12px rgba(0, 0, 0, 0.2)";
+          ? "0 12px 35px -8px rgba(22, 163, 74, 0.2)"
+          : "0 12px 35px -8px rgba(0, 0, 0, 0.12)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "translateY(0) scale(1)";
         e.currentTarget.style.boxShadow = isCompleted
-          ? "0 25px 50px -12px rgba(16, 185, 129, 0.2)"
-          : "0 25px 50px -12px rgba(0, 0, 0, 0.15)";
+          ? "0 8px 25px -8px rgba(22, 163, 74, 0.15)"
+          : "0 8px 25px -8px rgba(0, 0, 0, 0.08)";
       }}
     >
       {/* Completion overlay */}
@@ -502,7 +482,7 @@ const StepCard: React.FC<StepCardProps> = ({
             right: "0",
             bottom: "0",
             background:
-              "linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(4, 120, 87, 0.05))",
+              "linear-gradient(135deg, rgba(22, 163, 74, 0.05), rgba(21, 128, 61, 0.05))",
             pointerEvents: "none",
           }}
         />
@@ -527,7 +507,7 @@ const StepCard: React.FC<StepCardProps> = ({
               alignItems: "center",
               justifyContent: "center",
               flexShrink: 0,
-              boxShadow: `0 12px 30px -8px ${step.color}40`,
+              boxShadow: "0 4px 15px -4px rgba(0, 0, 0, 0.12)",
             }}
           >
             <step.icon
@@ -543,8 +523,8 @@ const StepCard: React.FC<StepCardProps> = ({
             <h3
               style={{
                 fontSize: "1.5rem",
-                fontWeight: "800",
-                color: isCompleted ? "#10B981" : "#111827",
+                fontWeight: "600",
+                color: isCompleted ? "#16A34A" : "#20273A", // secondary/300
                 marginBottom: "0.75rem",
                 lineHeight: "1.3",
                 letterSpacing: "-0.01em",
@@ -557,8 +537,8 @@ const StepCard: React.FC<StepCardProps> = ({
 
             <p
               style={{
-                fontSize: "1.125rem",
-                color: isCompleted ? "#6b7280" : "#64748b",
+                fontSize: "18px",
+                color: isCompleted ? "#90939D" : "#90939D", // secondary/200
                 marginBottom: "1rem",
                 lineHeight: "1.6",
                 fontWeight: "400",
@@ -570,19 +550,19 @@ const StepCard: React.FC<StepCardProps> = ({
             <div
               style={{
                 background: isCompleted
-                  ? "rgba(16, 185, 129, 0.1)"
+                  ? "rgba(22, 163, 74, 0.1)"
                   : `${step.color}15`,
                 borderRadius: "16px",
                 padding: "1rem 1.5rem",
                 border: isCompleted
-                  ? "1px solid rgba(16, 185, 129, 0.2)"
+                  ? "1px solid rgba(22, 163, 74, 0.2)"
                   : `1px solid ${step.color}30`,
               }}
             >
               <p
                 style={{
                   fontSize: "0.95rem",
-                  color: isCompleted ? "#047857" : step.color,
+                  color: isCompleted ? "#15803D" : step.color,
                   margin: 0,
                   fontWeight: "500",
                   lineHeight: "1.5",
@@ -599,7 +579,7 @@ const StepCard: React.FC<StepCardProps> = ({
               width: "24px",
               height: "24px",
               borderRadius: "50%",
-              background: isCompleted ? "#10B981" : "#e2e8f0",
+              background: isCompleted ? "#16A34A" : "#D4D4D4",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -614,14 +594,3 @@ const StepCard: React.FC<StepCardProps> = ({
     </div>
   );
 };
-
-// Main component showing usage
-const LegalitasPageWithSteps = () => {
-  return (
-    <div className="min-h-screen bg-white">
-      <StepGuideSection />
-    </div>
-  );
-};
-
-export default LegalitasPageWithSteps;

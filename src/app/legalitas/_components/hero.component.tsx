@@ -1,15 +1,13 @@
 import Link from "next/link";
 import React from "react";
 
-// Enhanced Hero Section Component with improved styling
-export const LegalitasHeroSection = () => {
+export const HeroSection = () => {
   return (
     <section
       style={{
         position: "relative",
         overflow: "hidden",
-        background:
-          "linear-gradient(135deg, rgba(254, 242, 192, 0.3) 0%, rgba(254, 242, 192, 0.1) 100%)",
+        background: "linear-gradient(to bottom, #FEF2C0 0%, transparent 100%)",
         display: "flex",
         alignItems: "center",
         minHeight: "600px",
@@ -27,7 +25,7 @@ export const LegalitasHeroSection = () => {
           position: "relative",
         }}
       >
-        {/* Hero Image - Enhanced - Now on Left */}
+        {/* Hero Image - Left */}
         <div
           className="hero-image"
           style={{
@@ -46,10 +44,9 @@ export const LegalitasHeroSection = () => {
             style={{
               width: "auto",
               height: "100%",
-              maxHeight: "650px",
-              minHeight: "600px",
+              maxHeight: "600px",
               objectFit: "contain",
-              filter: "drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15))",
+              filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08))",
               display: "block",
             }}
           />
@@ -59,7 +56,7 @@ export const LegalitasHeroSection = () => {
             className="decorative-star"
             style={{
               position: "absolute",
-              top: "20%",
+              top: "10%",
               right: "15%",
               fontSize: "2.5rem",
               color: "#DC2626",
@@ -78,27 +75,29 @@ export const LegalitasHeroSection = () => {
             style={{
               position: "absolute",
               top: "35%",
-              right: "-5%",
-              width: "12px",
-              height: "12px",
-              backgroundColor: "#f59e0b",
+              left: "-5%",
+              width: "8px",
+              height: "8px",
+              backgroundColor: "#20273A",
               borderRadius: "50%",
               animation: "bounceSubtle 4s ease-in-out infinite",
               animationDelay: "1.5s",
+              opacity: 0.3,
             }}
           />
           <div
             className="decorative-circle-2"
             style={{
               position: "absolute",
-              bottom: "30%",
-              right: "10%",
-              width: "8px",
-              height: "8px",
-              backgroundColor: "#DC2626",
+              bottom: "35%",
+              left: "8%",
+              width: "6px",
+              height: "6px",
+              backgroundColor: "#C4A73B",
               borderRadius: "50%",
               animation: "bounceSubtle 3.5s ease-in-out infinite",
               animationDelay: "2.5s",
+              opacity: 0.4,
             }}
           />
         </div>
@@ -115,8 +114,9 @@ export const LegalitasHeroSection = () => {
           }}
         >
           <h1
+            className="hero-title"
             style={{
-              fontSize: "3.5rem",
+              fontSize: "4rem",
               fontWeight: "900",
               color: "#111827",
               lineHeight: "1.05",
@@ -124,23 +124,24 @@ export const LegalitasHeroSection = () => {
               letterSpacing: "-0.03em",
             }}
           >
-            Ayo Urus Legalitas Usaha Anda!
+            Legalitas Usaha
           </h1>
 
           <p
             style={{
-              fontSize: "1.5rem",
+              fontSize: "1.25rem",
               color: "#374151",
-              marginBottom: "3.5rem",
+              marginBottom: "3rem",
               lineHeight: "1.6",
-              fontWeight: "500",
+              fontWeight: "400",
+              maxWidth: "500px",
             }}
           >
             Mudah, cepat, dan terarah dengan panduan lengkap
           </p>
 
           <div style={{ position: "relative" }}>
-            <Link
+            <a
               href="https://oss.go.id/"
               className="hero-button"
               style={{
@@ -154,26 +155,26 @@ export const LegalitasHeroSection = () => {
                 border: "none",
                 cursor: "pointer",
                 transition: "all 0.3s ease",
-                boxShadow: "0 10px 30px rgba(251, 191, 36, 0.4)",
+                boxShadow: "0 6px 20px rgba(251, 191, 36, 0.25)",
                 letterSpacing: "0.025em",
                 fontSize: "1.125rem",
-                textDecoration:"none",
+                textDecoration: "none",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "#D3B336";
                 e.currentTarget.style.transform = "scale(1.05)";
                 e.currentTarget.style.boxShadow =
-                  "0 20px 40px rgba(251, 191, 36, 0.5)";
+                  "0 8px 25px rgba(251, 191, 36, 0.35)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = "#FDD741";
                 e.currentTarget.style.transform = "scale(1)";
                 e.currentTarget.style.boxShadow =
-                  "0 10px 30px rgba(251, 191, 36, 0.4)";
+                  "0 6px 20px rgba(251, 191, 36, 0.25)";
               }}
             >
               <span>Akses Website OSS</span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -396,4 +397,4 @@ export const LegalitasHeroSection = () => {
   );
 };
 
-export default LegalitasHeroSection;
+export default HeroSection;
