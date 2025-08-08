@@ -27,7 +27,8 @@ export interface DigitalStore {
 export const digitalStoresData: DigitalStore[] = [
   { name: 'GrabFood', subtitle: 'Seblak BarBar Depok', status: 'active' },
   { name: 'GoFood', subtitle: 'Seblak BarBar Depok', status: 'active' },
-  { name: 'Shopee', subtitle: 'Seblak BarBar Depok', status: 'inactive' }
+  { name: 'Shopee', subtitle: 'Seblak BarBar Depok', status: 'inactive' },
+  { name: 'Uber', subtitle: 'Seblak BarBar Depok', status: 'inactive' }
 ];
 
 export interface KeuanganData {

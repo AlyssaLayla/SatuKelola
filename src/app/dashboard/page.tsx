@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useMemo } from "react";
-import { Plus, TrendingUp, ShoppingBag } from "lucide-react";
+import React, { useMemo, useState} from "react";
+import { Plus, TrendingUp, ShoppingBag, ChevronRight, ChevronLeft } from "lucide-react";
 import { transaksiData } from "@/data/transaksi";
 import { calculateSummary, formatCurrency } from "@/utils/transaksi.util";
 import { 
@@ -9,14 +9,27 @@ import {
   digitalStoresData, 
   keuanganData 
 } from "@/data/summary";
-import { orderStatsData,  stokSectionData } from "@/data/stok";
-import StokInventoriPage from "./stok-inventori/page";
+import { orderStatsData, stokSectionData } from "@/data/stok";
 
 const DashboardPage: React.FC = () => {
   // Calculate summary dari semua transactions
   const summary = useMemo(() => {
     return calculateSummary(transaksiData);
   }, []);
+
+  // State untuk carousel toko digital
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerPage = 4;
+  const totalItems = digitalStoresData.length + 1; // +1 untuk "Tambah Toko" card
+  const maxIndex = Math.max(0, totalItems - itemsPerPage);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  };
 
   return (
     <div
@@ -398,8 +411,7 @@ const DashboardPage: React.FC = () => {
               </div>
             </div>
           </div>
-
- {/* Stok Section */}
+          {/* Stok Section */}
           <div
             style={{
               backgroundColor: "white",
@@ -485,116 +497,211 @@ const DashboardPage: React.FC = () => {
             boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)"
           }}
         >
-          <h3
-            style={{
-              fontSize: "18px",
-              fontWeight: "600",
-              color: "#111827",
-              margin: "0 0 24px 0"
-            }}
-          >
-            Toko Digital
-          </h3>
-
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "24px"
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "24px"
             }}
           >
-            {/* Add Store Card */}
-            <div
+            <h3
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "32px",
-                border: "2px dashed #d1d5db",
-                borderRadius: "8px",
-                minHeight: "120px"
+                fontSize: "18px",
+                fontWeight: "600",
+                color: "#111827",
+                margin: "0"
               }}
             >
-              <div
+              Toko Digital
+            </h3>
+            
+            {/* Navigation Arrows */}
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <button
+                onClick={handlePrevious}
+                disabled={currentIndex === 0}
                 style={{
-                  width: "48px",
-                  height: "48px",
-                  backgroundColor: "#fbbf24",
+                  width: "32px",
+                  height: "32px",
                   borderRadius: "50%",
+                  border: "1px solid #d1d5db",
+                  backgroundColor: currentIndex === 0 ? "#f3f4f6" : "white",
+                  color: currentIndex === 0 ? "#9ca3af" : "#374151",
+                  cursor: currentIndex === 0 ? "not-allowed" : "pointer",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginBottom: "12px"
+                  transition: "all 0.2s ease"
+                }}
+                onMouseEnter={(e) => {
+                  if (currentIndex !== 0) {
+                    e.currentTarget.style.backgroundColor = "#f9fafb";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (currentIndex !== 0) {
+                    e.currentTarget.style.backgroundColor = "white";
+                  }
                 }}
               >
-                <Plus size={24} style={{ color: "white" }} />
-              </div>
-              <span style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
-                Tambah Toko Barumu!
-              </span>
-            </div>
-
-            {/* Store Cards */}
-            {digitalStoresData.map((store, index) => (
-              <div
-                key={index}
+                <ChevronLeft size={16} />
+              </button>
+              
+              <button
+                onClick={handleNext}
+                disabled={currentIndex >= maxIndex}
                 style={{
-                  padding: "20px",
-                  border: "1px solid #e5e7eb",
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "50%",
+                  border: "1px solid #d1d5db",
+                  backgroundColor: currentIndex >= maxIndex ? "#f3f4f6" : "white",
+                  color: currentIndex >= maxIndex ? "#9ca3af" : "#374151",
+                  cursor: currentIndex >= maxIndex ? "not-allowed" : "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.2s ease"
+                }}
+                onMouseEnter={(e) => {
+                  if (currentIndex < maxIndex) {
+                    e.currentTarget.style.backgroundColor = "#f9fafb";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (currentIndex < maxIndex) {
+                    e.currentTarget.style.backgroundColor = "white";
+                  }
+                }}
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+
+          {/* Carousel Container */}
+          <div
+            style={{
+              overflow: "hidden",
+              width: "100%"
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                gap: "24px",
+                transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
+                transition: "transform 0.3s ease",
+                width: `${(totalItems / itemsPerPage) * 100}%`
+              }}
+            >
+              {/* Add Store Card */}
+              <div
+                style={{
+                  flex: `0 0 ${100 / itemsPerPage}%`,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "24px",
+                  border: "2px dashed #d1d5db",
                   borderRadius: "8px",
-                  textAlign: "center"
+                  minHeight: "120px"
                 }}
               >
                 <div
                   style={{
                     width: "48px",
                     height: "48px",
-                    backgroundColor: "#e5e7eb",
-                    borderRadius: "8px",
+                    backgroundColor: "#fbbf24",
+                    borderRadius: "50%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    margin: "0 auto 12px auto"
+                    marginBottom: "12px"
                   }}
                 >
-                  <ShoppingBag size={20} style={{ color: "#6b7280" }} />
+                  <Plus size={24} style={{ color: "white" }} />
                 </div>
-                <h4
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: "600",
-                    color: "#111827",
-                    margin: "0 0 4px 0"
-                  }}
-                >
-                  {store.name}
-                </h4>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "#6b7280",
-                    margin: "0 0 16px 0"
-                  }}
-                >
-                  {store.subtitle}
-                </p>
-                <button
-                  style={{
-                    padding: "6px 16px",
-                    fontSize: "12px",
-                    fontWeight: "500",
-                    backgroundColor: store.status === 'active' ? "#fbbf24" : "#e5e7eb",
-                    color: store.status === 'active' ? "white" : "#6b7280",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: "pointer"
-                  }}
-                >
-                  {store.status === 'active' ? 'Kunjungi' : 'Nonaktif'}
-                </button>
+                <span style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
+                  Tambah Toko Barumu!
+                </span>
               </div>
-            ))}
+
+              {/* Store Cards */}
+              {digitalStoresData.map((store, index) => (
+                <div
+                  key={index}
+                  style={{
+                    flex: `0 0 ${100 / itemsPerPage}%`,
+                    padding: "20px",
+                    border: "1px solid #e5e7eb",
+                    borderRadius: "8px",
+                    textAlign: "center"
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      backgroundColor: "#e5e7eb",
+                      borderRadius: "8px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "0 auto 12px auto"
+                    }}
+                  >
+                    <ShoppingBag size={20} style={{ color: "#6b7280" }} />
+                  </div>
+                  <h4
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      color: "#111827",
+                      margin: "0 0 4px 0"
+                    }}
+                  >
+                    {store.name}
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#6b7280",
+                      margin: "0 0 16px 0"
+                    }}
+                  >
+                    {store.subtitle}
+                  </p>
+                  <button
+                    style={{
+                      padding: "6px 16px",
+                      fontSize: "12px",
+                      fontWeight: "500",
+                      backgroundColor: store.status === 'active' ? "#fbbf24" : "#e5e7eb",
+                      color: store.status === 'active' ? "white" : "#6b7280",
+                      border: "none",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease"
+                    }}
+                    onMouseEnter={(e) => {
+                      if (store.status === 'active') {
+                        e.currentTarget.style.backgroundColor = "#f59e0b";
+                      } else {
+                        e.currentTarget.style.backgroundColor = "#d1d5db";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = store.status === 'active' ? "#fbbf24" : "#e5e7eb";
+                    }}
+                  >
+                    {store.status === 'active' ? 'Kunjungi' : 'Nonaktif'}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
