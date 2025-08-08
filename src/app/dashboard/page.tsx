@@ -1,49 +1,22 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { Plus, TrendingUp } from "lucide-react";
+import { Plus, TrendingUp, ShoppingBag } from "lucide-react";
 import { transaksiData } from "@/data/transaksi";
 import { calculateSummary, formatCurrency } from "@/utils/transaksi.util";
+import { 
+  performanceData, 
+  digitalStoresData, 
+  keuanganData 
+} from "@/data/summary";
+import { orderStatsData,  stokSectionData } from "@/data/stok";
+import StokInventoriPage from "./stok-inventori/page";
 
 const DashboardPage: React.FC = () => {
   // Calculate summary dari semua transactions
   const summary = useMemo(() => {
     return calculateSummary(transaksiData);
   }, []);
-
-  // Mock data untuk charts dan inventory (sesuai gambar)
-  const performanceData = [
-    { month: 'Jan', value: 20 },
-    { month: 'Feb', value: 15 },
-    { month: 'Mar', value: 35 }, // highlighted bar
-    { month: 'Apr', value: 15 },
-    { month: 'May', value: 28 },
-    { month: 'Jun', value: 12 },
-    { month: 'Jul', value: 18 },
-    { month: 'Aug', value: 32 },
-    { month: 'Sep', value: 20 },
-    { month: 'Oct', value: 14 },
-    { month: 'Nov', value: 16 },
-  ];
-
-  const orderStats = [
-    { label: 'Baru', count: 10, color: '#fb923c', percentage: 15 },
-    { label: 'Diproses', count: 35, color: '#fbbf24', percentage: 52 },
-    { label: 'Dikirim', count: 10, color: '#3b82f6', percentage: 15 },
-    { label: 'Selesai', count: 26, color: '#10b981', percentage: 38 }
-  ];
-
-  const inventoryItems = [
-    { name: 'Bakso Cuanki', quantity: '50 gr', status: 'red' },
-    { name: 'Telur', quantity: '1 butir', status: 'red' },
-    { name: 'Lengkuas', quantity: '75 gr', status: 'red' }
-  ];
-
-  const digitalStores = [
-    { name: 'GrabFood', subtitle: 'Seblak BarBar Depok', status: 'active' },
-    { name: 'GoFood', subtitle: 'Seblak BarBar Depok', status: 'active' },
-    { name: 'Shopee', subtitle: 'Seblak BarBar Depok', status: 'inactive' }
-  ];
 
   return (
     <div
@@ -169,7 +142,7 @@ const DashboardPage: React.FC = () => {
                   margin: "0"
                 }}
               >
-                Rp4.500.000,00
+                {formatCurrency(keuanganData.saldo)}
               </p>
             </div>
 
@@ -178,9 +151,11 @@ const DashboardPage: React.FC = () => {
                 <span style={{ fontSize: "14px", color: "#6b7280" }}>Profit</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
-                    {formatCurrency(summary.saldoBersih)}
+                    {formatCurrency(keuanganData.profit)}
                   </span>
-                  <span style={{ fontSize: "12px", color: "#10b981" }}>↗8%</span>
+                  <span style={{ fontSize: "12px", color: "#10b981" }}>
+                    ↗{keuanganData.profitPercentage}%
+                  </span>
                 </div>
               </div>
 
@@ -188,9 +163,11 @@ const DashboardPage: React.FC = () => {
                 <span style={{ fontSize: "14px", color: "#6b7280" }}>Pemasukan</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
-                    {formatCurrency(summary.totalPemasukan)}
+                    {formatCurrency(keuanganData.pemasukan)}
                   </span>
-                  <span style={{ fontSize: "12px", color: "#10b981" }}>↗6%</span>
+                  <span style={{ fontSize: "12px", color: "#10b981" }}>
+                    ↗{keuanganData.pemasukanPercentage}%
+                  </span>
                 </div>
               </div>
 
@@ -198,9 +175,11 @@ const DashboardPage: React.FC = () => {
                 <span style={{ fontSize: "14px", color: "#6b7280" }}>Pengeluaran</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
-                    {formatCurrency(summary.totalPengeluaran)}
+                    {formatCurrency(keuanganData.pengeluaran)}
                   </span>
-                  <span style={{ fontSize: "12px", color: "#ef4444" }}>↘4%</span>
+                  <span style={{ fontSize: "12px", color: "#ef4444" }}>
+                    ↘{Math.abs(keuanganData.pengeluaranPercentage)}%
+                  </span>
                 </div>
               </div>
             </div>
@@ -209,7 +188,7 @@ const DashboardPage: React.FC = () => {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span style={{ fontSize: "14px", color: "#6b7280" }}>Piutang</span>
                 <span style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
-                  Rp3.000.000,00
+                  {formatCurrency(keuanganData.piutang)}
                 </span>
               </div>
             </div>
@@ -352,7 +331,7 @@ const DashboardPage: React.FC = () => {
                 overflow: "hidden"
               }}
             >
-              {orderStats.map((stat, index) => (
+              {orderStatsData.map((stat, index) => (
                 <div
                   key={index}
                   style={{
@@ -373,7 +352,7 @@ const DashboardPage: React.FC = () => {
                 marginBottom: "20px"
               }}
             >
-              {orderStats.map((stat, index) => (
+              {orderStatsData.map((stat, index) => (
                 <div
                   key={index}
                   style={{
@@ -420,7 +399,7 @@ const DashboardPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Inventaris */}
+ {/* Stok Section */}
           <div
             style={{
               backgroundColor: "white",
@@ -430,69 +409,68 @@ const DashboardPage: React.FC = () => {
               boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)"
             }}
           >
-            <div
+            <h3
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginBottom: "24px"
+                fontSize: "18px",
+                fontWeight: "600",
+                color: "#111827",
+                margin: "0 0 24px 0"
               }}
             >
-              <h3
-                style={{
-                  fontSize: "18px",
-                  fontWeight: "600",
-                  color: "#111827",
-                  margin: "0"
-                }}
-              >
-                Inventaris
-              </h3>
-              <select
-                style={{
-                  fontSize: "12px",
-                  color: "#6b7280",
-                  border: "1px solid #d1d5db",
-                  borderRadius: "4px",
-                  padding: "4px 8px",
-                  backgroundColor: "white"
-                }}
-              >
-                <option>Rentang</option>
-              </select>
-            </div>
+              Stok
+            </h3>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              {inventoryItems.map((item, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "12px",
-                    backgroundColor: "#f0fdfa",
-                    borderRadius: "8px"
-                  }}
-                >
+              {stokSectionData.map((item, index) => {
+                const IconComponent = item.iconComponent;
+                return (
                   <div
+                    key={index}
                     style={{
-                      width: "8px",
-                      height: "8px",
-                      backgroundColor: "#ef4444",
-                      borderRadius: "50%"
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                      padding: "16px",
+                      backgroundColor: "#f0fdfa",
+                      borderRadius: "8px"
                     }}
-                  />
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
-                      {item.name}
+                  >
+                    <div
+                      style={{
+                        width: "48px",
+                        height: "48px",
+                        backgroundColor: "#e0f2f1",
+                        borderRadius: "8px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        position: "relative"
+                      }}
+                    >
+                      <IconComponent size={20} style={{ color: "#059669" }} />
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "4px",
+                          right: "4px",
+                          width: "8px",
+                          height: "8px",
+                          backgroundColor: "#ef4444",
+                          borderRadius: "50%"
+                        }}
+                      />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: "14px", fontWeight: "500", color: "#111827" }}>
+                        {item.name}
+                      </div>
+                    </div>
+                    <div style={{ fontSize: "12px", color: "#6b7280" }}>
+                      {item.quantity}
                     </div>
                   </div>
-                  <div style={{ fontSize: "12px", color: "#6b7280" }}>
-                    {item.quantity}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -558,7 +536,7 @@ const DashboardPage: React.FC = () => {
             </div>
 
             {/* Store Cards */}
-            {digitalStores.map((store, index) => (
+            {digitalStoresData.map((store, index) => (
               <div
                 key={index}
                 style={{
@@ -580,14 +558,7 @@ const DashboardPage: React.FC = () => {
                     margin: "0 auto 12px auto"
                   }}
                 >
-                  <div
-                    style={{
-                      width: "24px",
-                      height: "16px",
-                      backgroundColor: "#6b7280",
-                      borderRadius: "2px"
-                    }}
-                  />
+                  <ShoppingBag size={20} style={{ color: "#6b7280" }} />
                 </div>
                 <h4
                   style={{
