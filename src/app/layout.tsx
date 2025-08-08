@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
+import LandingNavbar from "@/components/navbar.component";
 import AuthProvider from "@/contexts/auth.context";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Playfair_Display({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -27,13 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <AuthProvider>
-          <div className="min-h-screen bg-gray-50">
-            <main className="flex-1">{children}</main>
-          </div>
-        </AuthProvider>
+    <html lang="id" className={`${inter.variable} ${playfair.variable}`}>
+      <LandingNavbar />
+      <body>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
