@@ -27,12 +27,6 @@ const Sidebar: React.FC = () => {
       icon: Package,
       href: '/dashboard/stok-inventori'
     },
-    {
-      id: 'pengaturan',
-      label: 'Pengaturan',
-      icon: Settings,
-      href: '/dashboard/pengaturan'
-    }
   ];
 
   return (
