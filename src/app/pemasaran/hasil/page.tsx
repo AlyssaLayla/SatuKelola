@@ -1,19 +1,21 @@
+// page.tsx - Marketing Result Page LENGKAP SETELAH PERBAIKAN
 "use client";
 
 import React, { useState, useEffect } from "react";
 import {
   ArrowLeft,
   Download,
-  CheckCircle,
-  ExternalLink,
-  Calendar,
-  Star,
   Target,
   Lightbulb,
   Settings,
+  Calendar,
+  Star,
+  ExternalLink,
+  CheckCircle,
 } from "lucide-react";
+import { Breadcrumbs } from "@/components/breadcrumbs.component";
 
-// Types
+// TYPES
 type MarketingRecommendation = {
   archetype: string;
   priorityPlatforms: string[];
@@ -23,133 +25,234 @@ type MarketingRecommendation = {
   successStories: string[];
 };
 
-// Section Component
-const Section = ({
-  icon,
-  title,
-  children,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
+// SECTION HEADER COMPONENT
+const SectionHeader: React.FC<{ icon: React.ReactNode; title: string }> = ({ 
+  icon, 
+  title 
 }) => (
-  <div style={{ marginBottom: "3rem" }}>
+  <div style={{ marginBottom: "2rem" }}>
     <h2
       style={{
-        fontSize: "1.5rem",
-        fontWeight: "black",
-        color: "#20273A", // secondary/300
+        fontSize: "1.75rem",
+        fontWeight: "600",
+        color: "#111827",
         marginBottom: "1.5rem",
         display: "flex",
         alignItems: "center",
         gap: "0.75rem",
+        letterSpacing: "-0.02em",
       }}
+      className="section-title"
     >
       {icon}
       {title}
     </h2>
-    <div style={{ paddingLeft: "0.5rem" }}>{children}</div>
+
+    <style jsx>{`
+      @media (max-width: 768px) {
+        .section-title {
+          font-size: 1.5rem !important;
+          margin-bottom: 1rem !important;
+          gap: 0.5rem !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .section-title {
+          font-size: 1.25rem !important;
+        }
+      }
+    `}</style>
   </div>
 );
 
-// Enhanced Platform Card Component with card-like styling
-const PlatformCard = ({ name }: { name: string }) => (
+// PLATFORM CARD COMPONENT
+const PlatformCard: React.FC<{ name: string }> = ({ name }) => (
   <div
     style={{
       display: "flex",
       alignItems: "center",
       padding: "1.5rem",
-      backgroundColor: "#fff", // frame/100
-      borderRadius: "0.75rem",
-      border: "1px solid #D4D4D4", // frame/200
+      backgroundColor: "#ffffff",
+      borderRadius: "10px",
+      border: "2px solid #FEE480",
       transition: "all 0.3s ease",
       cursor: "pointer",
-      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
     }}
+    className="platform-card"
     onMouseEnter={(e) => {
-      e.currentTarget.style.backgroundColor = "#FEF2C0"; // primary/100
-      e.currentTarget.style.borderColor = "#FDD741"; // primary/300
+      e.currentTarget.style.backgroundColor = "#FFFFF0";
+      e.currentTarget.style.borderColor = "#FDD741";
       e.currentTarget.style.transform = "translateY(-2px)";
-      e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
+      e.currentTarget.style.boxShadow = "0 6px 5px -8px rgba(0, 0, 0, 0.15)";
     }}
     onMouseLeave={(e) => {
-      e.currentTarget.style.backgroundColor = "#fff"; // frame/100
-      e.currentTarget.style.borderColor = "#D4D4D4"; // frame/200
+      e.currentTarget.style.backgroundColor = "#ffffff";
+      e.currentTarget.style.borderColor = "#FEE480";
       e.currentTarget.style.transform = "translateY(0)";
-      e.currentTarget.style.boxShadow = "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)";
+      e.currentTarget.style.boxShadow = "0 1px 3px 0 rgba(0, 0, 0, 0.1)";
     }}
   >
     <div
       style={{
-        width: "3rem",
-        height: "3rem",
-        backgroundColor: "#FDD741", // primary/300
-        borderRadius: "0.5rem",
+        width: "48px",
+        height: "48px",
+        backgroundColor: "#FDD741",
+        borderRadius: "8px",
         marginRight: "0.75rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        color: "#ffffff",
-        fontWeight: "bold",
+        color: "#111827",
+        fontWeight: "600",
+        fontSize: "1.25rem",
       }}
+      className="platform-icon"
     >
       {name.charAt(0)}
     </div>
-    <span style={{ fontWeight: "500", color: "#20273A" }}>{name}</span>
+    <span 
+      style={{ 
+        fontWeight: "500", 
+        color: "#111827",
+        fontSize: "1rem",
+      }}
+      className="platform-name"
+    >
+      {name}
+    </span>
+
+    <style jsx>{`
+      @media (max-width: 768px) {
+        .platform-card {
+          padding: 1rem !important;
+        }
+
+        .platform-icon {
+          width: 40px !important;
+          height: 40px !important;
+          margin-right: 0.5rem !important;
+          font-size: 1rem !important;
+        }
+
+        .platform-name {
+          font-size: 0.9rem !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .platform-card {
+          padding: 0.75rem !important;
+        }
+
+        .platform-icon {
+          width: 36px !important;
+          height: 36px !important;
+        }
+
+        .platform-name {
+          font-size: 0.85rem !important;
+        }
+      }
+    `}</style>
   </div>
 );
 
-// Enhanced Tool Card Component with card-like styling
-const ToolCard = ({
-  tool,
-}: {
-  tool: { name: string; link: string; desc: string };
-}) => (
+// TOOL CARD COMPONENT
+const ToolCard: React.FC<{ tool: { name: string; link: string; desc: string } }> = ({ tool }) => (
   <a
     href={tool.link}
     target="_blank"
     rel="noopener noreferrer"
     style={{
       display: "block",
-      border: "2px solid #FEE480", // primary/200
-      borderRadius: "0.75rem",
+      border: "2px solid #FEE480",
+      borderRadius: "10px",
       padding: "1.5rem",
       transition: "all 0.3s ease",
       textDecoration: "none",
-      backgroundColor: "#fff", // frame/100
-      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      backgroundColor: "#ffffff",
+      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
     }}
+    className="tool-card"
     onMouseEnter={(e) => {
-      e.currentTarget.style.borderColor = "#FDD741"; // primary/300
-      e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)";
+      e.currentTarget.style.borderColor = "#FDD741";
+      e.currentTarget.style.boxShadow = "0 6px 5px -8px rgba(0, 0, 0, 0.15)";
       e.currentTarget.style.transform = "translateY(-4px)";
-      e.currentTarget.style.backgroundColor = "#FEF2C0"; // primary/100
+      e.currentTarget.style.backgroundColor = "#FFFFF0";
     }}
     onMouseLeave={(e) => {
-      e.currentTarget.style.borderColor = "#FEE480"; // primary/200
-      e.currentTarget.style.boxShadow = "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)";
+      e.currentTarget.style.borderColor = "#FEE480";
+      e.currentTarget.style.boxShadow = "0 1px 3px 0 rgba(0, 0, 0, 0.1)";
       e.currentTarget.style.transform = "translateY(0)";
-      e.currentTarget.style.backgroundColor = "#fff"; // frame/100
+      e.currentTarget.style.backgroundColor = "#ffffff";
     }}
   >
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
-      <h3 style={{ fontWeight: "600", color: "#D3B336", margin: 0, fontSize: "1.125rem" }}>
+    <div 
+      style={{ 
+        display: "flex", 
+        justifyContent: "space-between", 
+        alignItems: "flex-start", 
+        marginBottom: "1rem" 
+      }}
+      className="tool-header"
+    >
+      <h3 
+        style={{ 
+          fontWeight: "600", 
+          color: "#C4A73B", 
+          margin: 0, 
+          fontSize: "1.125rem" 
+        }}
+        className="tool-name"
+      >
         {tool.name}
       </h3>
-      <ExternalLink size={18} style={{ color: "#90939D", flexShrink: 0 }} />
+      <ExternalLink size={18} style={{ color: "#64748b", flexShrink: 0 }} />
     </div>
-    <p style={{ fontSize: "0.875rem", color: "#90939D", margin: 0, lineHeight: "1.5" }}>
+    <p 
+      style={{ 
+        fontSize: "0.875rem", 
+        color: "#64748b", 
+        margin: 0, 
+        lineHeight: "1.5" 
+      }}
+      className="tool-description"
+    >
       {tool.desc}
     </p>
+
+    <style jsx>{`
+      @media (max-width: 768px) {
+        .tool-card {
+          padding: 1rem !important;
+        }
+
+        .tool-name {
+          font-size: 1rem !important;
+        }
+
+        .tool-description {
+          font-size: 0.8rem !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .tool-card {
+          padding: 0.75rem !important;
+        }
+
+        .tool-header {
+          margin-bottom: 0.75rem !important;
+        }
+      }
+    `}</style>
   </a>
 );
 
-// Enhanced Week Plan Component with progress tracking
-const WeekPlan = ({
-  weekPlan,
-}: {
-  weekPlan: { week: number; tasks: string[] };
-}) => {
+// WEEK PLAN COMPONENT
+const WeekPlan: React.FC<{ weekPlan: { week: number; tasks: string[] } }> = ({ weekPlan }) => {
   const [checkedTasks, setCheckedTasks] = useState<boolean[]>(
     new Array(weekPlan.tasks.length).fill(false)
   );
@@ -166,44 +269,72 @@ const WeekPlan = ({
   return (
     <div
       style={{
-        borderLeft: "4px solid #FDD741", // primary/300
+        borderLeft: "4px solid #FDD741",
         paddingLeft: "1.5rem",
         paddingTop: "1.5rem",
         paddingBottom: "1.5rem",
         paddingRight: "1.5rem",
-        backgroundColor: "#FFFEFA", // primary/100
-        borderRadius: "0.75rem",
+        backgroundColor: "#FFFFF0",
+        borderRadius: "10px",
         marginLeft: "0.5rem",
-        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
       }}
+      className="week-plan"
     >
       <div style={{ marginBottom: "1.5rem" }}>
-        <h3 style={{ fontWeight: "700", fontSize: "1.25rem", color: "#20273A", marginBottom: "1rem" }}>
+        <h3 
+          style={{ 
+            fontWeight: "600", 
+            fontSize: "1.25rem", 
+            color: "#111827", 
+            marginBottom: "1rem" 
+          }}
+          className="week-title"
+        >
           Minggu {weekPlan.week}
         </h3>
         
-        {/* Progress Section */}
-        <div style={{ marginBottom: "1rem" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-            <span style={{ fontSize: "0.875rem", color: "#90939D" }}>
+        <div style={{ marginBottom: "1rem" }} className="progress-section">
+          <div 
+            style={{ 
+              display: "flex", 
+              justifyContent: "space-between", 
+              alignItems: "center", 
+              marginBottom: "0.5rem" 
+            }}
+            className="progress-info"
+          >
+            <span 
+              style={{ 
+                fontSize: "0.875rem", 
+                color: "#64748b" 
+              }}
+              className="progress-text"
+            >
               Progress: {completedTasks}/{weekPlan.tasks.length}
             </span>
-            <span style={{ fontSize: "0.875rem", color: "#D3B336", fontWeight: "600" }}>
+            <span 
+              style={{ 
+                fontSize: "0.875rem", 
+                color: "#C4A73B", 
+                fontWeight: "600" 
+              }}
+              className="progress-percentage"
+            >
               {Math.round(progressPercentage)}%
             </span>
           </div>
           
-          {/* Custom Progress Bar */}
           <div style={{
             width: "100%",
             height: "8px",
-            backgroundColor: "#FEE480", // primary/200
+            backgroundColor: "#FEE480",
             borderRadius: "4px",
             overflow: "hidden"
           }}>
             <div style={{
               height: "100%",
-              backgroundColor: "#FDD741", // primary/300
+              backgroundColor: "#FDD741",
               width: `${progressPercentage}%`,
               transition: "width 0.3s ease",
               borderRadius: "4px"
@@ -212,7 +343,7 @@ const WeekPlan = ({
         </div>
       </div>
 
-      <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
+      <ul style={{ margin: 0, padding: 0, listStyle: "none" }} className="task-list">
         {weekPlan.tasks.map((task, taskIndex) => (
           <li
             key={taskIndex}
@@ -222,37 +353,38 @@ const WeekPlan = ({
               marginBottom: "1rem",
               cursor: "pointer",
               padding: "0.75rem",
-              borderRadius: "0.5rem",
+              borderRadius: "8px",
               transition: "all 0.3s ease",
               backgroundColor: "transparent"
             }}
+            className="task-item"
             onClick={() => toggleTask(taskIndex)}
             onMouseEnter={(e) => {
               if (!checkedTasks[taskIndex]) {
-                e.currentTarget.style.backgroundColor = "#FEE480"; // primary/200
+                e.currentTarget.style.backgroundColor = "#FEE480";
               }
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = "transparent";
             }}
           >
-            {/* Custom Checkbox */}
             <div
               style={{
                 width: "1.25rem",
                 height: "1.25rem",
-                border: "2px solid #FDD741", // primary/300
-                borderRadius: "0.25rem",
+                border: "2px solid #FDD741",
+                borderRadius: "4px",
                 marginRight: "0.75rem",
                 marginTop: "0.125rem",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: checkedTasks[taskIndex] ? "#FDD741" : "transparent", // primary/300
+                backgroundColor: checkedTasks[taskIndex] ? "#FDD741" : "transparent",
                 transition: "all 0.3s ease",
                 flexShrink: 0,
                 cursor: "pointer"
               }}
+              className="task-checkbox"
             >
               {checkedTasks[taskIndex] && (
                 <CheckCircle size={12} style={{ color: "#ffffff" }} />
@@ -260,38 +392,260 @@ const WeekPlan = ({
             </div>
             <span
               style={{
-                color: "#20273A", // secondary/300
+                color: "#111827",
                 textDecoration: checkedTasks[taskIndex] ? "line-through" : "none",
                 opacity: checkedTasks[taskIndex] ? 0.6 : 1,
                 transition: "all 0.3s ease",
                 fontSize: "1rem",
                 lineHeight: "1.5",
               }}
+              className="task-text"
             >
               {task}
             </span>
           </li>
         ))}
       </ul>
+
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .week-plan {
+            padding: 1rem !important;
+            margin-left: 0 !important;
+          }
+
+          .week-title {
+            font-size: 1.125rem !important;
+            margin-bottom: 0.75rem !important;
+          }
+
+          .progress-info {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.25rem !important;
+          }
+
+          .task-item {
+            padding: 0.5rem !important;
+          }
+
+          .task-text {
+            font-size: 0.9rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .week-plan {
+            padding: 0.75rem !important;
+          }
+
+          .progress-section {
+            margin-bottom: 1rem !important;
+          }
+
+          .task-checkbox {
+            width: 1rem !important;
+            height: 1rem !important;
+            margin-right: 0.5rem !important;
+          }
+
+          .task-text {
+            font-size: 0.85rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
-// Main Marketing Result Page Component
+// CONTENT IDEAS SECTION
+const ContentIdeasSection: React.FC<{ contentIdeas: string[] }> = ({ contentIdeas }) => (
+  <div style={{ marginBottom: "3rem" }}>
+    <SectionHeader
+      icon={<Lightbulb size={24} style={{ color: "#C4A73B" }} />}
+      title="Ide Konten Spesifik"
+    />
+    <div style={{ paddingLeft: "0.5rem" }}>
+      <ul style={{ margin: 0, padding: 0, listStyle: "none" }} className="content-ideas-list">
+        {contentIdeas.map((idea, index) => (
+          <li
+            key={index}
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              marginBottom: "1.5rem",
+            }}
+            className="content-idea-item"
+          >
+            <div
+              style={{
+                width: "2rem",
+                height: "2rem",
+                borderRadius: "50%",
+                backgroundColor: "#FFFFF0",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: "1rem",
+                marginTop: "0.125rem",
+                flexShrink: 0,
+                border: "2px solid #FDD741",
+              }}
+              className="idea-number"
+            >
+              <span
+                style={{
+                  color: "#C4A73B",
+                  fontWeight: "600",
+                  fontSize: "0.875rem",
+                }}
+              >
+                {index + 1}
+              </span>
+            </div>
+            <p
+              style={{
+                color: "#111827",
+                margin: 0,
+                lineHeight: "1.6",
+                fontSize: "1rem",
+              }}
+              className="idea-text"
+            >
+              {idea}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <style jsx>{`
+      @media (max-width: 768px) {
+        .content-idea-item {
+          margin-bottom: 1rem !important;
+        }
+
+        .idea-number {
+          width: 1.75rem !important;
+          height: 1.75rem !important;
+          margin-right: 0.75rem !important;
+        }
+
+        .idea-text {
+          font-size: 0.9rem !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .content-idea-item {
+          margin-bottom: 0.75rem !important;
+        }
+
+        .idea-number {
+          width: 1.5rem !important;
+          height: 1.5rem !important;
+          margin-right: 0.5rem !important;
+        }
+
+        .idea-text {
+          font-size: 0.85rem !important;
+        }
+      }
+    `}</style>
+  </div>
+);
+
+// SUCCESS STORIES SECTION
+const SuccessStoriesSection: React.FC<{ successStories: string[] }> = ({ successStories }) => (
+  <div style={{ marginBottom: "3rem" }}>
+    <SectionHeader
+      icon={<Star size={24} style={{ color: "#C4A73B" }} />}
+      title="Kisah Sukses UMKM"
+    />
+    <div style={{ paddingLeft: "0.5rem" }}>
+      <div
+        style={{
+          backgroundColor: "#FFFFF0  ",
+          borderLeft: "4px solid #FDD741",
+          padding: "2rem",
+          borderRadius: "10px",
+          boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
+        }}
+        className="success-stories-container"
+      >
+        <ul style={{ margin: 0, padding: 0, listStyle: "none" }} className="success-stories-list">
+          {successStories.map((story, index) => (
+            <li
+              key={index}
+              style={{ display: "flex", marginBottom: "1rem" }}
+              className="success-story-item"
+            >
+              <span
+                style={{
+                  marginRight: "0.75rem",
+                  color: "#C4A73B",
+                  fontWeight: "600",
+                  fontSize: "1.25rem",
+                }}
+              >
+                •
+              </span>
+              <span
+                style={{
+                  color: "#7F6C21",
+                  lineHeight: "1.6",
+                  fontSize: "1rem",
+                }}
+                className="success-story-text"
+              >
+                {story}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <style jsx>{`
+      @media (max-width: 768px) {
+        .success-stories-container {
+          padding: 1.5rem !important;
+        }
+
+        .success-story-text {
+          font-size: 0.9rem !important;
+        }
+
+        .success-story-item {
+          margin-bottom: 0.75rem !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .success-stories-container {
+          padding: 1rem !important;
+        }
+
+        .success-story-text {
+          font-size: 0.85rem !important;
+        }
+      }
+    `}</style>
+  </div>
+);
+
+// MAIN COMPONENT
 const MarketingResultPage = () => {
   const [quizData, setQuizData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // Load quiz data from in-memory storage (localStorage not available in Claude artifacts)
   useEffect(() => {
-    // Simulating loading without localStorage
     setTimeout(() => {
       setQuizData({ archetype: "Content Creator" });
       setLoading(false);
     }, 1000);
   }, []);
 
-  // Dummy data hasil rekomendasi
   const recommendation: MarketingRecommendation = {
     archetype: quizData?.archetype || "Content Creator",
     priorityPlatforms: ["TikTok", "Instagram Reels"],
@@ -349,6 +703,18 @@ const MarketingResultPage = () => {
     ],
   };
 
+  // BREADCRUMB ITEMS - SESUAI PATH localhost/pemasaran/hasil
+  const breadcrumbItems = [
+    {
+      label: "Pemasaran",
+      href: "/pemasaran",
+    },
+    {
+      label: "Hasil",
+      isActive: true,
+    },
+  ];
+
   if (loading) {
     return (
       <div
@@ -357,7 +723,7 @@ const MarketingResultPage = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#fff", // frame/100
+          backgroundColor: "#ffffff",
         }}
       >
         <div style={{ textAlign: "center" }}>
@@ -365,23 +731,19 @@ const MarketingResultPage = () => {
             style={{
               width: "3rem",
               height: "3rem",
-              border: "3px solid #D4D4D4", // frame/200
-              borderTop: "3px solid #D3B336", // primary/400
+              border: "3px solid #e5e7eb",
+              borderTop: "3px solid #FDD741",
               borderRadius: "50%",
               animation: "spin 1s linear infinite",
               margin: "0 auto 1rem",
             }}
           ></div>
-          <p style={{ color: "#90939D" }}>Memuat hasil quiz...</p>
+          <p style={{ color: "#64748b" }}>Memuat hasil quiz...</p>
         </div>
         <style jsx>{`
           @keyframes spin {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
         `}</style>
       </div>
@@ -389,59 +751,32 @@ const MarketingResultPage = () => {
   }
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
-      {/* Header */}
+    <div style={{ minHeight: "100vh", backgroundColor: "#ffffff" }}>
+      {/* HEADER */}
       <div
         style={{
-          background: "#20273A", // secondary/300 - dark background
-          color: "#fff", // white text
-          padding: "3rem 1.5rem",
+          background: "#111827",
+          color: "#ffffff",
+          padding: "6rem 1.5rem",
           textAlign: "center",
           position: "relative",
         }}
+        className="result-header"
       >
-        {/* Back Button inside header */}
         <div style={{ position: "absolute", top: "1.5rem", left: "1.5rem" }}>
-          <button
-            onClick={() => window.history.back()}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.75rem 1.25rem",
-              backgroundColor: "rgba(255, 255, 255, 0.1)", // semi-transparent white
-              border: "1px solid rgba(255, 255, 255, 0.3)", // semi-transparent border
-              borderRadius: "10px",
-              color: "#fff", // white text
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              backdropFilter: "blur(10px)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                "rgba(255, 255, 255, 0.2)"; // lighter on hover
-              e.currentTarget.style.borderColor = "#FDD741"; // primary/300 border on hover
-              e.currentTarget.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor =
-                "rgba(255, 255, 255, 0.1)";
-              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            <ArrowLeft size={16} />
-            Kembali
-          </button>
+          {/* BREADCRUMBS */}
+          <Breadcrumbs items={breadcrumbItems} />
         </div>
 
         <h1
           style={{
             fontSize: "2.5rem",
-            fontWeight: "black",
+            fontWeight: "600",
             margin: 0,
-            color: "#fff",
+            color: "#ffffff",
+            letterSpacing: "-0.02em",
           }}
+          className="result-title"
         >
           Rekomendasi Pemasaran
         </h1>
@@ -449,210 +784,254 @@ const MarketingResultPage = () => {
         <div 
           style={{
             display: 'inline-block',
-            backgroundColor: '#FDD741', // primary/300
-            color: '#20273A', // secondary/300
+            backgroundColor: '#FDD741',
+            color: '#111827',
             padding: '0.75rem 2rem',
             borderRadius: '20px',
-            fontWeight: '700',
+            fontWeight: '600',
             fontSize: '1rem',
             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
             marginTop: '1.5rem',
           }}
+          className="archetype-badge"
         >
           Profil: {recommendation.archetype}
         </div>
+
+        <style jsx>{`
+          @media (max-width: 768px) {
+            .result-header {
+              padding: 2rem 1rem !important;
+            }
+
+            .back-button {
+              position: static !important;
+              margin-bottom: 1rem !important;
+              align-self: flex-start !important;
+            }
+
+            .result-title {
+              font-size: 1.875rem !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .archetype-badge {
+              padding: 0.5rem 1.5rem !important;
+              font-size: 0.9rem !important;
+              margin-top: 1rem !important;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .result-header {
+              padding: 1.5rem 0.75rem !important;
+            }
+
+            .result-title {
+              font-size: 1.5rem !important;
+            }
+
+            .back-text {
+              display: none !important;
+            }
+
+            .archetype-badge {
+              padding: 0.5rem 1rem !important;
+              font-size: 0.85rem !important;
+            }
+          }
+        `}</style>
       </div>
 
-      {/* Content */}
-      <div
-        style={{ maxWidth: "56rem", margin: "0 auto", padding: "3rem 1.5rem" }}
-      >
-        {/* Platform Prioritas */}
-        <Section
-          icon={<Target size={24} style={{ color: "#D3B336" }} />}
-          title="Platform Prioritas"
+      {/* CONTENT */}
+      <div style={{ minHeight: "100vh" }}>
+        <div
+          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
+            paddingLeft: "24px",
+            paddingRight: "24px",
+            paddingTop: "40px",
+            paddingBottom: "100px",
+          }}
+          className="main-container"
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "1.5rem",
-              marginBottom: "1.5rem",
-            }}
-          >
-            {recommendation.priorityPlatforms.map((platform, index) => (
-              <PlatformCard key={index} name={platform} />
-            ))}
-          </div>
-        </Section>
 
-        {/* Ide Konten */}
-        <Section
-          icon={<Lightbulb size={24} style={{ color: "#D3B336" }} />}
-          title="Ide Konten Spesifik"
-        >
-          <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
-            {recommendation.contentIdeas.map((idea, index) => (
-              <li
-                key={index}
+          {/* PLATFORM PRIORITAS */}
+          <div style={{ marginBottom: "3rem" }}>
+            <SectionHeader
+              icon={<Target size={24} style={{ color: "#C4A73B" }} />}
+              title="Platform Prioritas"
+            />
+            <div style={{ paddingLeft: "0.5rem" }}>
+              <div
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                  gap: "1.5rem",
                   marginBottom: "1.5rem",
                 }}
+                className="platforms-grid"
               >
-                <div
-                  style={{
-                    width: "2rem",
-                    height: "2rem",
-                    borderRadius: "50%",
-                    backgroundColor: "#FEF2C0", // primary/100
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginRight: "1rem",
-                    marginTop: "0.125rem",
-                    flexShrink: 0,
-                    border: "2px solid #FDD741", // primary/300
-                  }}
-                >
-                  <span
-                    style={{
-                      color: "#D3B336",
-                      fontWeight: "bold",
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    {index + 1}
-                  </span>
-                </div>
-                <p
-                  style={{
-                    color: "#20273A",
-                    margin: 0,
-                    lineHeight: "1.6",
-                    fontSize: "1rem",
-                  }}
-                >
-                  {idea}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        {/* Tools */}
-        <Section
-          icon={<Settings size={24} style={{ color: "#D3B336" }} />}
-          title="Tools Gratis Pendukung"
-        >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "1.5rem",
-            }}
-          >
-            {recommendation.tools.map((tool, index) => (
-              <ToolCard key={index} tool={tool} />
-            ))}
+                {recommendation.priorityPlatforms.map((platform, index) => (
+                  <PlatformCard key={index} name={platform} />
+                ))}
+              </div>
+            </div>
           </div>
-        </Section>
 
-        {/* Action Plan */}
-        <Section
-          icon={<Calendar size={24} style={{ color: "#D3B336" }} />}
-          title="Rencana Aksi"
-        >
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
-          >
-            {recommendation.actionPlan.map((weekPlan, index) => (
-              <WeekPlan key={index} weekPlan={weekPlan} />
-            ))}
+          {/* IDE KONTEN */}
+          <ContentIdeasSection contentIdeas={recommendation.contentIdeas} />
+
+          {/* TOOLS */}
+          <div style={{ marginBottom: "3rem" }}>
+            <SectionHeader
+              icon={<Settings size={24} style={{ color: "#C4A73B" }} />}
+              title="Tools Gratis Pendukung"
+            />
+            <div style={{ paddingLeft: "0.5rem" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                  gap: "1.5rem",
+                }}
+                className="tools-grid"
+              >
+                {recommendation.tools.map((tool, index) => (
+                  <ToolCard key={index} tool={tool} />
+                ))}
+              </div>
+            </div>
           </div>
-        </Section>
 
-        {/* Success Stories */}
-        <Section
-          icon={<Star size={24} style={{ color: "#D3B336" }} />}
-          title="Kisah Sukses UMKM"
-        >
-          <div
-            style={{
-              backgroundColor: "#FFFEFA", // primary/100
-              borderLeft: "4px solid #FDD741", // primary/300
-              padding: "2rem",
-              borderRadius: "0.75rem",
-              boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-            }}
-          >
-            <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
-              {recommendation.successStories.map((story, index) => (
-                <li
-                  key={index}
-                  style={{ display: "flex", marginBottom: "1rem" }}
-                >
-                  <span
-                    style={{
-                      marginRight: "0.75rem",
-                      color: "#D3B336",
-                      fontWeight: "bold",
-                      fontSize: "1.25rem",
-                    }}
-                  >
-                    •
-                  </span>
-                  <span
-                    style={{
-                      color: "#7F6C21",
-                      lineHeight: "1.6",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    {story}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          {/* ACTION PLAN */}
+          <div style={{ marginBottom: "3rem" }}>
+            <SectionHeader
+              icon={<Calendar size={24} style={{ color: "#C4A73B" }} />}
+              title="Rencana Aksi"
+            />
+            <div style={{ paddingLeft: "0.5rem" }}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+                className="action-plan-container"
+              >
+                {recommendation.actionPlan.map((weekPlan, index) => (
+                  <WeekPlan key={index} weekPlan={weekPlan} />
+                ))}
+              </div>
+            </div>
           </div>
-        </Section>
 
-        {/* CTA */}
-        <div style={{ marginTop: "4rem", textAlign: "center" }}>
-          <button
-            style={{
-              background: "#FDD741", // primary/300 to primary/400
-              color: "#000", // frame/100
-              padding: "1.25rem 2.5rem",
-              borderRadius: "20px",
-              fontWeight: "600",
-              border: "none",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.75rem",
-              boxShadow: "0 10px 15px -3px rgba(253, 215, 65, 0.4)",
-              fontSize: "1.125rem",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#D3B336"; // primary/400 to primary/500
-              e.currentTarget.style.transform = "translateY(-3px)";
-              e.currentTarget.style.boxShadow =
-                "0 20px 25px -5px rgba(253, 215, 65, 0.4)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#FDD741"; // primary/300 to primary/400
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 10px 15px -3px rgba(253, 215, 65, 0.4)";
-            }}
-          >
-            <Download size={22} />
-            Simpan
-          </button>
+          {/* SUCCESS STORIES */}
+          <SuccessStoriesSection successStories={recommendation.successStories} />
+
+          {/* CTA BUTTON */}
+          <div style={{ marginTop: "4rem", textAlign: "center" }}>
+            <button
+              style={{
+                background: "#FDD741",
+                color: "#111827",
+                padding: "1.25rem 2.5rem",
+                borderRadius: "20px",
+                fontWeight: "600",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.75rem",
+                boxShadow: "0 10px 15px -3px rgba(253, 215, 65, 0.4)",
+                fontSize: "1.125rem",
+              }}
+              className="save-button"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#C4A73B";
+                e.currentTarget.style.transform = "translateY(-3px)";
+                e.currentTarget.style.boxShadow = "0 20px 25px -5px rgba(253, 215, 65, 0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#FDD741";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(253, 215, 65, 0.4)";
+              }}
+            >
+              <Download size={22} />
+              <span className="save-text">Simpan</span>
+            </button>
+          </div>
         </div>
+
+        {/* GLOBAL MOBILE RESPONSIVE STYLES */}
+        <style jsx>{`
+          @media (max-width: 1200px) {
+            .main-container {
+              padding-left: 20px !important;
+              padding-right: 20px !important;
+              padding-top: 30px !important;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .main-container {
+              padding-left: 16px !important;
+              padding-right: 16px !important;
+              padding-top: 20px !important;
+              padding-bottom: 60px !important;
+            }
+
+            .platforms-grid {
+              grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+              gap: 1rem !important;
+            }
+
+            .tools-grid {
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+              gap: 1rem !important;
+            }
+
+            .action-plan-container {
+              gap: 1.5rem !important;
+            }
+
+            .save-button {
+              padding: 1rem 2rem !important;
+              font-size: 1rem !important;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .main-container {
+              padding-left: 12px !important;
+              padding-right: 12px !important;
+              padding-top: 16px !important;
+              padding-bottom: 40px !important;
+            }
+
+            .platforms-grid {
+              grid-template-columns: 1fr !important;
+              gap: 0.75rem !important;
+            }
+
+            .tools-grid {
+              grid-template-columns: 1fr !important;
+              gap: 0.75rem !important;
+            }
+
+            .action-plan-container {
+              gap: 1rem !important;
+            }
+
+            .save-button {
+              padding: 0.875rem 1.5rem !important;
+              font-size: 0.9rem !important;
+            }
+
+            .save-text {
+              display: none !important;
+            }
+          }
+        `}</style>
       </div>
     </div>
   );

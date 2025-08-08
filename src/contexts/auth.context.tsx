@@ -65,7 +65,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(userData);
       window.dispatchEvent(new Event("authStateChanged"));
       console.log("Login successful");
-      router.replace("/dashboard");
+      router.replace("/");
     } catch (error) {
       console.error("Login error:", error);
       throw error;
@@ -122,7 +122,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setUser(userData);
 
           if (pathname === "/login") {
-            router.replace("/dashboard");
+            router.replace("/");
           }
         } else {
           const protectedRoutes = ["/dashboard"];

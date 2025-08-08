@@ -4,7 +4,7 @@ import LandingNavbar from "@/components/navbar.component";
 import LandingHeroSection from "./_components/hero.component";
 import ServicesSection from "./_components/service.component";
 import TestimonialsSection from "./_components/testimoni.component";
-// import { LandingFooter } from "./LandingFooter";
+import LandingFooter from "@/components/footer.componnet";
 
 // Main Landing Page Component
 const LandingMainPage = () => {
@@ -21,7 +21,7 @@ const LandingMainPage = () => {
       <TestimonialsSection />
       
       {/* Footer */}
-      {/* <LandingFooter /> */}
+      <LandingFooter />
     </div>
   );
 };
