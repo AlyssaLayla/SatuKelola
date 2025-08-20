@@ -134,7 +134,6 @@ export const ServicesSection = () => {
           zIndex: 2,
         }}
       >
-        {/* Header yang sudah diperbaiki - sekarang center */}
         <div
           style={{
             display: "flex",
@@ -286,7 +285,7 @@ export const ServicesSection = () => {
                   }
                 }}
               >
-                {/* Decorative gradient circles */}
+                
                 <div
                   style={{
                     position: "absolute",
@@ -322,7 +321,6 @@ export const ServicesSection = () => {
                   }}
                 />
 
-                {/* Icon dan Title bersebelahan */}
                 <div
                   style={{
                     display: "flex",
@@ -333,7 +331,6 @@ export const ServicesSection = () => {
                     zIndex: 2,
                   }}
                 >
-                  {/* Icon Container */}
                   <div
                     style={{
                       width: "60px",
@@ -360,7 +357,6 @@ export const ServicesSection = () => {
                     />
                   </div>
 
-                  {/* Title */}
                   <h3
                     style={{
                       fontSize: "1.5rem",
