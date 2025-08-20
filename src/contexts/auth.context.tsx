@@ -32,10 +32,142 @@ interface AuthProviderProps {
 const ACCESS_TOKEN_KEY = "auth_token";
 const REFRESH_TOKEN_KEY = "refresh_token";
 
+const SimpleAuthLoading = () => (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      zIndex: 9998,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(255, 255, 255, 0.95)",
+      backdropFilter: "blur(8px)",
+    }}
+  >
+    <div style={{ textAlign: "center" }}>
+      <div style={{ marginBottom: "2rem" }}>
+        <img
+          src="/logo.png"
+          alt="Logo"
+          style={{
+            width: "auto",
+            height: "80px",
+            maxWidth: "140px",
+            objectFit: "contain",
+            display: "block",
+            margin: "0 auto",
+            animation: "authPulse 1.5s ease-in-out infinite",
+          }}
+          onError={(e) => {
+            const target = e.currentTarget as HTMLImageElement;
+            target.style.display = "none";
+            const fallback = target.nextElementSibling as HTMLElement;
+            if (fallback) fallback.style.display = "flex";
+          }}
+        />
+
+        <div
+          style={{
+            display: "none",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "140px",
+            height: "80px",
+            margin: "0 auto",
+            color: "#64748b",
+            fontSize: "0.875rem",
+            textAlign: "center",
+            fontFamily: "var(--font-inter)",
+            animation: "authPulse 1.5s ease-in-out infinite",
+          }}
+        >
+          <div
+            style={{
+              width: "40px",
+              height: "40px",
+              background: "linear-gradient(135deg, #FDD741, #FEE480)",
+              borderRadius: "8px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "0.5rem",
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                stroke="#20273A"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          <span style={{ fontSize: "0.75rem", fontWeight: "500" }}>
+            SatuKelola
+          </span>
+        </div>
+      </div>
+
+      <div style={{ marginBottom: "1rem" }}>
+        <div
+          style={{
+            width: "32px",
+            height: "32px",
+            border: "3px solid #f3f4f6",
+            borderTop: "3px solid #20273A",
+            borderRadius: "50%",
+            animation: "authSpin 1s linear infinite",
+            margin: "0 auto",
+          }}
+        />
+      </div>
+
+      <p
+        style={{
+          fontSize: "0.875rem",
+          color: "#64748b",
+          fontWeight: "500",
+          fontFamily: "var(--font-inter)",
+        }}
+      >
+        Authenticating
+      </p>
+    </div>
+
+    <style jsx>{`
+      @keyframes authSpin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes authPulse {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(0.98);
+        }
+      }
+    `}</style>
+  </div>
+);
+
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = React.useState<User | undefined>(undefined);
   const [loadingContext, setLoadingContext] = React.useState(false);
   const [isClient, setIsClient] = React.useState(false);
+  const [isInitializing, setIsInitializing] = React.useState(true);
+  
   console.log(user);
 
   const router = useRouter();
@@ -102,7 +234,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsClient(true);
 
     const initializeAuth = async () => {
-      setLoadingContext(true);
+      setIsInitializing(true);
 
       try {
         const storedToken = localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -147,7 +279,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           router.replace("/auth");
         }
       } finally {
-        setLoadingContext(false);
+        setIsInitializing(false);
       }
     };
 
@@ -187,204 +319,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     updateUser,
   };
 
-  if (!isClient) {
-    return (
-      <div
-        className="min-h-screen-safe"
-        style={{
-          background:
-            "linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted)))",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div style={{ position: "relative", zIndex: 10, textAlign: "center" }}>
-          <div style={{ position: "relative", marginBottom: "1.5rem" }}>
-            <div
-              className="animate-spin"
-              style={{
-                borderRadius: "50%",
-                height: "4rem",
-                width: "4rem",
-                border: "4px solid hsl(var(--border))",
-                margin: "0 auto",
-              }}
-            >
-              <div
-                style={{
-                  borderRadius: "50%",
-                  height: "4rem",
-                  width: "4rem",
-                  border: "4px solid transparent",
-                  borderTopColor: "hsl(var(--primary))",
-                  borderRightColor: "hsl(var(--secondary))",
-                }}
-              ></div>
-            </div>
-            <div
-              className="animate-ping"
-              style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "50%",
-                backgroundColor: "hsl(var(--primary) / 0.2)",
-              }}
-            ></div>
-          </div>
+  // Show simple loading only if client is ready but still initializing
+  if (!isClient || isInitializing) {
+    return null; // Let the main LoadingWrapper handle the initial loading
+  }
 
-          <div style={{ marginBottom: "1rem" }}>
-            <h2
-              className="text-gradient"
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-              }}
-            >
-              SatuKelola
-            </h2>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.25rem",
-              }}
-            >
-              <span
-                style={{
-                  color: "hsl(var(--muted-foreground))",
-                  fontWeight: "500",
-                }}
-              >
-                Loading
-              </span>
-              <div style={{ display: "flex", gap: "0.25rem" }}>
-                <div
-                  className="animate-bounce"
-                  style={{
-                    width: "0.25rem",
-                    height: "0.25rem",
-                    backgroundColor: "hsl(var(--primary))",
-                    borderRadius: "50%",
-                  }}
-                ></div>
-                <div
-                  className="animate-bounce"
-                  style={{
-                    width: "0.25rem",
-                    height: "0.25rem",
-                    backgroundColor: "hsl(var(--primary))",
-                    borderRadius: "50%",
-                    animationDelay: "100ms",
-                  }}
-                ></div>
-                <div
-                  className="animate-bounce"
-                  style={{
-                    width: "0.25rem",
-                    height: "0.25rem",
-                    backgroundColor: "hsl(var(--primary))",
-                    borderRadius: "50%",
-                    animationDelay: "200ms",
-                  }}
-                ></div>
-              </div>
-            </div>
-
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                maxWidth: "20rem",
-                margin: "0.5rem auto 0",
-              }}
-            >
-              Preparing your experience
-            </p>
-          </div>
-
-          <div
-            style={{
-              marginTop: "2rem",
-              width: "16rem",
-              margin: "2rem auto 0",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "hsl(var(--muted))",
-                borderRadius: "9999px",
-                height: "0.25rem",
-                overflow: "hidden",
-              }}
-            >
-              <div
-                className="animate-pulse"
-                style={{
-                  background:
-                    "linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)))",
-                  height: "0.25rem",
-                  borderRadius: "9999px",
-                }}
-              ></div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: "50%",
-            transform: "translateX(-50%)",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: "0.5rem",
-              opacity: 0.4,
-            }}
-          >
-            <div
-              className="animate-pulse"
-              style={{
-                width: "0.5rem",
-                height: "0.5rem",
-                backgroundColor: "hsl(var(--primary))",
-                borderRadius: "50%",
-              }}
-            ></div>
-            <div
-              className="animate-pulse"
-              style={{
-                width: "0.5rem",
-                height: "0.5rem",
-                backgroundColor: "hsl(var(--secondary))",
-                borderRadius: "50%",
-                animationDelay: "300ms",
-              }}
-            ></div>
-            <div
-              className="animate-pulse"
-              style={{
-                width: "0.5rem",
-                height: "0.5rem",
-                backgroundColor: "hsl(var(--primary))",
-                borderRadius: "50%",
-                animationDelay: "600ms",
-              }}
-            ></div>
-          </div>
-        </div>
-      </div>
-    );
+  // Show auth-specific loading for login/logout operations
+  if (loadingContext) {
+    return <SimpleAuthLoading />;
   }
 
   return (
