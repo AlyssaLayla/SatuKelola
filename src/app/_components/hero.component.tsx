@@ -9,7 +9,18 @@ export const LandingHeroSection = () => {
 
   const fullText = "Satu Solusi Untuk Bisnis Hebatmu";
 
+  const scrollToServices = () => {
+    const servicesSection = document.querySelector(".services-section");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
   useEffect(() => {
+  const initialDelay = setTimeout(() => {
     let i = 0;
     const timer = setInterval(() => {
       if (i < fullText.length) {
@@ -21,7 +32,10 @@ export const LandingHeroSection = () => {
     }, 80);
 
     return () => clearInterval(timer);
-  }, []);
+  }, 1850);
+
+  return () => clearTimeout(initialDelay);
+}, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -78,13 +92,13 @@ export const LandingHeroSection = () => {
         position: "relative",
         overflow: "hidden",
         background:
-          "linear-gradient(135deg, #ffffff 0%, #fefce8 50%, #ffffff 100%)",
+          "linear-gradient(135deg, #ffffff 0%, #ffffff 30%, #fefce8 100%)",
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: "80px",
-        paddingBottom: "80px",
+        paddingTop: "40px",
+        paddingBottom: "20px",
       }}
     >
       <div
@@ -130,12 +144,12 @@ export const LandingHeroSection = () => {
           <div style={{ position: "relative", zIndex: 2 }}>
             <h1
               style={{
-                fontSize: "3.5rem",
+                fontSize: "4rem",
                 fontWeight: "900",
                 lineHeight: "0.9",
-                letterSpacing: "-0.08em",
+                letterSpacing: "-0.05em",
                 color: "#111827",
-                minHeight: "200px",
+                minHeight: "150px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -169,27 +183,19 @@ export const LandingHeroSection = () => {
 
             <p
               style={{
-                fontSize: "1.25rem",
-                color: "#64748b",
+                fontSize: "1.5rem",
+                color: "#555555",
                 lineHeight: "1.7",
                 marginBottom: "0.5rem",
                 fontWeight: "400",
                 maxWidth: "600px",
-                margin: "0 auto 3rem auto",
+                margin: "0 auto 1.5rem auto",
               }}
             >
               Dukung bisnismu dengan layanan lengkap,{" "}
-              <span
-                style={{
-                  color: "#C4A73B",
-                  fontWeight: "700",
-                  background: "linear-gradient(90deg, #FDD741, #20273A)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                SatuKelola
+              <span style={{ fontWeight: "700" }}>
+                <span style={{ color: "#FDD741" }}>Satu</span>
+                <span style={{ color: "#20273A" }}>Kelola</span>
               </span>
               .
             </p>
@@ -197,12 +203,13 @@ export const LandingHeroSection = () => {
             <div style={{ position: "relative" }}>
               <button
                 className="hero-cta-button"
+                onClick={scrollToServices}
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "12px",
                   padding: "1rem 2rem",
-                  background: "linear-gradient(135deg, #FDD741, #D3B336)",
+                  background: "#FDD741",
                   color: "#111827",
                   fontWeight: "700",
                   borderRadius: "20px",
@@ -210,7 +217,7 @@ export const LandingHeroSection = () => {
                   cursor: "pointer",
                   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                   letterSpacing: "0.025em",
-                  fontSize: "1.25rem",
+                  fontSize: "1rem",
                   position: "relative",
                   overflow: "hidden",
                 }}
@@ -235,7 +242,6 @@ export const LandingHeroSection = () => {
           style={{
             position: "relative",
             zIndex: 1,
-            marginTop: "3rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -285,7 +291,7 @@ export const LandingHeroSection = () => {
             style={{
               position: "absolute",
               top: "15%",
-              left: "10%",
+              left: "15%",
               width: "80px",
               height: "80px",
               borderRadius: "20px",
@@ -338,8 +344,8 @@ export const LandingHeroSection = () => {
             className="floating-element-3"
             style={{
               position: "absolute",
-              bottom: "20%",
-              left: "5%",
+              bottom: "15%",
+              left: "25%",
               width: "60px",
               height: "60px",
               borderRadius: "15px",
@@ -366,7 +372,7 @@ export const LandingHeroSection = () => {
             style={{
               position: "absolute",
               bottom: "30%",
-              right: "10%",
+              right: "20%",
               width: "50px",
               height: "50px",
               borderRadius: "50%",
