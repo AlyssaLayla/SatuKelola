@@ -33,16 +33,31 @@ const LoadingScreen = ({
   useEffect(() => {
     if (!isLoading) return;
 
+    const duration = 2000; // Total durasi loading dalam ms (2 detik)
+    const intervalTime = 50; // Update setiap 50ms untuk animasi yang smooth
+    const steps = duration / intervalTime; // Total steps yang dibutuhkan
+    const incrementPerStep = 100 / steps; // Increment per step untuk mencapai 100%
+
+    let currentStep = 0;
+
     const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => onLoadingComplete?.(), 500);
-          return 100;
-        }
-        return prev + Math.random() * 8 + 2;
-      });
-    }, 150);
+      currentStep++;
+      
+      const newProgress = Math.min(currentStep * incrementPerStep, 100);
+      
+      // Tambahkan sedikit variasi random untuk efek yang lebih natural
+      const randomVariation = Math.random() * 2 - 1; // -1 to 1
+      const adjustedProgress = Math.min(Math.max(newProgress + randomVariation, 0), 100);
+      
+      setProgress(adjustedProgress);
+
+      // Jika sudah mencapai 100% atau melebihi steps yang direncanakan
+      if (currentStep >= steps || newProgress >= 100) {
+        clearInterval(interval);
+        setProgress(100); // Pastikan progress tepat 100%
+        setTimeout(() => onLoadingComplete?.(), 300);
+      }
+    }, intervalTime);
 
     return () => clearInterval(interval);
   }, [isLoading, onLoadingComplete]);
@@ -131,10 +146,10 @@ const LoadingScreen = ({
           alignItems: "center",
         }}
       >
-        <div style={{ marginBottom: "3rem" }}>
+        <div style={{ marginBottom: "1rem" }}>
           <div
             style={{
-              marginBottom: "1.5rem",
+              marginTop: "1rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -145,10 +160,11 @@ const LoadingScreen = ({
               alt="Logo"
               style={{
                 width: "auto",
-                height: "120px",
-                maxWidth: "200px",
+                height: "140px",
+                maxWidth: "225px",
                 objectFit: "contain",
                 display: "block",
+                animation: "logoPulse 2s ease-in-out infinite",
               }}
               onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
@@ -164,12 +180,13 @@ const LoadingScreen = ({
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                width: "200px",
-                height: "120px",
+                width: "225px",
+                height: "140px",
                 color: "#64748b",
                 fontSize: "0.875rem",
                 textAlign: "center",
                 fontFamily: "var(--font-inter)",
+                animation: "logoPulse 2s ease-in-out infinite",
               }}
             >
               <div
@@ -199,18 +216,6 @@ const LoadingScreen = ({
               </span>
             </div>
           </div>
-
-          <p
-            style={{
-              fontSize: "1.125rem",
-              color: "#64748b",
-              fontWeight: "500",
-              marginBottom: "0",
-              fontFamily: "var(--font-inter)",
-            }}
-          >
-            Satu Solusi Untuk Bisnis Hebatmu
-          </p>
         </div>
 
         <div style={{ width: "320px" }}>
@@ -230,7 +235,7 @@ const LoadingScreen = ({
                 fontWeight: "500",
               }}
             >
-              Loading...
+              Loading
             </span>
             <span
               style={{
@@ -255,12 +260,9 @@ const LoadingScreen = ({
             <div
               style={{
                 height: "100%",
-                background:
-                  progress > 80
-                    ? "linear-gradient(90deg, #20273A 0%, #FDD741 100%)"
-                    : "#20273A",
+                background: "#20273A",
                 borderRadius: "50px",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
                 width: `${Math.min(progress, 100)}%`,
                 position: "relative",
               }}
@@ -293,7 +295,7 @@ const LoadingScreen = ({
             style={{
               width: "8px",
               height: "8px",
-              background: "#FDD741",
+              background: "#D3B336",
               borderRadius: "50%",
               animation: "bounce 1.4s ease-in-out infinite both",
             }}
@@ -302,7 +304,7 @@ const LoadingScreen = ({
             style={{
               width: "8px",
               height: "8px",
-              background: "#FDD741",
+              background: "#D3B336",
               borderRadius: "50%",
               animation: "bounce 1.4s ease-in-out infinite both",
               animationDelay: "0.16s",
@@ -312,7 +314,7 @@ const LoadingScreen = ({
             style={{
               width: "8px",
               height: "8px",
-              background: "#FDD741",
+              background: "#D3B336",
               borderRadius: "50%",
               animation: "bounce 1.4s ease-in-out infinite both",
               animationDelay: "0.32s",
@@ -349,6 +351,17 @@ const LoadingScreen = ({
           }
           40% {
             transform: scale(1);
+          }
+        }
+
+        @keyframes logoPulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.05);
+            opacity: 0.85;
           }
         }
 
