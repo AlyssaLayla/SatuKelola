@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Quote } from "lucide-react";
 
 export const TestimonialsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -111,9 +110,9 @@ export const TestimonialsSection = () => {
     },
     {
       id: 12,
-      quote: "Bisnis Café Yang Makin Profitable!",
+      quote: "Bisnis Cafe Yang Makin Profitable!",
       content:
-        "Dengan menerapkan sistem yang dipelajari di sini, café saya jadi lebih efficient dan profitable.",
+        "Dengan menerapkan sistem yang dipelajari di sini, cafe saya jadi lebih efficient dan profitable.",
       author: "Hendra Wijaya, 34 Tahun",
       business: "Owner Hendra Coffee & Eatery",
       avatar: "/avatar.png",
@@ -172,8 +171,8 @@ export const TestimonialsSection = () => {
       <div style={{ marginBottom: "2rem" }}>
         <h3
           style={{
-            fontSize: "1.5rem",
-            fontWeight: "700",
+            fontSize: "1.25rem",
+            fontWeight: "600",
             color: "#111827",
             lineHeight: "1.4",
             marginBottom: "1rem",
@@ -185,7 +184,7 @@ export const TestimonialsSection = () => {
 
         <p
           style={{
-            fontSize: "1rem",
+            fontSize: "1.1rem",
             color: "#64748b",
             lineHeight: "1.6",
             fontWeight: "400",
@@ -226,7 +225,7 @@ export const TestimonialsSection = () => {
           <h4
             style={{
               fontSize: "1.125rem",
-              fontWeight: "600",
+              fontWeight: "500",
               color: "#111827",
               marginBottom: "0.25rem",
               lineHeight: "1.3",
@@ -282,10 +281,13 @@ export const TestimonialsSection = () => {
         >
           <p
             style={{
-              fontSize: "20px",
-              color: "#111827",
-              marginBottom: "0.5rem",
+              fontSize: "1.5rem",
+              color: "#555555",
+              maxWidth: "600px",
+              margin: "0 auto",
+              lineHeight: "1.7",
               fontWeight: "400",
+              textAlign: "center",
             }}
           >
             Apa Kata Mereka?
