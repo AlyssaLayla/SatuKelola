@@ -120,32 +120,43 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-          padding: "8px 12px",
-          border: "1px solid #d1d5db",
-          borderRadius: "6px",
-          backgroundColor: "white",
-          fontSize: "14px",
-          fontWeight: "500",
+          gap: "0.75rem",
+          padding: "1rem 1.5rem",
+          background: "rgba(255, 255, 255, 0.9)",
+          border: "1px solid #e2e8f0",
+          borderRadius: "20px",
+          fontSize: "1rem",
           color: "#374151",
+          fontWeight: "500",
           cursor: "pointer",
-          transition: "background-color 0.2s ease",
-          minWidth: "160px",
+          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+          letterSpacing: "0.025em",
+          boxShadow: "0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+          minWidth: "200px",
+          justifyContent: "space-between",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "#f9fafb";
+          e.currentTarget.style.background = "rgba(255, 255, 255, 1)";
+          e.currentTarget.style.borderColor = "#FDD741";
+          e.currentTarget.style.boxShadow = "0 4px 8px -2px rgba(253, 215, 65, 0.2)";
+          e.currentTarget.style.transform = "translateY(-1px)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "white";
+          e.currentTarget.style.background = "rgba(255, 255, 255, 0.9)";
+          e.currentTarget.style.borderColor = "#e2e8f0";
+          e.currentTarget.style.boxShadow = "0 2px 4px -1px rgba(0, 0, 0, 0.06)";
+          e.currentTarget.style.transform = "translateY(0)";
         }}
       >
-        <Calendar size={16} />
-        <span>{getDisplayText()}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Calendar size={20} style={{ color: "#6b7280" }} />
+          <span>{getDisplayText()}</span>
+        </div>
         <ChevronDown
-          size={16}
+          size={18}
           style={{
-            transition: "transform 0.2s ease",
+            color: "#6b7280",
+            transition: "transform 0.3s ease",
             transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
           }}
         />
@@ -156,15 +167,17 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
           style={{
             position: "absolute",
             top: "100%",
-            marginTop: "8px",
+            marginTop: "12px",
             right: "0",
             backgroundColor: "white",
             border: "1px solid #e5e7eb",
-            borderRadius: "8px",
-            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-            zIndex: 50,
-            padding: "16px",
-            width: "320px",
+            borderRadius: "24px",
+            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            zIndex: 9999,
+            padding: "24px",
+            width: "360px",
+            backdropFilter: "blur(20px)",
+            background: "rgba(255, 255, 255, 0.95)",
           }}
         >
           <div
@@ -172,34 +185,41 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: "16px",
+              marginBottom: "20px",
             }}
           >
             <button
               onClick={previousMonth}
               style={{
-                padding: "4px",
-                borderRadius: "4px",
-                border: "none",
-                backgroundColor: "transparent",
+                width: "36px",
+                height: "36px",
+                borderRadius: "12px",
+                border: "1px solid #e5e7eb",
+                backgroundColor: "white",
                 cursor: "pointer",
-                transition: "background-color 0.2s ease",
+                transition: "all 0.2s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#f3f4f6";
+                e.currentTarget.style.backgroundColor = "#f8fafc";
+                e.currentTarget.style.borderColor = "#FDD741";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.backgroundColor = "white";
+                e.currentTarget.style.borderColor = "#e5e7eb";
               }}
             >
-              <ChevronDown size={16} style={{ transform: "rotate(90deg)" }} />
+              <ChevronDown size={18} style={{ transform: "rotate(90deg)", color: "#6b7280" }} />
             </button>
             <h3
               style={{
-                fontWeight: "600",
+                fontWeight: "700",
                 color: "#111827",
-                fontSize: "16px",
+                fontSize: "1.125rem",
                 margin: "0",
+                letterSpacing: "-0.01em",
               }}
             >
               {monthYear}
@@ -207,21 +227,27 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
             <button
               onClick={nextMonth}
               style={{
-                padding: "4px",
-                borderRadius: "4px",
-                border: "none",
-                backgroundColor: "transparent",
+                width: "36px",
+                height: "36px",
+                borderRadius: "12px",
+                border: "1px solid #e5e7eb",
+                backgroundColor: "white",
                 cursor: "pointer",
-                transition: "background-color 0.2s ease",
+                transition: "all 0.2s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#f3f4f6";
+                e.currentTarget.style.backgroundColor = "#f8fafc";
+                e.currentTarget.style.borderColor = "#FDD741";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.backgroundColor = "white";
+                e.currentTarget.style.borderColor = "#e5e7eb";
               }}
             >
-              <ChevronDown size={16} style={{ transform: "rotate(-90deg)" }} />
+              <ChevronDown size={18} style={{ transform: "rotate(-90deg)", color: "#6b7280" }} />
             </button>
           </div>
 
@@ -230,7 +256,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
               gap: "4px",
-              marginBottom: "8px",
+              marginBottom: "12px",
             }}
           >
             {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
@@ -238,10 +264,12 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 key={day}
                 style={{
                   textAlign: "center",
-                  fontSize: "12px",
-                  fontWeight: "500",
+                  fontSize: "0.75rem",
+                  fontWeight: "600",
                   color: "#6b7280",
                   padding: "8px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
                 }}
               >
                 {day}
@@ -254,11 +282,12 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
               gap: "4px",
+              marginBottom: "20px",
             }}
           >
             {days.map((date, index) => {
               if (!date) {
-                return <div key={index} style={{ padding: "8px" }}></div>;
+                return <div key={index} style={{ padding: "12px" }}></div>;
               }
 
               const isSelected = isDateSelected(date);
@@ -270,38 +299,43 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
                   key={index}
                   onClick={() => handleDateClick(date)}
                   style={{
-                    padding: "8px",
-                    fontSize: "14px",
-                    borderRadius: "4px",
-                    border: "none",
+                    padding: "12px",
+                    fontSize: "0.875rem",
+                    borderRadius: "12px",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     backgroundColor: isSelected
-                      ? "#fbbf24"
+                      ? "#FDD741"
                       : isInRange
                       ? "#fef3c7"
                       : isToday
-                      ? "#f3f4f6"
+                      ? "#f8fafc"
                       : "transparent",
                     color: isSelected
-                      ? "white"
+                      ? "#20273A"
                       : isInRange
                       ? "#92400e"
                       : isToday
                       ? "#111827"
                       : "#374151",
-                    fontWeight: isToday ? "600" : "normal",
+                    fontWeight: isSelected || isToday ? "600" : "500",
+                    border: isToday && !isSelected ? "1px solid #e5e7eb" : "none",
                   }}
                   onMouseEnter={(e) => {
                     if (!isSelected && !isInRange) {
-                      e.currentTarget.style.backgroundColor = "#f3f4f6";
+                      e.currentTarget.style.backgroundColor = "#f1f5f9";
+                      e.currentTarget.style.color = "#111827";
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (!isSelected && !isInRange && !isToday) {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                    } else if (isToday && !isSelected && !isInRange) {
-                      e.currentTarget.style.backgroundColor = "#f3f4f6";
+                    if (!isSelected && !isInRange) {
+                      if (isToday) {
+                        e.currentTarget.style.backgroundColor = "#f8fafc";
+                        e.currentTarget.style.color = "#111827";
+                      } else {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.color = "#374151";
+                      }
                     }
                   }}
                 >
@@ -311,7 +345,13 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
             })}
           </div>
 
-          <div style={{ marginTop: "16px", display: "flex", gap: "8px" }}>
+          <div style={{ 
+            display: "flex", 
+            justifyContent: "space-between", 
+            alignItems: "center",
+            paddingTop: "16px",
+            borderTop: "1px solid #f1f5f9",
+          }}>
             <button
               onClick={() => {
                 setStartDate(null);
@@ -319,22 +359,40 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 onDateRangeChange?.(null, null);
               }}
               style={{
-                fontSize: "14px",
+                fontSize: "0.875rem",
                 color: "#6b7280",
                 border: "none",
                 backgroundColor: "transparent",
                 cursor: "pointer",
                 transition: "color 0.2s ease",
+                padding: "8px 12px",
+                borderRadius: "8px",
+                fontWeight: "500",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#111827";
+                e.currentTarget.style.color = "#ef4444";
+                e.currentTarget.style.backgroundColor = "#fef2f2";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = "#6b7280";
+                e.currentTarget.style.backgroundColor = "transparent";
               }}
             >
-              Reset
+              Reset Filter
             </button>
+
+            {startDate && endDate && (
+              <div style={{
+                fontSize: "0.875rem",
+                color: "#059669",
+                fontWeight: "600",
+                padding: "8px 12px",
+                backgroundColor: "#dcfce7",
+                borderRadius: "8px",
+              }}>
+                ✓ Filter Aktif
+              </div>
+            )}
           </div>
         </div>
       )}

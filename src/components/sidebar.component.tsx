@@ -129,7 +129,13 @@ const Sidebar: React.FC = () => {
               }}
             >
               <Icon size={18} />
-              <span>{item.label}</span>
+              <span
+              style={{
+                fontSize: "1.125rem",
+                margin: "0",
+                fontWeight: "400",
+              }}
+              >{item.label}</span>
             </Link>
           );
         })}
@@ -141,35 +147,7 @@ const Sidebar: React.FC = () => {
           borderTop: '1px solid #e5e7eb'
         }}
       >
-        <button
-          onClick={() => {
-            console.log('Logout clicked');
-          }}
-          style={{
-            width: '100%',
-            padding: '12px 16px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            backgroundColor: '#1f2937',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: '500',
-            transition: 'background-color 0.2s ease'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#374151';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#1f2937';
-          }}
-        >
-          <LogOut size={18} />
-          <span>Logout</span>
-        </button>
+        
       </div>
     </div>
   );
