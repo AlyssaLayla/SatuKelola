@@ -158,7 +158,7 @@ export const LandingHeroSection = () => {
             >
               <span
                 style={{
-                  color: "#FDD741",
+                  color: "#FFB700",
                 }}
               >
                 {displayText.split(" ").slice(0, 2).join(" ")}
@@ -194,7 +194,7 @@ export const LandingHeroSection = () => {
             >
               Dukung bisnismu dengan layanan lengkap,{" "}
               <span style={{ fontWeight: "700" }}>
-                <span style={{ color: "#FDD741" }}>Satu</span>
+                <span style={{ color: "#FFB700" }}>Satu</span>
                 <span style={{ color: "#20273A" }}>Kelola</span>
               </span>
               .
