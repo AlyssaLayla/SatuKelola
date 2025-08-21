@@ -309,7 +309,7 @@ const UserAvatarButton = ({
         }}
       >
         Halo,{" "}
-        <span style={{ color: "#FDD741", fontWeight: "700" }}>
+        <span style={{ color: "#FFB700", fontWeight: "700" }}>
           {user && user.name ? user.name.split(" ")[0] : "Sari"}
         </span>
       </p>
@@ -404,6 +404,7 @@ export const LandingNavbar = () => {
   }, [isMounted]);
 
   const navItems = [
+    { name: "Beranda", href: "/" },
     { name: "Komunitas", href: "/komunitas" },
     { name: "Legalitas", href: "/legalitas" },
     { name: "Pemasaran", href: "/pemasaran" },
@@ -697,17 +698,17 @@ export const LandingNavbar = () => {
                   href={item.href}
                   style={{
                     fontSize: "1rem",
-                    fontWeight: "600",
+                    fontWeight: "500",
                     color: "#374151",
                     textDecoration: "none",
                     padding: "12px 0",
                     borderBottom: "2px solid transparent",
                     transition: "all 0.3s ease",
-                    position: "relative",
+                    position: "relative", 
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#FDD741";
-                    e.currentTarget.style.borderBottomColor = "#FDD741";
+                    e.currentTarget.style.color = "#FFB700";
+                    e.currentTarget.style.borderBottomColor = "#FFB700";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = "#374151";
@@ -885,7 +886,7 @@ export const LandingNavbar = () => {
                     <p
                       style={{
                         fontSize: "0.875rem",
-                        color: "#64748b",
+                        color: "#D3B336",
                         margin: 0,
                       }}
                     >
