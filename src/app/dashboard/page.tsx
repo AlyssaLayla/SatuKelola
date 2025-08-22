@@ -8,7 +8,6 @@ import OrdersSummaryCard from "./_components/summary-card.component";
 import StockStatusCard from "./_components/stok-card.component";
 import DigitalStoresCard from "./_components/store-card.component";
 
-// Mock data dengan struktur yang lebih kaya
 const mockTransaksiData = [
   { jenis: "Pemasukan", kredit: 150000, debet: 0, tanggal: "2024-08-20" },
   { jenis: "Pengeluaran", kredit: 0, debet: 85000, tanggal: "2024-08-20" },
@@ -87,13 +86,26 @@ const calculateSummary = (transactions: any) => {
 const DashboardPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const itemsPerPage = 4;
+  const [isMobile, setIsMobile] = useState(false);
+  
+  const itemsPerPage = isMobile ? 1 : 4;
   const totalItems = digitalStoresData.length + 1;
   const maxIndex = Math.max(0, totalItems - itemsPerPage);
 
   useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
     const timer = setTimeout(() => setIsVisible(true), 200);
-    return () => clearTimeout(timer);
+    
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+      clearTimeout(timer);
+    };
   }, []);
 
   const summary = useMemo(() => {
@@ -166,7 +178,7 @@ const DashboardPage = () => {
           background: "#ffffff",
           backdropFilter: "blur(20px)",
           borderBottom: "1px solid rgba(241, 245, 249, 0.8)",
-          padding: "2rem 0",
+          padding: isMobile ? "1.5rem 0" : "2rem 0",
           position: "relative",
           zIndex: 2,
           opacity: isVisible ? 1 : 0,
@@ -178,8 +190,8 @@ const DashboardPage = () => {
           style={{
             maxWidth: "1400px",
             margin: "0 auto",
-            paddingLeft: "2rem",
-            paddingRight: "2rem",
+            paddingLeft: isMobile ? "1rem" : "2rem",
+            paddingRight: isMobile ? "1rem" : "2rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -190,7 +202,7 @@ const DashboardPage = () => {
           <div>
             <h1
               style={{
-                fontSize: "2.5rem",
+                fontSize: isMobile ? "1.875rem" : "2.5rem",
                 fontWeight: "900",
                 color: "#111827",
                 margin: "0 0 0.5rem 0",
@@ -202,7 +214,7 @@ const DashboardPage = () => {
             </h1>
             <p
               style={{
-                fontSize: "1.125rem",
+                fontSize: isMobile ? "1rem" : "1.125rem",
                 color: "#6b7280",
                 margin: "0",
                 fontWeight: "400",
@@ -219,7 +231,7 @@ const DashboardPage = () => {
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
-          padding: "3rem 2rem",
+          padding: isMobile ? "2rem 1rem" : "3rem 2rem",
           position: "relative",
           zIndex: 2,
         }}
@@ -228,7 +240,7 @@ const DashboardPage = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))",
             gap: "24px",
             marginBottom: "40px",
             opacity: isVisible ? 1 : 0,
@@ -248,7 +260,7 @@ const DashboardPage = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))",
             gap: "24px",
             marginBottom: "40px",
             opacity: isVisible ? 1 : 0,
@@ -292,58 +304,57 @@ const DashboardPage = () => {
           }
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-          h1 {
-            font-size: 2rem !important;
-          }
-
-          .main-content {
-            padding: 2rem 1.5rem !important;
-          }
-        }
-
+        /* Mobile Responsive Styles */
         @media (max-width: 768px) {
-          h1 {
-            font-size: 1.75rem !important;
+          body {
+            overflow-x: hidden;
           }
-
-          p {
-            font-size: 1rem !important;
-          }
-
-          .header {
-            padding: 1.5rem 0 !important;
-          }
-
-          .header-container {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 1rem !important;
-          }
-
-          .main-content {
-            padding: 2rem 1rem !important;
-          }
-
-          .financial-cards {
+          
+          .grid-mobile-single {
             grid-template-columns: 1fr !important;
           }
-
-          .orders-stock-cards {
-            grid-template-columns: 1fr !important;
+          
+          /* Card responsive adjustments */
+          [style*="borderRadius: \"24px\""] {
+            border-radius: 16px !important;
+            padding: 1.5rem !important;
+          }
+          
+          /* Digital stores card mobile adjustment */
+          [style*="borderRadius: \"32px\""] {
+            border-radius: 20px !important;
+            padding: 1.5rem !important;
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 480px) {
+          .main-content {
+            padding: 1.5rem 0.75rem !important;
+          }
+          
           h1 {
             font-size: 1.5rem !important;
           }
+          
+          p {
+            font-size: 0.875rem !important;
+          }
+          
+          [style*="borderRadius: \"24px\""] {
+            border-radius: 12px !important;
+            padding: 1rem !important;
+          }
+          
+          [style*="borderRadius: \"32px\""] {
+            border-radius: 16px !important;
+            padding: 1rem !important;
+          }
+        }
 
+        /* Tablet responsive */
+        @media (min-width: 769px) and (max-width: 1024px) {
           .main-content {
-            padding: 1.5rem 0.75rem !important;
+            padding: 2.5rem 1.5rem !important;
           }
         }
       `}</style>

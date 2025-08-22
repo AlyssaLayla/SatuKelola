@@ -28,11 +28,13 @@ interface StepCardProps {
   isCompleted: boolean;
   onToggleComplete: () => void;
   side: "left" | "right";
+  isMobile: boolean;
 }
 
 export const StepGuideSection = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const steps: Step[] = [
     {
@@ -119,11 +121,21 @@ export const StepGuideSection = () => {
   ];
 
   useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
     const timer = setTimeout(() => {
       setVisibleSteps(steps.map((_, index) => index));
     }, 300);
 
-    return () => clearTimeout(timer);
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+      clearTimeout(timer);
+    };
   }, []);
 
   const toggleStepComplete = (stepId: number) => {
@@ -137,28 +149,31 @@ export const StepGuideSection = () => {
   return (
     <section
       style={{
-        paddingTop: "100px",
-        paddingBottom: "100px",
+        paddingTop: "5rem",
+        paddingBottom: "5rem",
       }}
+      className="step-guide-section"
     >
       <div
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "1.5rem",
+          paddingRight: "1.5rem",
         }}
+        className="step-guide-container"
       >
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
+        <div style={{ textAlign: "center", marginBottom: "4rem" }} className="step-guide-header">
           <h2
             style={{
               fontSize: "2.75rem",
               fontWeight: "700",
               color: "#20273A",
-              marginBottom: "20px",
+              marginBottom: "1rem",
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
             }}
+            className="step-guide-title"
           >
             Langkah-Langkah Mengurus Legalitas
           </h2>
@@ -171,6 +186,7 @@ export const StepGuideSection = () => {
               lineHeight: "1.7",
               fontWeight: "400",
             }}
+            className="step-guide-description"
           >
             Ikuti panduan step-by-step berikut untuk mengurus legalitas usaha
             secara mandiri di website OSS
@@ -178,22 +194,30 @@ export const StepGuideSection = () => {
         </div>
 
         <div
-          style={{ position: "relative", maxWidth: "1000px", margin: "0 auto" }}
+          style={{ 
+            position: "relative", 
+            maxWidth: isMobile ? "100%" : "1000px", 
+            margin: "0 auto" 
+          }}
+          className="step-guide-timeline"
         >
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "40px",
-              bottom: "40px",
-              width: "4px",
-              background:
-                "linear-gradient(to bottom, #D4D4D4, #AAAAAA, #D4D4D4)",
-              borderRadius: "2px",
-              transform: "translateX(-50%)",
-              zIndex: 1,
-            }}
-          />
+          {!isMobile && (
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "40px",
+                bottom: "40px",
+                width: "4px",
+                background:
+                  "linear-gradient(to bottom, #D4D4D4, #AAAAAA, #D4D4D4)",
+                borderRadius: "2px",
+                transform: "translateX(-50%)",
+                zIndex: 1,
+              }}
+              className="timeline-line"
+            />
+          )}
 
           <div style={{ position: "relative", zIndex: 2 }}>
             {steps.map((step, index) => {
@@ -201,6 +225,120 @@ export const StepGuideSection = () => {
               const isVisible = visibleSteps.includes(index);
               const isCompleted = completedSteps.includes(step.id);
 
+              if (isMobile) {
+                // Mobile layout - single column
+                return (
+                  <div
+                    key={step.id}
+                    className={`step-item transform transition-all duration-700 ${
+                      isVisible
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-12 opacity-0"
+                    }`}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "1rem",
+                      marginBottom: index === steps.length - 1 ? "0" : "2rem",
+                      animationDelay: `${index * 0.1}s`,
+                      transitionDelay: `${index * 0.1}s`,
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        minWidth: "60px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "60px",
+                          height: "60px",
+                          borderRadius: "50%",
+                          background: isCompleted
+                            ? "linear-gradient(135deg, #16A34A, #15803D)"
+                            : `linear-gradient(135deg, ${step.color}, ${step.color}dd)`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          position: "relative",
+                          zIndex: 3,
+                          boxShadow: "0 6px 20px -6px rgba(0, 0, 0, 0.2)",
+                          border: "3px solid #ffffff",
+                          cursor: "pointer",
+                          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                        }}
+                        onClick={() => toggleStepComplete(step.id)}
+                        onTouchStart={(e) => {
+                          e.currentTarget.style.transform = "scale(1.1)";
+                        }}
+                        onTouchEnd={(e) => {
+                          e.currentTarget.style.transform = "scale(1)";
+                        }}
+                      >
+                        {isCompleted ? (
+                          <Check size={24} style={{ color: "#ffffff" }} />
+                        ) : (
+                          <step.icon
+                            size={24}
+                            style={{
+                              color: "#ffffff",
+                              filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
+                            }}
+                          />
+                        )}
+
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "-6px",
+                            right: "-6px",
+                            width: "24px",
+                            height: "24px",
+                            borderRadius: "50%",
+                            backgroundColor: "#ffffff",
+                            border: `2px solid ${step.color}`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "0.75rem",
+                            fontWeight: "800",
+                            color: step.color,
+                            boxShadow: "0 2px 8px -2px rgba(0, 0, 0, 0.15)",
+                          }}
+                        >
+                          {step.id}
+                        </div>
+                      </div>
+                      
+                      {index !== steps.length - 1 && (
+                        <div
+                          style={{
+                            width: "2px",
+                            height: "2rem",
+                            background: "#e2e8f0",
+                            marginTop: "0.5rem",
+                          }}
+                        />
+                      )}
+                    </div>
+
+                    <div style={{ flex: 1 }}>
+                      <StepCard
+                        step={step}
+                        isCompleted={isCompleted}
+                        onToggleComplete={() => toggleStepComplete(step.id)}
+                        side="left"
+                        isMobile={true}
+                      />
+                    </div>
+                  </div>
+                );
+              }
+
+              // Desktop layout - two columns with zigzag
               return (
                 <div
                   key={step.id}
@@ -214,7 +352,7 @@ export const StepGuideSection = () => {
                     gridTemplateColumns: "2fr 80px 2fr",
                     alignItems: "center",
                     gap: "0px",
-                    marginBottom: index === steps.length - 1 ? "0" : "80px",
+                    marginBottom: index === steps.length - 1 ? "0" : "5rem",
                     animationDelay: `${index * 0.1}s`,
                     transitionDelay: `${index * 0.1}s`,
                   }}
@@ -234,6 +372,7 @@ export const StepGuideSection = () => {
                           isCompleted={isCompleted}
                           onToggleComplete={() => toggleStepComplete(step.id)}
                           side="left"
+                          isMobile={false}
                         />
                         <div
                           style={{
@@ -254,7 +393,7 @@ export const StepGuideSection = () => {
                           }}
                         >
                           <ChevronRight
-                            size={24}
+                            size={20}
                             style={{
                               color: step.color,
                               fontWeight: "bold",
@@ -356,6 +495,7 @@ export const StepGuideSection = () => {
                           isCompleted={isCompleted}
                           onToggleComplete={() => toggleStepComplete(step.id)}
                           side="right"
+                          isMobile={false}
                         />
                         <div
                           style={{
@@ -376,7 +516,7 @@ export const StepGuideSection = () => {
                           }}
                         >
                           <ChevronRight
-                            size={24}
+                            size={20}
                             style={{
                               color: step.color,
                               transform: "rotate(180deg)",
@@ -395,30 +535,191 @@ export const StepGuideSection = () => {
       </div>
 
       <style jsx>{`
-        @media (max-width: 1024px) {
-          /* Stack vertically on tablet and mobile */
-          .step-item {
-            flex-direction: column !important;
-            text-align: center !important;
-          }
-
-          .step-item > div:first-child,
-          .step-item > div:last-child {
-            flex: none !important;
-            width: 100% !important;
-            padding: 0 !important;
-            margin-bottom: 2rem;
-          }
-
-          /* Hide vertical line on mobile */
-          .vertical-line {
-            display: none !important;
+        /* Desktop Large (1200px+) */
+        @media (min-width: 1200px) {
+          .step-guide-title {
+            font-size: 3rem !important;
           }
         }
 
+        /* Desktop Medium (992px - 1199px) */
+        @media (max-width: 1199px) {
+          .step-guide-container {
+            max-width: 1000px !important;
+          }
+        }
+
+        /* Tablet Landscape (768px - 991px) */
+        @media (max-width: 991px) {
+          .step-guide-section {
+            padding: 4rem 0 !important;
+          }
+          
+          .step-guide-container {
+            padding: 0 1.25rem !important;
+          }
+          
+          .step-guide-header {
+            margin-bottom: 3rem !important;
+          }
+          
+          .step-guide-title {
+            font-size: 2.25rem !important;
+          }
+          
+          .step-guide-description {
+            font-size: 1.125rem !important;
+          }
+          
+          .step-guide-timeline {
+            max-width: 100% !important;
+          }
+
+        }
+
+        /* Tablet Portrait and Mobile (768px and below) */
         @media (max-width: 768px) {
+          .step-guide-section {
+            padding: 3rem 0 !important;
+          }
+          
+          .step-guide-container {
+            padding: 0 1rem !important;
+          }
+          
+          .step-guide-title {
+            font-size: 2rem !important;
+            margin-bottom: 0.75rem !important;
+          }
+          
+          .step-guide-description {
+            font-size: 1rem !important;
+          }
+          
+          .timeline-line {
+            display: none !important;
+          }
+          
           .step-item {
-            margin-bottom: 60px !important;
+            display: flex !important;
+            grid-template-columns: none !important;
+            align-items: flex-start !important;
+            gap: 1rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+        }
+
+        /* Mobile Large (481px - 575px) */
+        @media (max-width: 575px) {
+          .step-guide-section {
+            padding: 2.5rem 0 !important;
+          }
+          
+          .step-guide-container {
+            padding: 0 0.75rem !important;
+          }
+          
+          .step-guide-header {
+            margin-bottom: 2rem !important;
+          }
+          
+          .step-guide-title {
+            font-size: 1.75rem !important;
+          }
+          
+          .step-guide-description {
+            font-size: 0.95rem !important;
+          }
+          
+          .step-item {
+            gap: 0.75rem !important;
+            margin-bottom: 1.25rem !important;
+          }
+        }
+
+        /* Mobile Small (320px - 480px) */
+        @media (max-width: 480px) {
+          .step-guide-section {
+            padding: 2rem 0 !important;
+          }
+          
+          .step-guide-container {
+            padding: 0 0.5rem !important;
+          }
+          
+          .step-guide-title {
+            font-size: 1.5rem !important;
+            line-height: 1.2 !important;
+          }
+          
+          .step-guide-description {
+            font-size: 0.875rem !important;
+          }
+          
+          .step-item {
+            gap: 0.5rem !important;
+            margin-bottom: 1rem !important;
+          }
+        }
+
+        /* Extra Small Mobile (320px and below) */
+        @media (max-width: 320px) {
+          .step-guide-title {
+            font-size: 1.375rem !important;
+          }
+          
+          .step-guide-description {
+            font-size: 0.8rem !important;
+          }
+        }
+
+        /* Landscape orientation for mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+          .step-guide-section {
+            padding: 2rem 0 !important;
+          }
+          
+          .step-guide-header {
+            margin-bottom: 2rem !important;
+          }
+          
+          .step-item {
+            margin-bottom: 1rem !important;
+          }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+          .step-item > div:first-child > div:first-child {
+            min-width: 70px !important;
+          }
+          
+          .step-item > div:first-child > div:first-child > div:first-child {
+            width: 70px !important;
+            height: 70px !important;
+          }
+        }
+
+        /* Focus states for accessibility */
+        .step-item button:focus,
+        .step-item div[onClick]:focus {
+          outline: 2px solid #3b82f6 !important;
+          outline-offset: 2px !important;
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+          .timeline-line {
+            background: linear-gradient(to bottom, #000000, #666666, #000000) !important;
+          }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .step-item,
+          .step-item > div,
+          .step-item button {
+            transition: none !important;
           }
         }
       `}</style>
@@ -431,13 +732,14 @@ const StepCard: React.FC<StepCardProps> = ({
   isCompleted,
   onToggleComplete,
   side,
+  isMobile,
 }) => {
   return (
     <div
       style={{
         background: "#ffffff",
-        borderRadius: "20px",
-        padding: "1.5rem",
+        borderRadius: isMobile ? "16px" : "20px",
+        padding: isMobile ? "1rem" : "1.5rem",
         boxShadow: isCompleted
           ? "0 8px 25px -8px rgba(22, 163, 74, 0.15)"
           : "0 8px 25px -8px rgba(0, 0, 0, 0.08)",
@@ -446,20 +748,28 @@ const StepCard: React.FC<StepCardProps> = ({
         cursor: "pointer",
         position: "relative",
         overflow: "hidden",
+        maxWidth: isMobile ? "none" : "400px",
       }}
+      className="step-card"
       onClick={onToggleComplete}
-      onMouseEnter={(e) => {
+      onMouseEnter={!isMobile ? (e) => {
         e.currentTarget.style.transform = "translateY(-4px) scale(1.02)";
         e.currentTarget.style.boxShadow = isCompleted
           ? "0 12px 35px -8px rgba(22, 163, 74, 0.2)"
           : "0 12px 35px -8px rgba(0, 0, 0, 0.12)";
-      }}
-      onMouseLeave={(e) => {
+      } : undefined}
+      onMouseLeave={!isMobile ? (e) => {
         e.currentTarget.style.transform = "translateY(0) scale(1)";
         e.currentTarget.style.boxShadow = isCompleted
           ? "0 8px 25px -8px rgba(22, 163, 74, 0.15)"
           : "0 8px 25px -8px rgba(0, 0, 0, 0.08)";
-      }}
+      } : undefined}
+      onTouchStart={isMobile ? (e) => {
+        e.currentTarget.style.transform = "scale(0.98)";
+      } : undefined}
+      onTouchEnd={isMobile ? (e) => {
+        e.currentTarget.style.transform = "scale(1)";
+      } : undefined}
     >
       {isCompleted && (
         <div
@@ -481,15 +791,15 @@ const StepCard: React.FC<StepCardProps> = ({
           style={{
             display: "flex",
             alignItems: "flex-start",
-            gap: "1.5rem",
-            marginBottom: "1.5rem",
+            gap: isMobile ? "1rem" : "1.5rem",
+            marginBottom: isMobile ? "1rem" : "1.5rem",
           }}
         >
           <div
             style={{
-              width: "60px",
-              height: "60px",
-              borderRadius: "20px",
+              width: isMobile ? "50px" : "60px",
+              height: isMobile ? "50px" : "60px",
+              borderRadius: isMobile ? "16px" : "20px",
               background: `linear-gradient(135deg, ${step.color}, ${step.color}dd)`,
               display: "flex",
               alignItems: "center",
@@ -499,7 +809,7 @@ const StepCard: React.FC<StepCardProps> = ({
             }}
           >
             <step.icon
-              size={28}
+              size={isMobile ? 20 : 28}
               style={{
                 color: "#ffffff",
                 filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
@@ -510,7 +820,7 @@ const StepCard: React.FC<StepCardProps> = ({
           <div style={{ flex: 1, minWidth: 0 }}>
             <h3
               style={{
-                fontSize: "1.5rem",
+                fontSize: isMobile ? "1.125rem" : "1.5rem",
                 fontWeight: "600",
                 color: isCompleted ? "#16A34A" : "#20273A",
                 marginBottom: "0.75rem",
@@ -525,7 +835,7 @@ const StepCard: React.FC<StepCardProps> = ({
 
             <p
               style={{
-                fontSize: "18px",
+                fontSize: isMobile ? "0.875rem" : "1rem",
                 color: isCompleted ? "#90939D" : "#90939D",
                 marginBottom: "1rem",
                 lineHeight: "1.6",
@@ -540,8 +850,8 @@ const StepCard: React.FC<StepCardProps> = ({
                 background: isCompleted
                   ? "rgba(22, 163, 74, 0.1)"
                   : `${step.color}15`,
-                borderRadius: "16px",
-                padding: "1rem 1.5rem",
+                borderRadius: isMobile ? "12px" : "16px",
+                padding: isMobile ? "0.75rem 1rem" : "1rem 1.5rem",
                 border: isCompleted
                   ? "1px solid rgba(22, 163, 74, 0.2)"
                   : `1px solid ${step.color}30`,
@@ -549,7 +859,7 @@ const StepCard: React.FC<StepCardProps> = ({
             >
               <p
                 style={{
-                  fontSize: "0.95rem",
+                  fontSize: isMobile ? "0.8rem" : "0.95rem",
                   color: isCompleted ? "#15803D" : step.color,
                   margin: 0,
                   fontWeight: "500",
@@ -563,8 +873,8 @@ const StepCard: React.FC<StepCardProps> = ({
 
           <div
             style={{
-              width: "24px",
-              height: "24px",
+              width: isMobile ? "20px" : "24px",
+              height: isMobile ? "20px" : "24px",
               borderRadius: "50%",
               background: isCompleted ? "#16A34A" : "#D4D4D4",
               display: "flex",
@@ -574,7 +884,9 @@ const StepCard: React.FC<StepCardProps> = ({
               flexShrink: 0,
             }}
           >
-            {isCompleted && <Check size={16} style={{ color: "#ffffff" }} />}
+            {isCompleted && (
+              <Check size={isMobile ? 12 : 16} style={{ color: "#ffffff" }} />
+            )}
           </div>
         </div>
       </div>

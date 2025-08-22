@@ -171,28 +171,31 @@ export const ProcessCardSection = () => {
   return (
     <section
       style={{
-        paddingTop: "100px",
-        paddingBottom: "100px",
+        paddingTop: "5rem",
+        paddingBottom: "5rem",
       }}
+      className="process-section"
     >
       <div
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          paddingLeft: "1.5rem",
+          paddingRight: "1.5rem",
         }}
+        className="process-container"
       >
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
+        <div style={{ textAlign: "center", marginBottom: "4rem" }} className="process-header">
           <h2
             style={{
               fontSize: "2.75rem",
               fontWeight: "700",
               color: "#20273A",
-              marginBottom: "20px",
+              marginBottom: "1rem",
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
             }}
+            className="process-title"
           >
             Jenis Legalitas yang Tersedia
           </h2>
@@ -205,6 +208,7 @@ export const ProcessCardSection = () => {
               lineHeight: "1.7",
               fontWeight: "400",
             }}
+            className="process-description"
           >
             Pilih jenis legalitas yang sesuai dengan kebutuhan bisnis Anda
           </p>
@@ -213,10 +217,11 @@ export const ProcessCardSection = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
-            gap: "32px",
-            padding: "0 20px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "2rem",
+            padding: "0",
           }}
+          className="process-grid"
         >
           {processes.map((process, index) => {
             const isVisible = visibleCards.includes(index);
@@ -232,8 +237,8 @@ export const ProcessCardSection = () => {
                 }`}
                 style={{
                   background: "#ffffff",
-                  borderRadius: "32px",
-                  padding: "2.5rem",
+                  borderRadius: "2rem",
+                  padding: "2rem",
                   boxShadow: isActive
                     ? "0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
                     : "0 4px 15px -3px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)",
@@ -246,6 +251,9 @@ export const ProcessCardSection = () => {
                   overflow: "hidden",
                   animationDelay: `${index * 0.1}s`,
                   transitionDelay: `${index * 0.1}s`,
+                  minHeight: "400px",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
                 onClick={() =>
                   setActiveProcess(
@@ -272,6 +280,7 @@ export const ProcessCardSection = () => {
                   style={{
                     marginBottom: isActive ? "1.5rem" : "2rem",
                     transition: "margin-bottom 0.3s ease",
+                    flex: 1,
                   }}
                 >
                   <div
@@ -280,7 +289,10 @@ export const ProcessCardSection = () => {
                       justifyContent: "space-between",
                       alignItems: "center",
                       marginBottom: "1.5rem",
+                      flexWrap: "wrap",
+                      gap: "0.75rem",
                     }}
+                    className="process-card-header"
                   >
                     <span
                       style={{
@@ -294,7 +306,9 @@ export const ProcessCardSection = () => {
                         borderRadius: "20px",
                         fontSize: "0.875rem",
                         fontWeight: "500",
+                        whiteSpace: "nowrap",
                       }}
+                      className="process-category"
                     >
                       {process.category}
                     </span>
@@ -305,6 +319,7 @@ export const ProcessCardSection = () => {
                         alignItems: "center",
                         gap: "0.5rem",
                       }}
+                      className="process-difficulty"
                     >
                       <div
                         style={{
@@ -335,12 +350,13 @@ export const ProcessCardSection = () => {
                       gap: "1.5rem",
                       marginBottom: "1.5rem",
                     }}
+                    className="process-card-content"
                   >
                     <div
                       style={{
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: "24px",
+                        width: "70px",
+                        height: "70px",
+                        borderRadius: "20px",
                         background: `linear-gradient(135deg, ${process.color}, ${process.color}dd)`,
                         display: "flex",
                         alignItems: "center",
@@ -349,9 +365,10 @@ export const ProcessCardSection = () => {
                         boxShadow: "0 4px 15px -4px rgba(0, 0, 0, 0.15)",
                         transition: "transform 0.3s ease",
                       }}
+                      className="process-icon-container"
                     >
                       <process.illustration
-                        size={36}
+                        size={32}
                         style={{
                           color:
                             process.color === "#FDD741" ||
@@ -366,7 +383,7 @@ export const ProcessCardSection = () => {
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <h3
                         style={{
-                          fontSize: "1.5rem",
+                          fontSize: "1.375rem",
                           fontWeight: "600",
                           color: isActive ? process.color : "#111827",
                           marginBottom: "0.75rem",
@@ -374,18 +391,20 @@ export const ProcessCardSection = () => {
                           letterSpacing: "-0.01em",
                           transition: "color 0.3s ease",
                         }}
+                        className="process-card-title"
                       >
                         {process.title}
                       </h3>
 
                       <p
                         style={{
-                          fontSize: "18px",
+                          fontSize: "1rem",
                           color: "#64748b",
                           lineHeight: "1.6",
                           fontWeight: "400",
                           margin: 0,
                         }}
+                        className="process-card-desc"
                       >
                         {process.description}
                       </p>
@@ -404,6 +423,7 @@ export const ProcessCardSection = () => {
                         : "1px solid #e2e8f0",
                       transition: "all 0.3s ease",
                     }}
+                    className="process-time-container"
                   >
                     <p
                       style={{
@@ -428,6 +448,7 @@ export const ProcessCardSection = () => {
                     marginBottom: isActive ? "1rem" : "0",
                     transition: "margin-bottom 0.3s ease",
                   }}
+                  className="process-expand-button"
                 >
                   <div
                     style={{
@@ -467,12 +488,13 @@ export const ProcessCardSection = () => {
                     transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                     opacity: isActive ? 1 : 0,
                   }}
+                  className="process-requirements"
                 >
                   <div
                     style={{
                       background: `${process.color}10`,
-                      borderRadius: "24px",
-                      padding: isActive ? "2rem" : "0 2rem",
+                      borderRadius: "1.5rem",
+                      padding: isActive ? "1.5rem" : "0 1.5rem",
                       border: `1px solid ${process.color}20`,
                       transition: "padding 0.3s ease",
                     }}
@@ -494,7 +516,7 @@ export const ProcessCardSection = () => {
 
                     <ul
                       style={{
-                        margin: "0 0 2rem 0",
+                        margin: "0 0 1rem 0",
                         padding: 0,
                         listStyle: "none",
                       }}
@@ -569,43 +591,321 @@ export const ProcessCardSection = () => {
       </div>
 
       <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
+        /* Desktop Large (1200px+) */
+        @media (min-width: 1200px) {
+          .process-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 2.5rem !important;
           }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          
+          .process-title {
+            font-size: 3rem !important;
           }
         }
 
-        .scrolling-container:hover {
-          animation-play-state: paused;
+        /* Desktop Medium (992px - 1199px) */
+        @media (max-width: 1199px) {
+          .process-grid {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+          }
         }
 
-        .process-card:hover .scrolling-container {
-          animation-play-state: paused;
-        }
-
-        @media (max-width: 768px) {
+        /* Tablet Landscape (768px - 991px) */
+        @media (max-width: 991px) {
+          .process-section {
+            padding: 4rem 0 !important;
+          }
+          
+          .process-container {
+            padding: 0 1.25rem !important;
+          }
+          
+          .process-header {
+            margin-bottom: 3rem !important;
+          }
+          
+          .process-title {
+            font-size: 2.25rem !important;
+          }
+          
+          .process-description {
+            font-size: 1.125rem !important;
+          }
+          
+          .process-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+            gap: 1.5rem !important;
+          }
+          
           .process-card {
-            min-width: 320px !important;
+            padding: 1.75rem !important;
+            min-height: 380px !important;
+          }
+          
+          .process-icon-container {
+            width: 60px !important;
+            height: 60px !important;
           }
         }
 
+        /* Tablet Portrait (576px - 767px) */
+        @media (max-width: 767px) {
+          .process-section {
+            padding: 3rem 0 !important;
+          }
+          
+          .process-container {
+            padding: 0 1rem !important;
+          }
+          
+          .process-title {
+            font-size: 2rem !important;
+            margin-bottom: 0.75rem !important;
+          }
+          
+          .process-description {
+            font-size: 1rem !important;
+          }
+          
+          .process-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.25rem !important;
+          }
+          
+          .process-card {
+            padding: 1.5rem !important;
+            min-height: 350px !important;
+            border-radius: 1.5rem !important;
+          }
+          
+          .process-card-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.5rem !important;
+          }
+          
+          .process-card-content {
+            gap: 1rem !important;
+          }
+          
+          .process-icon-container {
+            width: 50px !important;
+            height: 50px !important;
+          }
+          
+          .process-card-title {
+            font-size: 1.25rem !important;
+          }
+          
+          .process-card-desc {
+            font-size: 0.95rem !important;
+          }
+          
+          .process-time-container {
+            padding: 0.875rem 1.25rem !important;
+          }
+        }
+
+        /* Mobile Large (481px - 575px) */
+        @media (max-width: 575px) {
+          .process-section {
+            padding: 2.5rem 0 !important;
+          }
+          
+          .process-container {
+            padding: 0 0.75rem !important;
+          }
+          
+          .process-header {
+            margin-bottom: 2rem !important;
+          }
+          
+          .process-title {
+            font-size: 1.75rem !important;
+          }
+          
+          .process-description {
+            font-size: 0.95rem !important;
+          }
+          
+          .process-card {
+            border-radius: 1.25rem !important;
+            padding: 1.25rem !important;
+            min-height: 320px !important;
+          }
+          
+          .process-card-content {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 1rem !important;
+          }
+          
+          .process-icon-container {
+            margin: 0 auto !important;
+          }
+          
+          .process-card-title {
+            font-size: 1.125rem !important;
+            text-align: center !important;
+          }
+          
+          .process-card-desc {
+            text-align: center !important;
+          }
+          
+          .process-expand-button {
+            padding: 0.75rem 0 !important;
+          }
+        }
+
+        /* Mobile Small (320px - 480px) */
         @media (max-width: 480px) {
+          .process-section {
+            padding: 2rem 0 !important;
+          }
+          
+          .process-container {
+            padding: 0 0.5rem !important;
+          }
+          
+          .process-title {
+            font-size: 1.5rem !important;
+            line-height: 1.2 !important;
+          }
+          
+          .process-description {
+            font-size: 0.875rem !important;
+          }
+          
           .process-card {
-            min-width: 280px !important;
+            border-radius: 1rem !important;
+            padding: 1rem !important;
+            min-height: 300px !important;
+          }
+          
+          .process-category {
+            font-size: 0.8rem !important;
+            padding: 0.375rem 0.875rem !important;
+          }
+          
+          .process-difficulty span {
+            font-size: 0.8rem !important;
+          }
+          
+          .process-icon-container {
+            width: 45px !important;
+            height: 45px !important;
+          }
+          
+          .process-card-title {
+            font-size: 1rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          
+          .process-card-desc {
+            font-size: 0.875rem !important;
+          }
+          
+          .process-time-container {
+            padding: 0.75rem 1rem !important;
+            border-radius: 12px !important;
+          }
+          
+          .process-time-container p {
+            font-size: 0.875rem !important;
+          }
+          
+          .process-requirements > div {
+            border-radius: 1rem !important;
+            padding: 0 1rem !important;
+          }
+          
+          .process-requirements h4 {
+            font-size: 1rem !important;
+            margin-bottom: 1rem !important;
+          }
+          
+          .process-requirements li {
+            font-size: 0.875rem !important;
+            gap: 0.5rem !important;
+          }
+        }
+
+        /* Extra Small Mobile (320px and below) */
+        @media (max-width: 320px) {
+          .process-title {
+            font-size: 1.375rem !important;
+          }
+          
+          .process-card {
+            padding: 0.875rem !important;
+            min-height: 280px !important;
+          }
+          
+          .process-icon-container {
+            width: 40px !important;
+            height: 40px !important;
+          }
+          
+          .process-card-title {
+            font-size: 0.95rem !important;
+            line-height: 1.3 !important;
+          }
+          
+          .process-card-desc {
+            font-size: 0.8rem !important;
+            line-height: 1.4 !important;
+          }
+          
+          .process-time-container p {
+            font-size: 0.8rem !important;
+          }
+          
+          .process-requirements h4 {
+            font-size: 0.95rem !important;
+          }
+          
+          .process-requirements li {
+            font-size: 0.8rem !important;
+            line-height: 1.4 !important;
+          }
+        }
+
+        /* Landscape orientation for mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+          .process-section {
+            padding: 2rem 0 !important;
+          }
+          
+          .process-header {
+            margin-bottom: 2rem !important;
+          }
+          
+          .process-card {
+            min-height: 280px !important;
+          }
+        }
+
+        /* Focus states for accessibility */
+        .process-card:focus {
+          outline: 2px solid #3b82f6 !important;
+          outline-offset: 2px !important;
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+          .process-card {
+            border-width: 2px !important;
+          }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .process-card,
+          .process-expand-button > div,
+          .process-requirements,
+          .process-requirements li {
+            transition: none !important;
           }
         }
       `}</style>

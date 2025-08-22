@@ -25,13 +25,14 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
   maxIndex,
 }) => {
   const totalItems = digitalStoresData.length + 1;
+  const isMobile = itemsPerPage === 1;
 
   return (
     <div
       style={{
         background: "#ffffff",
-        borderRadius: "32px",
-        padding: "2.5rem",
+        borderRadius: isMobile ? "20px" : "32px",
+        padding: isMobile ? "1.5rem" : "2.5rem",
         border: "1px solid #f1f5f9",
         boxShadow: "0 8px 20px -6px rgba(0, 0, 0, 0.08)",
         position: "relative",
@@ -49,11 +50,11 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          {/* Icon Container - Terpisah dari judul */}
+          {/* Icon Container */}
           <div
             style={{
-              width: "48px",
-              height: "48px",
+              width: isMobile ? "40px" : "48px",
+              height: isMobile ? "40px" : "48px",
               borderRadius: "16px",
               background: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
               display: "flex",
@@ -61,13 +62,13 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
               justifyContent: "center",
             }}
           >
-            <ShoppingBag size={24} style={{ color: "#ffffff" }} />
+            <ShoppingBag size={isMobile ? 20 : 24} style={{ color: "#ffffff" }} />
           </div>
           
-          {/* Title Container - Terpisah dari icon */}
+          {/* Title Container */}
           <h3
             style={{
-              fontSize: "1.5rem",
+              fontSize: isMobile ? "1.25rem" : "1.5rem",
               fontWeight: "700",
               color: "#111827",
               margin: "0",
@@ -78,73 +79,75 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
           </h3>
         </div>
 
-        {/* Navigation Controls */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <button
-            onClick={handlePrevious}
-            disabled={currentIndex === 0}
-            style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "12px",
-              border: "1px solid #e2e8f0",
-              backgroundColor: currentIndex === 0 ? "#f8fafc" : "#ffffff",
-              color: currentIndex === 0 ? "#9ca3af" : "#374151",
-              cursor: currentIndex === 0 ? "not-allowed" : "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              if (currentIndex !== 0) {
-                e.currentTarget.style.backgroundColor = "#f1f5f9";
-                e.currentTarget.style.borderColor = "#d1d5db";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (currentIndex !== 0) {
-                e.currentTarget.style.backgroundColor = "#ffffff";
-                e.currentTarget.style.borderColor = "#e2e8f0";
-              }
-            }}
-          >
-            <ChevronLeft size={18} />
-          </button>
+        {/* Navigation Controls - Hide on mobile if single item view */}
+        {(!isMobile || totalItems > 1) && (
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <button
+              onClick={handlePrevious}
+              disabled={currentIndex === 0}
+              style={{
+                width: isMobile ? "36px" : "40px",
+                height: isMobile ? "36px" : "40px",
+                borderRadius: "12px",
+                border: "1px solid #e2e8f0",
+                backgroundColor: currentIndex === 0 ? "#f8fafc" : "#ffffff",
+                color: currentIndex === 0 ? "#9ca3af" : "#374151",
+                cursor: currentIndex === 0 ? "not-allowed" : "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                if (currentIndex !== 0) {
+                  e.currentTarget.style.backgroundColor = "#f1f5f9";
+                  e.currentTarget.style.borderColor = "#d1d5db";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (currentIndex !== 0) {
+                  e.currentTarget.style.backgroundColor = "#ffffff";
+                  e.currentTarget.style.borderColor = "#e2e8f0";
+                }
+              }}
+            >
+              <ChevronLeft size={isMobile ? 16 : 18} />
+            </button>
 
-          <button
-            onClick={handleNext}
-            disabled={currentIndex >= maxIndex}
-            style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "12px",
-              border: "1px solid #e2e8f0",
-              backgroundColor:
-                currentIndex >= maxIndex ? "#f8fafc" : "#ffffff",
-              color: currentIndex >= maxIndex ? "#9ca3af" : "#374151",
-              cursor: currentIndex >= maxIndex ? "not-allowed" : "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              if (currentIndex < maxIndex) {
-                e.currentTarget.style.backgroundColor = "#f1f5f9";
-                e.currentTarget.style.borderColor = "#d1d5db";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (currentIndex < maxIndex) {
-                e.currentTarget.style.backgroundColor = "#ffffff";
-                e.currentTarget.style.borderColor = "#e2e8f0";
-              }
-            }}
-          >
-            <ChevronRight size={18} />
-          </button>
-        </div>
+            <button
+              onClick={handleNext}
+              disabled={currentIndex >= maxIndex}
+              style={{
+                width: isMobile ? "36px" : "40px",
+                height: isMobile ? "36px" : "40px",
+                borderRadius: "12px",
+                border: "1px solid #e2e8f0",
+                backgroundColor:
+                  currentIndex >= maxIndex ? "#f8fafc" : "#ffffff",
+                color: currentIndex >= maxIndex ? "#9ca3af" : "#374151",
+                cursor: currentIndex >= maxIndex ? "not-allowed" : "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                if (currentIndex < maxIndex) {
+                  e.currentTarget.style.backgroundColor = "#f1f5f9";
+                  e.currentTarget.style.borderColor = "#d1d5db";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (currentIndex < maxIndex) {
+                  e.currentTarget.style.backgroundColor = "#ffffff";
+                  e.currentTarget.style.borderColor = "#e2e8f0";
+                }
+              }}
+            >
+              <ChevronRight size={isMobile ? 16 : 18} />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Cards Container */}
@@ -152,7 +155,7 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
         <div
           style={{
             display: "flex",
-            gap: "24px",
+            gap: isMobile ? "16px" : "24px",
             transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
             transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
             width: `${(totalItems / itemsPerPage) * 100}%`,
@@ -166,10 +169,10 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              padding: "2rem",
+              padding: isMobile ? "1.5rem" : "2rem",
               border: "2px dashed #d1d5db",
-              borderRadius: "20px",
-              minHeight: "200px",
+              borderRadius: isMobile ? "16px" : "20px",
+              minHeight: isMobile ? "160px" : "200px",
               cursor: "pointer",
               transition: "all 0.3s ease",
               background: "linear-gradient(135deg, #fafbfc 0%, #f1f5f9 100%)",
@@ -187,10 +190,10 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
           >
             <div
               style={{
-                width: "64px",
-                height: "64px",
+                width: isMobile ? "48px" : "64px",
+                height: isMobile ? "48px" : "64px",
                 background: "linear-gradient(135deg, #FDD741, #FEE480)",
-                borderRadius: "20px",
+                borderRadius: isMobile ? "16px" : "20px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -198,21 +201,22 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
                 boxShadow: "0 8px 20px -6px rgba(253, 215, 65, 0.4)",
               }}
             >
-              <Plus size={28} style={{ color: "#20273A" }} />
+              <Plus size={isMobile ? 20 : 28} style={{ color: "#20273A" }} />
             </div>
             <h4
               style={{
-                fontSize: "1.125rem",
+                fontSize: isMobile ? "1rem" : "1.125rem",
                 fontWeight: "600",
                 color: "#111827",
                 margin: "0 0 8px 0",
+                textAlign: "center",
               }}
             >
               Tambah Toko Baru
             </h4>
             <p
               style={{
-                fontSize: "0.875rem",
+                fontSize: isMobile ? "0.75rem" : "0.875rem",
                 color: "#6b7280",
                 margin: "0",
                 textAlign: "center",
@@ -228,14 +232,14 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
               key={index}
               style={{
                 flex: `0 0 ${100 / itemsPerPage}%`,
-                padding: "2rem",
+                padding: isMobile ? "1.5rem" : "2rem",
                 border: "1px solid #e5e7eb",
-                borderRadius: "20px",
+                borderRadius: isMobile ? "16px" : "20px",
                 textAlign: "center",
                 background: "#ffffff",
                 transition: "all 0.3s ease",
                 cursor: "pointer",
-                minHeight: "200px",
+                minHeight: isMobile ? "160px" : "200px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -256,8 +260,8 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
               <div>
                 <div
                   style={{
-                    width: "64px",
-                    height: "64px",
+                    width: isMobile ? "48px" : "64px",
+                    height: isMobile ? "48px" : "64px",
                     background:
                       store.status === "active"
                         ? "linear-gradient(135deg, #22c55e, #16a34a)"
@@ -270,14 +274,14 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
                     position: "relative",
                   }}
                 >
-                  <ShoppingBag size={28} style={{ color: "#ffffff" }} />
+                  <ShoppingBag size={isMobile ? 20 : 28} style={{ color: "#ffffff" }} />
                   <div
                     style={{
                       position: "absolute",
                       bottom: "-4px",
                       right: "-4px",
-                      width: "20px",
-                      height: "20px",
+                      width: isMobile ? "16px" : "20px",
+                      height: isMobile ? "16px" : "20px",
                       background:
                         store.status === "active" ? "#22c55e" : "#ef4444",
                       borderRadius: "50%",
@@ -289,8 +293,8 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
                   >
                     <div
                       style={{
-                        width: "8px",
-                        height: "8px",
+                        width: isMobile ? "4px" : "8px",
+                        height: isMobile ? "4px" : "8px",
                         background: "#ffffff",
                         borderRadius: "50%",
                       }}
@@ -300,7 +304,7 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
 
                 <h4
                   style={{
-                    fontSize: "1.125rem",
+                    fontSize: isMobile ? "1rem" : "1.125rem",
                     fontWeight: "600",
                     color: "#111827",
                     margin: "0 0 8px 0",
@@ -310,7 +314,7 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
                 </h4>
                 <p
                   style={{
-                    fontSize: "0.875rem",
+                    fontSize: isMobile ? "0.75rem" : "0.875rem",
                     color: "#6b7280",
                     margin: "0 0 20px 0",
                   }}
@@ -321,7 +325,7 @@ const DigitalStoresCard: React.FC<DigitalStoresCardProps> = ({
 
               <button
                 style={{
-                  padding: "10px 20px",
+                  padding: isMobile ? "8px 16px" : "10px 20px",
                   fontSize: "0.875rem",
                   fontWeight: "600",
                   backgroundColor:
