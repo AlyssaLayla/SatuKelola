@@ -12,8 +12,9 @@ export default function MarketingAdvisorHero() {
         background: "linear-gradient(to bottom, #FEF2C0 0%, transparent 100%)",
         display: "flex",
         alignItems: "center",
-        paddingTop: "20px",
-        paddingBottom: "20px",
+        minHeight: "100vh",
+        paddingTop: "2rem",
+        paddingBottom: "2rem",
       }}
     >
       <div
@@ -27,14 +28,15 @@ export default function MarketingAdvisorHero() {
           paddingLeft: "2rem",
           paddingRight: "2rem",
         }}
+        className="hero-container"
       >
         <div
           className="content-container"
           style={{
             flex: "1",
-            paddingTop: "5rem",
-            paddingBottom: "5rem",
-            paddingRight: "3rem",
+            paddingTop: "3rem",
+            paddingBottom: "3rem",
+            paddingRight: "2rem",
             position: "relative",
             zIndex: 2,
             maxWidth: "600px",
@@ -42,13 +44,14 @@ export default function MarketingAdvisorHero() {
         >
           <h1
             style={{
-              fontSize: "4rem !important",
+              fontSize: "3.5rem",
               fontWeight: "900",
               color: "#111827",
               lineHeight: "1.05",
               marginBottom: "1.5rem",
               letterSpacing: "-0.03em",
             }}
+            className="hero-title"
           >
             Yuk Temukan Cara Promosi Paling Cocok Versi Kamu!
           </h1>
@@ -57,8 +60,7 @@ export default function MarketingAdvisorHero() {
             className="button-container"
             style={{
               position: "relative",
-              marginTop: "3rem",
-              maxWidth: "400px",
+              marginTop: "2rem",
             }}
           >
             <button
@@ -124,6 +126,7 @@ export default function MarketingAdvisorHero() {
               filter: "drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1))",
               display: "block",
             }}
+            className="hero-image"
           />
 
           <div
@@ -176,6 +179,7 @@ export default function MarketingAdvisorHero() {
         </div>
       </div>
 
+      {/* Background decorations */}
       <div
         style={{
           position: "absolute",
@@ -215,184 +219,205 @@ export default function MarketingAdvisorHero() {
         />
       </div>
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "100px",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.8) 100%)",
-          pointerEvents: "none",
-          zIndex: 3,
-        }}
-      />
-
       <style jsx>{`
         @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-25px);
-          }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-25px); }
         }
 
         @keyframes bounceSubtle {
-          0%,
-          100% {
-            transform: translateY(0px) rotate(15deg);
+          0%, 100% { transform: translateY(0px) rotate(15deg); }
+          50% { transform: translateY(-8px) rotate(15deg); }
+        }
+
+        /* Desktop Large (1200px+) */
+        @media (min-width: 1200px) {
+          .hero-title {
+            font-size: 3.75rem !important;
           }
-          50% {
-            transform: translateY(-8px) rotate(15deg);
+          .hero-image {
+            max-height: 650px !important;
           }
         }
 
-        /* Large desktop */
-        @media (max-width: 1440px) {
-          .content-container h1 {
-            font-size: 3rem !important;
+        /* Desktop Medium (992px - 1199px) */
+        @media (max-width: 1199px) {
+          .hero-title {
+            font-size: 3.25rem !important;
           }
-          .hero-image-container img {
-            max-height: 550px !important;
-            min-height: 400px !important;
-          }
-        }
-
-        /* Desktop */
-        @media (max-width: 1280px) {
-          .content-container {
-            padding-right: 2rem !important;
-          }
-          .content-container h1 {
-            font-size: 2.8rem !important;
-          }
-          .hero-image-container img {
-            max-height: 500px !important;
-            min-height: 350px !important;
-          }
-        }
-
-        /* Small desktop */
-        @media (max-width: 1150px) {
           .content-container {
             padding-right: 1.5rem !important;
           }
-          .content-container h1 {
-            font-size: 2.5rem !important;
-          }
-          .hero-image-container img {
-            max-height: 450px !important;
-            min-height: 300px !important;
-          }
         }
 
-        /* Tablet landscape - Stack vertically */
-        @media (max-width: 1024px) {
-          section > div {
+        /* Tablet Landscape (768px - 991px) */
+        @media (max-width: 991px) {
+          section {
+            min-height: 80vh !important;
+            padding: 1rem 0 !important;
+          }
+          
+          .hero-container {
             flex-direction: column !important;
             text-align: center !important;
-            padding-left: 1.5rem !important;
-            padding-right: 1.5rem !important;
+            padding: 1.5rem !important;
+            align-items: center !important;
           }
 
           .content-container {
             max-width: 100% !important;
-            padding-top: 3rem !important;
-            padding-bottom: 2rem !important;
-            padding-right: 0 !important;
+            padding: 2rem 0 1rem 0 !important;
             text-align: center !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
+            order: 2 !important;
           }
 
-          .content-container h1 {
-            font-size: 2.8rem !important;
-          }
-
-          .button-container {
-            width: 100% !important;
-            max-width: 400px !important;
-            display: flex !important;
-            justify-content: center !important;
-          }
-
-          .hero-image-container {
-            margin-left: 0 !important;
-            margin-top: 1.5rem !important;
-            display: flex !important;
-            justify-content: center !important;
-          }
-
-          .hero-image-container img {
-            width: 100% !important;
-            max-width: 500px !important;
-            max-height: none !important;
-            min-height: auto !important;
-            height: auto !important;
-          }
-        }
-
-        /* Tablet portrait */
-        @media (max-width: 768px) {
-          section > div {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-          }
-
-          .content-container {
-            padding-top: 2.5rem !important;
-            padding-bottom: 1.5rem !important;
-          }
-
-          .content-container h1 {
-            font-size: 2.2rem !important;
-          }
-
-          .hero-image-container img {
-            max-width: 400px !important;
-          }
-        }
-
-        /* Mobile landscape & portrait */
-        @media (max-width: 640px) {
-          .content-container {
-            padding-top: 2rem !important;
-            padding-bottom: 1rem !important;
-          }
-
-          .content-container h1 {
-            font-size: 1.8rem !important;
+          .hero-title {
+            font-size: 2.75rem !important;
             margin-bottom: 1rem !important;
           }
 
           .button-container {
-            max-width: 100% !important;
             margin-top: 1.5rem !important;
+            display: flex !important;
+            justify-content: center !important;
           }
 
           .hero-image-container {
-            display: none !important;
+            order: 1 !important;
+            margin: 0 0 1rem 0 !important;
+            max-width: 500px !important;
+          }
+
+          .hero-image {
+            max-height: 400px !important;
+            width: 100% !important;
           }
         }
 
-        /* Extra small mobile */
-        @media (max-width: 480px) {
-          section > div {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
+        /* Tablet Portrait (576px - 767px) */
+        @media (max-width: 767px) {
+          .hero-container {
+            padding: 1rem !important;
           }
 
-          .content-container h1 {
-            font-size: 1.6rem !important;
+          .content-container {
+            padding: 1.5rem 0 !important;
+          }
+
+          .hero-title {
+            font-size: 2.25rem !important;
+            line-height: 1.2 !important;
+          }
+
+          .hero-image-container {
+            max-width: 400px !important;
+          }
+
+          .hero-image {
+            max-height: 320px !important;
           }
 
           .hero-button {
             padding: 1rem 2rem !important;
             font-size: 1rem !important;
+          }
+        }
+
+        /* Mobile Large (481px - 575px) */
+        @media (max-width: 575px) {
+          section {
+            min-height: 70vh !important;
+          }
+
+          .hero-container {
+            padding: 0.75rem !important;
+          }
+
+          .hero-title {
+            font-size: 1.875rem !important;
+            margin-bottom: 1rem !important;
+          }
+
+          .hero-image-container {
+            max-width: 300px !important;
+          }
+
+          .hero-image {
+            max-height: 250px !important;
+          }
+
+          .hero-button {
+            padding: 0.875rem 1.75rem !important;
+            font-size: 0.95rem !important;
+          }
+        }
+
+        /* Mobile Small (320px - 480px) */
+        @media (max-width: 480px) {
+          .hero-container {
+            padding: 0.5rem !important;
+          }
+
+          .hero-title {
+            font-size: 1.625rem !important;
+            line-height: 1.3 !important;
+          }
+
+          .hero-image-container {
+            max-width: 250px !important;
+          }
+
+          .hero-image {
+            max-height: 200px !important;
+          }
+
+          .hero-button {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.9rem !important;
+            max-width: 280px !important;
+          }
+
+          .decorative-star {
+            font-size: 1.5rem !important;
+          }
+        }
+
+        /* Extra Small Mobile (320px and below) */
+        @media (max-width: 320px) {
+          .hero-title {
+            font-size: 1.5rem !important;
+          }
+
+          .hero-image-container {
+            max-width: 200px !important;
+          }
+
+          .hero-image {
+            max-height: 180px !important;
+          }
+
+          .hero-button {
+            padding: 0.75rem 1.25rem !important;
+            font-size: 0.85rem !important;
+          }
+        }
+
+        /* Landscape orientation for mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+          section {
+            min-height: 100vh !important;
+          }
+          
+          .hero-container {
+            flex-direction: row !important;
+          }
+          
+          .content-container {
+            order: 1 !important;
+          }
+          
+          .hero-image-container {
+            order: 2 !important;
           }
         }
       `}</style>
